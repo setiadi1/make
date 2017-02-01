@@ -17,7 +17,8 @@ var oneApp = oneApp || {};
 				'columns-sort': 'onColumnsSort',
 				'view-ready': 'onViewReady',
 				'overlay-open': 'onOverlayOpen',
-				'overlay-close': 'onOverlayClose'
+				'overlay-close': 'onOverlayClose',
+				'click .ttfmake-text-columns-add-row': 'addRow',
 			});
 		},
 
@@ -35,9 +36,25 @@ var oneApp = oneApp || {};
 				});
 			}
 
+			this.handleColumnsClasses();
+
 			this.$el.trigger('columns-ready');
 
 			return this;
+		},
+
+		addRow: function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+
+			var columnsNumber = this.model.get('columns-number');
+			var nthChild = parseInt(columnsNumber, 10) + 1;
+
+			this.addColumns(columnsNumber);
+			this.handleColumnsClasses();
+
+			this.$el.trigger('columns-ready');
+			this.model.trigger('change');
 		},
 
 		addColumn: function(columnModel) {
@@ -46,12 +63,19 @@ var oneApp = oneApp || {};
 			});
 
 			var html = columnView.render().el;
-			$('.ttfmake-text-columns-stage', this.$el).append(html);
+
+			if (!$('.ttfmp-column-size-container').length) {
+				$('.ttfmake-text-columns-stage', this.$el).append(html);
+			} else {
+				$('.ttfmp-column-size-container', this.$el).before(html);
+			}
 
 			this.itemViews.push(columnView);
 
 			var columns = parseInt($('.ttfmake-text-column', this.$el).length, 10);
 			columnView.$el.addClass('ttfmake-text-column-position-'+columns);
+
+			console.log('column created');
 
 			return columnView;
 		},
@@ -79,6 +103,19 @@ var oneApp = oneApp || {};
 				this.model.set('columns', columns);
 				this.model.trigger('change');
 			}
+		},
+
+		handleColumnsClasses: function() {
+			var self = this;
+
+			var columnsNumber = this.model.get('columns-number');
+			var nthChild = parseInt(columnsNumber, 10) + 1;
+
+			$(document).ready(function() {
+				self.$el.find('.ttfmake-text-column').removeClass('ttfmake-text-column-row-start');
+
+				self.$el.find('.ttfmake-text-column:nth-child('+columnsNumber+'n+'+nthChild+')').addClass('ttfmake-text-column-row-start');
+			});
 		},
 
 		onViewReady: function(e) {
