@@ -53,6 +53,10 @@
 }
 .ttfmake-text-column {
 	position: relative;
+  width: 32%;
+}
+.ttfmake-text-column.ttfmake-text-column-row-start {
+  margin-left: 0;
 }
 @media screen and ( min-width: 1160px ) {
 	.ttfmake-text-column,
@@ -62,6 +66,12 @@
 		-webkit-flex: 1;
 		margin-bottom: 0; /*reset*/
 	}
+  .ttfmake-text-column {
+    flex: auto;
+    -ms-flex: auto;
+    -webkit-flex: auto;
+    margin-bottom: 1em;
+  }
 }
 /*---------------------------------------------------------
  Text: One column (sections.css)
@@ -93,12 +103,12 @@
 /*---------------------------------------------------------
  Text: Three column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-3 .ttfmake-text-column-position-4,
+/*.ttfmake-text-columns-3 .ttfmake-text-column-position-4,
 .ttfmake-text-columns-3 .ttfmake-text-column-position-5,
 .ttfmake-text-columns-3 .ttfmake-text-column-position-6 {
 	display: none;
 	width: 0%;
-}
+}*/
 @media screen and ( min-width: 1160px ) {
 	.ttfmake-text-columns-2,
 	.ttfmake-text-columns-3,

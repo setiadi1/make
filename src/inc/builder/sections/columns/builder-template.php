@@ -49,4 +49,6 @@ do_action( 'make_section_text_after_title', $ttfmake_section_data ); ?>
 
 <div class="clear"></div>
 
+<a href="#" class="ttfmake-text-columns-add-row">Add Row</a>
+
 <?php ttfmake_load_section_footer();
