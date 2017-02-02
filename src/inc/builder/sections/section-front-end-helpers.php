@@ -338,18 +338,12 @@ function ttfmake_builder_get_text_array( $ttfmake_section_data ) {
 			foreach ( $columns_order as $order => $key ) {
 				$columns_array[$order] = $columns_data[$key];
 				$count++;
-				if ( $count >= $columns_number ) {
-					break;
-				}
 			}
 		} else {
 			$count = 0;
 			foreach ( $columns_data as $column ) {
 				array_push($columns_array, $column);
 				$count++;
-				if ( $count >= $columns_number ) {
-					break;
-				}
 			}
 		}
 	}
