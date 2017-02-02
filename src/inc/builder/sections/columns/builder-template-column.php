@@ -30,7 +30,7 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 			'title'              => __( 'Edit content', 'make' ),
 			'other-a-attributes' => 'data-textarea="' . $textarea_id . '" data-iframe="' . $iframe_id . '"',
 		),
-		300 => array(
+		400 => array(
 			'label'              => __( 'Remove text column', 'make' ),
 			'href'               => '#',
 			'class'              => 'remove-text-column-link ttfmake-text-column-remove',
