@@ -15,6 +15,7 @@ $darken   = ( isset( $ttfmake_section_data[ 'darken' ] ) ) ? absint( $ttfmake_se
 	</h3>
 	<?php endif; ?>
 	<div class="builder-section-content">
+		<?php $columns_layout_size = $ttfmake_section_data['columns-number']; ?>
 		<?php if ( ! empty( $text_columns ) ) : $i = 1; foreach ( $text_columns as $column ) :
 			$link_front = '';
 			$link_back = '';
@@ -22,7 +23,10 @@ $darken   = ( isset( $ttfmake_section_data[ 'darken' ] ) ) ? absint( $ttfmake_se
 				$link_front = '<a href="' . esc_url( $column['image-link'] ) . '">';
 				$link_back = '</a>';
 			endif;
-			?>
+		?>
+		<?php if ( $i == 1 ): ?>
+			<div class="builder-text-row">
+		<?php endif; ?>
 		<div class="builder-text-column builder-text-column-<?php echo $i; ?>" id="builder-section-<?php echo esc_attr( $ttfmake_section_data['id'] ); ?>-column-<?php echo $i; ?>">
 			<?php if ( isset( $column['image-id'] ) && !empty( $column['image-id'] ) ):
 				$image_html =  ttfmake_get_image( $column['image-id'], 'large' );
@@ -44,6 +48,12 @@ $darken   = ( isset( $ttfmake_section_data[ 'darken' ] ) ) ? absint( $ttfmake_se
 			</div>
 			<?php endif; ?>
 		</div>
+		<?php if ( $i % $columns_layout_size == 0 ): ?>
+			</div>
+			<?php if ( $i < sizeof( $text_columns ) ): ?>
+				<div class="builder-text-row">
+			<?php endif; ?>
+		<?php endif; ?>
 		<?php $i++; endforeach; endif; ?>
 	</div>
 	<?php if ( 0 !== $darken ) : ?>

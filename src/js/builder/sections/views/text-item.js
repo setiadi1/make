@@ -16,6 +16,7 @@ var oneApp = oneApp || {};
 				'click .edit-content-link': 'onContentEdit',
 				'click .ttfmake-overlay-open': 'openConfigurationOverlay',
 				'overlay-open': 'onOverlayOpen',
+				'click .ttfmake-text-column-remove': 'onColumnRemove',
 			});
 		},
 
@@ -35,6 +36,20 @@ var oneApp = oneApp || {};
 
 			var $button = $('.ttfmake-overlay-close-update', $overlay);
 			$button.text('Update column');
-		}
+		},
+
+		onColumnRemove: function(evt) {
+			evt.preventDefault();
+
+			var $stage = this.$el.parents('.ttfmake-text-columns-stage');
+
+			this.$el.animate({
+				opacity: 'toggle',
+				height: 'toggle'
+			}, oneApp.builder.options.closeSpeed, function() {
+				this.$el.trigger('column-remove', this);
+				this.remove();
+			}.bind(this));
+		},
 	});
 })(window, Backbone, jQuery, _, oneApp);

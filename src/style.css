@@ -3106,6 +3106,14 @@ div.wp-video-shortcode {
  Text section: Columns (_pages.scss)
 -------------------------------------------------------- */
 
+.builder-text-row:after {
+	display: block;
+	visibility: hidden;
+	clear: both;
+	height: 0;
+	content: "";
+}
+
 .builder-text-column {
 	float: left;
 	width: 100%;
@@ -3127,20 +3135,40 @@ div.wp-video-shortcode {
 		width: 48.3333333333%;
 	}
 
+	.builder-text-columns-2 .builder-text-column:nth-child(2n+2) {
+		margin-right: 0;
+	}
+
 	.builder-text-columns-3 .builder-text-column {
 		width: 31.1111111111%;
+	}
+
+	.builder-text-columns-3 .builder-text-column:nth-child(3n+3) {
+		margin-right: 0;
 	}
 
 	.builder-text-columns-4 .builder-text-column {
 		width: 22.5%;
 	}
 
+	.builder-text-columns-4 .builder-text-column:nth-child(4n+4) {
+		margin-right: 0;
+	}
+
 	.builder-text-columns-5 .builder-text-column {
 		width: 17.3333333333%;
 	}
 
+	.builder-text-columns-5 .builder-text-column:nth-child(5n+5) {
+		margin-right: 0;
+	}
+
 	.builder-text-columns-6 .builder-text-column {
 		width: 13.8888888889%;
+	}
+
+	.builder-text-columns-6 .builder-text-column:nth-child(6n+6) {
+		margin-right: 0;
 	}
 }
 

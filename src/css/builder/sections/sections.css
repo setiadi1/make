@@ -53,7 +53,6 @@
 }
 .ttfmake-text-column {
 	position: relative;
-  width: 32%;
 }
 .ttfmake-text-column.ttfmake-text-column-row-start {
   margin-left: 0;
@@ -76,16 +75,11 @@
 /*---------------------------------------------------------
  Text: One column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-1 .ttfmake-text-column-position-2,
-.ttfmake-text-columns-1 .ttfmake-text-column-position-3,
-.ttfmake-text-columns-1 .ttfmake-text-column-position-4,
-.ttfmake-text-columns-1 .ttfmake-text-column-position-5,
-.ttfmake-text-columns-1 .ttfmake-text-column-position-6 {
-	display: none;
-	width: 0%;
-}
-.ttfmake-text-columns-1 > .ttfmake-text-column > .ttfmake-sortable-handle {
-	display: none;
+.ttfmake-text-columns-1 .ttfmake-text-column,
+.ttfmake-text-columns-1 .sortable-placeholder {
+	flex: 0 100%;
+	-ms-flex: 0 100%;
+	-webkit-flex: 0 100%;
 }
 .ttfmake-text-columns-1 .ttfmake-text-column .column-buttons {
     top: 0;
@@ -93,22 +87,19 @@
 /*---------------------------------------------------------
  Text: Two column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-2 .ttfmake-text-column-position-3,
-.ttfmake-text-columns-2 .ttfmake-text-column-position-4,
-.ttfmake-text-columns-2 .ttfmake-text-column-position-5,
-.ttfmake-text-columns-2 .ttfmake-text-column-position-6 {
-	display: none;
-	width: 0%;
+.ttfmake-text-columns-2 .ttfmake-text-column {
+	flex: 0 50%;
+	-ms-flex: 0 50%;
+	-webkit-flex: 0 50%;
 }
 /*---------------------------------------------------------
  Text: Three column (sections.css)
 -------------------------------------------------------- */
-/*.ttfmake-text-columns-3 .ttfmake-text-column-position-4,
-.ttfmake-text-columns-3 .ttfmake-text-column-position-5,
-.ttfmake-text-columns-3 .ttfmake-text-column-position-6 {
-	display: none;
-	width: 0%;
-}*/
+.ttfmake-text-columns-3 .ttfmake-text-column {
+	flex: 0 33.333%;
+	-ms-flex: 0 33.333%;
+	-webkit-flex: 0 33.333%;
+}
 @media screen and ( min-width: 1160px ) {
 	.ttfmake-text-columns-2,
 	.ttfmake-text-columns-3,
@@ -123,17 +114,26 @@
 /*---------------------------------------------------------
  Text: Four column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-4 .ttfmake-text-column-position-5,
-.ttfmake-text-columns-4 .ttfmake-text-column-position-6 {
-	display: none;
-	width: 0%;
+.ttfmake-text-columns-4 .ttfmake-text-column {
+  flex: 0 25%;
+  -ms-flex: 0 25%;
+  -webkit-flex: 0 25%;
 }
 /*---------------------------------------------------------
  Text: Five column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-5 .ttfmake-text-column-position-6 {
-	display: none;
-	width: 0%;
+.ttfmake-text-columns-5 .ttfmake-text-column {
+	flex: 0 20%;
+  -ms-flex: 0 20%;
+  -webkit-flex: 0 20%;
+}
+/*---------------------------------------------------------
+ Text: Six column (sections.css)
+-------------------------------------------------------- */
+.ttfmake-text-columns-6 .ttfmake-text-column {
+	flex: 0 16.666%;
+  -ms-flex: 0 16.666%;
+  -webkit-flex: 0 16.666%;
 }
 /*---------------------------------------------------------
  Gallery: One column (sections.css)
@@ -228,14 +228,16 @@
 	margin-right: 10px;
 }
 .ttfmake-banner-add-item,
-.ttfmake-gallery-add-item {
+.ttfmake-gallery-add-item,
+.ttfmake-text-columns-add-column {
 	clear: both;
 	height: 76px;
 	background-color: #fff;
 	border: 1px solid #dfdfdf;
 }
 .ttfmake-banner-add-item:before,
-.ttfmake-gallery-add-item:before {
+.ttfmake-gallery-add-item:before,
+.ttfmake-text-columns-add-column:before {
 	content: "\f502";
 	display: block;
 	color: #1bc865;
@@ -243,11 +245,17 @@
 	text-align: center;
 }
 .ttfmake-banner-add-item-link,
-.ttfmake-gallery-add-item-link {
+.ttfmake-gallery-add-item-link,
+.ttfmake-text-columns-add-column-link {
 	text-decoration: none; /*reset*/
 }
+.ttfmake-text-columns-add-column-link {
+  display: block;
+  padding: 0 10px;
+}
 .ttfmake-banner-add-item span,
-.ttfmake-gallery-add-item span {
+.ttfmake-gallery-add-item span,
+.ttfmake-text-columns-add-column span {
 	display: none; /*reset*/
 	text-indent: -9999px;
 	white-space: nowrap;
@@ -357,7 +365,8 @@
 .configure-gallery-item-link,
 .configure-banner-slide-link,
 .configure-column-link,
-.remove-widget-link {
+.remove-widget-link,
+.remove-text-column-link {
 	display: inline-block;
 	position: absolute;
 	clear: both;
@@ -377,12 +386,16 @@
 .remove-widget-link {
 	top: 0; /*reset*/
 }
+.edit-text-column-link {
+  right: 55px;
+}
 .remove-gallery-item-link,
 .remove-banner-slide-link,
 .remove-widget-link {
 	right: 0; /*reset*/
 }
-.remove-gallery-item-link {
+.remove-gallery-item-link,
+.remove-text-column-link {
 	right: 10px;
 }
 .edit-gallery-item-link {
@@ -391,9 +404,11 @@
 .configure-gallery-item-link {
 	right: 100px;
 }
-.configure-banner-slide-link,
-.configure-column-link {
+.configure-banner-slide-link {
 	right: 90px;
+}
+.configure-column-link {
+  right: 100px;
 }
 .edit-gallery-item-link:hover,
 .remove-gallery-item-link:hover,
@@ -403,7 +418,8 @@
 .configure-gallery-item-link:hover,
 .configure-banner-slide-link:hover,
 .configure-column-link:hover,
-.remove-widget-link:hover {
+.remove-widget-link:hover,
+.remove-text-column-link:hover {
 	color: #222222;
 }
 .edit-gallery-item-link span,
@@ -414,7 +430,8 @@
 .configure-gallery-item-link span,
 .configure-banner-slide-link span,
 .configure-column-link span,
-.remove-widget-link span {
+.remove-widget-link span,
+.remove-text-column-link span {
 	display: none;
 	text-indent: -9999px;
 	white-space: nowrap;
@@ -429,7 +446,8 @@
 }
 .remove-gallery-item-link:before,
 .remove-banner-slide-link:before,
-.remove-widget-link:before {
+.remove-widget-link:before,
+.remove-text-column-link:before {
 	content: "\f182";
 	font: 400 20px/39px dashicons;
 	speak: none; /*reset*/
@@ -456,9 +474,9 @@
 -------------------------------------------------------- */
 .make-plus-disabled .edit-text-column-link {
 	top: 20px;
-	right: 10px;
+	right: 55px;
 }
 .make-plus-disabled .configure-column-link {
 	top: 20px;
-	right: 55px;
+	right: 100px;
 }

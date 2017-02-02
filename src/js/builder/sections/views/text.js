@@ -19,6 +19,8 @@ var oneApp = oneApp || {};
 				'overlay-open': 'onOverlayOpen',
 				'overlay-close': 'onOverlayClose',
 				'click .ttfmake-text-columns-add-row': 'addRow',
+				'column-remove': 'onColumnRemove',
+				'click .ttfmake-text-columns-add-column-link': 'handleColumnAddLink'
 			});
 		},
 
@@ -36,25 +38,24 @@ var oneApp = oneApp || {};
 				});
 			}
 
-			this.handleColumnsClasses();
-
 			this.$el.trigger('columns-ready');
 
 			return this;
 		},
 
-		addRow: function(e) {
+		handleColumnAddLink: function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 
-			var columnsNumber = this.model.get('columns-number');
-			var nthChild = parseInt(columnsNumber, 10) + 1;
-
-			this.addColumns(columnsNumber);
-			this.handleColumnsClasses();
+			this.addColumns(1);
 
 			this.$el.trigger('columns-ready');
 			this.model.trigger('change');
+		},
+
+		onColumnRemove: function(e, columnView) {
+			var columns = this.model.get('columns');
+			this.model.set('columns', _(columns).without(columnView.model));
 		},
 
 		addColumn: function(columnModel) {
@@ -74,8 +75,6 @@ var oneApp = oneApp || {};
 
 			var columns = parseInt($('.ttfmake-text-column', this.$el).length, 10);
 			columnView.$el.addClass('ttfmake-text-column-position-'+columns);
-
-			console.log('column created');
 
 			return columnView;
 		},

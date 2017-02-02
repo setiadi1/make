@@ -101,6 +101,15 @@
 /*---------------------------------------------------------
  Text section: Columns (_pages.scss)
 -------------------------------------------------------- */
+.builder-text-row {
+  &:after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
+  }
+}
 .builder-text-column {
 	@include for(medium-screens) {
 		margin-right: percentage( $gut / $width );
@@ -115,18 +124,38 @@
 @include for(medium-screens) {
 	.builder-text-columns-2 .builder-text-column {
 		width: percentage( ( $width - $gut ) / ( $width*2 ) );
+
+		&:nth-child(2n+2) {
+			margin-right: 0;
+		}
 	}
 	.builder-text-columns-3 .builder-text-column {
 		width: percentage( ( $width - ( $gut*2 ) ) / ( $width*3 ) );
+
+		&:nth-child(3n+3) {
+			margin-right: 0;
+		}
 	}
 	.builder-text-columns-4 .builder-text-column {
 		width: percentage( ( $width - ( $gut*3 ) ) / ( $width*4 ) );
+
+		&:nth-child(4n+4) {
+			margin-right: 0;
+		}
 	}
 	.builder-text-columns-5 .builder-text-column {
 		width: percentage( ( $width - ( $gut*4 ) ) / ( $width*5 ) );
+
+		&:nth-child(5n+5) {
+			margin-right: 0;
+		}
 	}
 	.builder-text-columns-6 .builder-text-column {
 		width: percentage( ( $width - ( $gut*5 ) ) / ( $width*6 ) );
+
+		&:nth-child(6n+6) {
+			margin-right: 0;
+		}
 	}
 }
 .builder-text-image {
