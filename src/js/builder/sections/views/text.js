@@ -142,7 +142,7 @@ var oneApp = oneApp || {};
 
 		onColumnsSort: function(e, ids) {
 			e.stopPropagation();
-			
+
 			var columns = _(this.model.get('columns'));
 			var sortedColumns = _(ids).map(function(id) {
 				return columns.find(function(column) {
@@ -171,6 +171,8 @@ var oneApp = oneApp || {};
 			});
 
 			$stage.addClass('ttfmake-text-columns-' + columns);
+
+			this.$el.trigger('columns-layout-updated');
 		},
 
 		onTextItemChange: function(evt) {
