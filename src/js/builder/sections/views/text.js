@@ -56,6 +56,8 @@ var oneApp = oneApp || {};
 		onColumnRemove: function(e, columnView) {
 			var columns = this.model.get('columns');
 			this.model.set('columns', _(columns).without(columnView.model));
+
+			this.$el.trigger('column-removed');
 		},
 
 		addColumn: function(columnModel) {
@@ -75,6 +77,8 @@ var oneApp = oneApp || {};
 
 			var columns = parseInt($('.ttfmake-text-column', this.$el).length, 10);
 			columnView.$el.addClass('ttfmake-text-column-position-'+columns);
+
+			this.$el.trigger('column-added');
 
 			return columnView;
 		},
@@ -138,7 +142,7 @@ var oneApp = oneApp || {};
 
 		onColumnsSort: function(e, ids) {
 			e.stopPropagation();
-
+			
 			var columns = _(this.model.get('columns'));
 			var sortedColumns = _(ids).map(function(id) {
 				return columns.find(function(column) {
@@ -147,6 +151,7 @@ var oneApp = oneApp || {};
 			});
 
 			this.model.set('columns', sortedColumns);
+			this.$el.trigger('columns-sorted');
 		},
 
 		onColumnsNumberChange: function() {
@@ -195,6 +200,8 @@ var oneApp = oneApp || {};
 					 * Make Plus feature from here
 					 */
 					var addClass;
+
+					$stage.removeClass('current-item-one-half current-item-two-thirds current-item-one-third current-item-one-fourth current-item-three-fourths');
 
 					// If text item, potentially add class to stage
 					if ($item.hasClass('ttfmake-text-column')) {
