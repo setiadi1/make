@@ -75,14 +75,16 @@
 /*---------------------------------------------------------
  Text: One column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-1 .ttfmake-text-column,
-.ttfmake-text-columns-1 .sortable-placeholder {
+.ttfmake-text-columns-1 .ttfmake-text-column {
 	flex: 0 100%;
 	-ms-flex: 0 100%;
 	-webkit-flex: 0 100%;
 }
 .ttfmake-text-columns-1 .ttfmake-text-column .column-buttons {
     top: 0;
+}
+.ttfmake-text-columns-1 .sortable-placeholder {
+  height: 546px;
 }
 /*---------------------------------------------------------
  Text: Two column (sections.css)
