@@ -185,7 +185,14 @@ var oneApp = oneApp || {};
 
 			$sortableSelector.sortable({
 				handle: '.ttfmake-sortable-handle',
-				placeholder: 'sortable-placeholder',
+				placeholder: {
+					element: function(currentItem) {
+						return $('<span class="sortable-placeholder"></span>')[0];
+					},
+					update: function(container, p) {
+            return;
+					}
+				},
 				items: '.ttfmake-text-column',
 				forcePlaceholderSizeType: true,
 				distance: 2,
@@ -220,6 +227,10 @@ var oneApp = oneApp || {};
 						}
 
 						$stage.addClass(addClass);
+
+						ui.placeholder.css('flex', $item.css('flex'));
+         		ui.placeholder.css('margin-right', $item.css('margin-right'));
+         		ui.placeholder.css('margin-left', $item.css('margin-left'));
 					}
 				},
 				stop: function(event, ui) {
