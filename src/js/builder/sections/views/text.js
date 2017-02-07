@@ -106,6 +106,8 @@ var oneApp = oneApp || {};
 				this.model.set('columns', columns);
 				this.model.trigger('change');
 			}
+
+			this.initFrames();
 		},
 
 		handleColumnsClasses: function() {
