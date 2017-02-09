@@ -11,7 +11,7 @@ var oneApp = oneApp || {};
 
 		events: function() {
 			return _.extend({}, oneApp.views.section.prototype.events, {
-				'columns-number-change' : 'onColumnsNumberChange',
+				'columns-change' : 'handleColumns',
 				'mouseup .ttfmake-text-column' : 'updateJSONOnSlide',
 				'model-item-change': 'onTextItemChange',
 				'columns-sort': 'onColumnsSort',
@@ -160,9 +160,9 @@ var oneApp = oneApp || {};
 			this.$el.trigger('columns-sorted');
 		},
 
-		onColumnsNumberChange: function() {
+		handleColumns : function() {
 			var columns = this.model.get('columns-number'),
-				$stage = $('.ttfmake-text-columns-stage', this.$el);
+					$stage = $('.ttfmake-text-columns-stage', this.$el);
 
 			var numberOfColumnsToCreate = columns - this.model.get('columns').length;
 
@@ -269,7 +269,7 @@ var oneApp = oneApp || {};
 			this.model.set(changeset);
 
 			if ('columns-number' in changeset) {
-				this.$el.trigger('columns-number-change');
+				this.$el.trigger('columns-change');
 			}
 		}
 	});
