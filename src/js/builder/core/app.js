@@ -65,6 +65,11 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 				self.$stage.trigger('uploader-image-removed')
 			});
 
+			$('body').on('click', function(e) {
+				self.$stage.find('.configure-button').removeClass('active');
+				self.$stage.find('.configure-options').hide();
+			});
+
 			return this;
 		},
 
