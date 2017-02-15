@@ -19,21 +19,21 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 		100 => array(
 			'label'              => __( 'Configure column', 'make' ),
 			'href'               => '#',
-			'class'              => 'configure-column-link ttfmake-overlay-open',
+			'class'              => 'ttfmake-overlay-open',
 			'title'              => __( 'Configure column', 'make' ),
 			'other-a-attributes' => ' data-overlay="#' . $overlay_id .'"',
 		),
 		200 => array(
 			'label'              => __( 'Edit text column', 'make' ),
 			'href'               => '#',
-			'class'              => 'edit-content-link edit-text-column-link {{ (get("content")) ? "item-has-content" : "" }}',
+			'class'              => 'edit-text-column-link edit-content-link {{ (get("content")) ? "item-has-content" : "" }}',
 			'title'              => __( 'Edit content', 'make' ),
 			'other-a-attributes' => 'data-textarea="' . $textarea_id . '" data-iframe="' . $iframe_id . '"',
 		),
-		400 => array(
+		600 => array(
 			'label'              => __( 'Remove text column', 'make' ),
 			'href'               => '#',
-			'class'              => 'remove-text-column-link ttfmake-text-column-remove',
+			'class'              => 'ttfmake-text-column-remove',
 			'title'              => __( 'Remove column', 'make' )
 		)
 	);
@@ -77,13 +77,19 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	do_action( 'make_section_text_before_column', $ttfmake_section_data );
 	?>
 
-	<?php foreach ( $column_buttons as $button ) : ?>
-		<a href="<?php echo esc_url( $button['href'] ); ?>" class="column-buttons <?php echo esc_attr( $button['class'] ); ?>" title="<?php echo esc_attr( $button['title'] ); ?>" <?php if ( ! empty( $button['other-a-attributes'] ) ) echo $button['other-a-attributes']; ?>>
-			<span>
-				<?php echo esc_html( $button['label'] ); ?>
-			</span>
-		</a>
-	<?php endforeach; ?>
+	<a href="#" class="column-buttons configure-button" title="Configure column">
+		<span>Configure options</span>
+	</a>
+
+	<ul class="configure-options">
+		<?php foreach ( $column_buttons as $button ) : ?>
+			<li>
+				<a href="<?php echo esc_url( $button['href'] ); ?>" class="column-buttons <?php echo esc_attr( $button['class'] ); ?>" title="<?php echo esc_attr( $button['title'] ); ?>" <?php if ( ! empty( $button['other-a-attributes'] ) ) echo $button['other-a-attributes']; ?>>
+					<?php echo esc_html( $button['label'] ); ?>
+				</a>
+			</li>
+		<?php endforeach; ?>
+	</ul>
 
 	<?php echo ttfmake_get_builder_base()->add_uploader( $column_name, 0, __( 'Set image', 'make' ), 'image-url' ); ?>
 	<?php ttfmake_get_builder_base()->add_frame( $combined_id, 'content', '', $content ); ?>
@@ -145,4 +151,4 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	</div>
 
 	<?php get_template_part( '/inc/builder/core/templates/overlay', 'footer' ); ?>
-</div>
+</v>
