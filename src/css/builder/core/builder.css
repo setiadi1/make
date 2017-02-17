@@ -187,7 +187,7 @@
 .ttfmake-sortable-handle {
 	position: relative;
 	width: 100%;
-	height: 20px;
+	height: 35px;
 	border: 1px solid #d9d9d9;
 	border-bottom: 0; /*reset*/
 	background-color: #eee;
@@ -199,7 +199,7 @@
 .sortable-background,
 .ttfmp-widget-list li .sortable-background {
 	display: block;
-	height: 18px;
+	height: 32px;
 	background: url(images/sortable-background.png) center center repeat-x;
 	opacity: .5;
 }
