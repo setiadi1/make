@@ -189,6 +189,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 			content = switchEditors.wpautop(this.wrapShortcodes(content));
 
 			iframeBody.html(content);
+			$(iframe).attr('height', iframeBody.outerHeight());
 		},
 
 		getMakeContent: function () {

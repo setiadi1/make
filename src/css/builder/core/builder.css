@@ -460,6 +460,7 @@
 }
 .ttfmake-section-body iframe {
 	background: #fff !important;
+	min-height: 300px;
 }
 /*---------------------------------------------------------
  Media placeholder if has image set (builder.css)
