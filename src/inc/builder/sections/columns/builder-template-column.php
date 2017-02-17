@@ -64,6 +64,10 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 <div class="ttfmake-text-column{{ (get('size')) ? ' ttfmake-column-width-'+get('size') : '' }}" data-id="{{ get('id') }}">
 	<div title="<?php esc_attr_e( 'Drag-and-drop this column into place', 'make' ); ?>" class="ttfmake-sortable-handle">
 		<div class="sortable-background column-sortable-background"></div>
+
+		<a href="#" class="column-buttons configure-button" title="Configure column">
+			<span>Configure options</span>
+		</a>
 	</div>
 
 	<?php
@@ -77,9 +81,7 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	do_action( 'make_section_text_before_column', $ttfmake_section_data );
 	?>
 
-	<a href="#" class="column-buttons configure-button" title="Configure column">
-		<span>Configure options</span>
-	</a>
+	
 
 	<ul class="configure-options">
 		<?php foreach ( $column_buttons as $button ) : ?>
