@@ -24,17 +24,17 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 			'other-a-attributes' => ' data-overlay="#' . $overlay_id .'"',
 		),
 		200 => array(
-			'label'              => __( 'Edit text column', 'make' ),
+			'label'              => __( 'Edit content', 'make' ),
 			'href'               => '#',
 			'class'              => 'edit-text-column-link edit-content-link {{ (get("content")) ? "item-has-content" : "" }}',
 			'title'              => __( 'Edit content', 'make' ),
 			'other-a-attributes' => 'data-textarea="' . $textarea_id . '" data-iframe="' . $iframe_id . '"',
 		),
 		600 => array(
-			'label'              => __( 'Remove text column', 'make' ),
+			'label'              => __( 'Trash column', 'make' ),
 			'href'               => '#',
 			'class'              => 'ttfmake-text-column-remove',
-			'title'              => __( 'Remove column', 'make' )
+			'title'              => __( 'Trash column', 'make' )
 		)
 	);
 
