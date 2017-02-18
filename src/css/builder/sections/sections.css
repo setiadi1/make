@@ -528,12 +528,12 @@
 	display: none;
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: -20px;
 	z-index: 5;
 	margin: 0;
-	padding: 0;
+	padding: 6px 0;
 	border: 1px solid #dfdfdf;
-	background-color: #eeeeee;
+	background-color: #32373c;
 }
 
 .configure-options li {
@@ -542,19 +542,16 @@
 
 .configure-options li a {
 	display: block;
-	padding: 15px;
-	color: #444;
+	padding: 6px 12px;
+	color: rgba(240, 245, 250, 0.7);
 	text-decoration: none;
 }
 
 .configure-options li a:hover {
-	background-color: #dfdfdf;
+	color: #00b9eb;
 }
 
 .configure-options li a.ttfmake-text-column-remove {
-	color: #a00;
 }
 .configure-options li a.ttfmake-text-column-remove:hover {
-	background-color: #a00;
-	color: #fff;
 }
