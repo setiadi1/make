@@ -155,6 +155,7 @@ var oneApp = oneApp || {};
 
 			this.setElement($el);
 			this.$colorPickers = oneApp.builder.initColorPicker(this);
+			this.$overlay = $overlay;
 		},
 
 		close: function(apply) {
