@@ -254,6 +254,7 @@ var oneApp = oneApp || {};
 
 					var ids = $(this).sortable('toArray', {attribute: 'data-id'});
 					self.$el.trigger('columns-sort', [ids]);
+					oneApp.builder.initFrame(self.model.get('id') + '-' + $item.attr('data-id'));
 				}
 			});
 		},
