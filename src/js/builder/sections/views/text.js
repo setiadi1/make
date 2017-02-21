@@ -265,8 +265,7 @@ var oneApp = oneApp || {};
 		},
 
 		onOverlayClose: function(e, changeset) {
-			e.stopPropagation();
-
+			oneApp.views.section.prototype.onOverlayClose.apply(this, arguments);
 			this.model.set(changeset);
 
 			if ('columns-number' in changeset) {
