@@ -15,6 +15,8 @@ var oneApp = oneApp || {};
 				'click .edit-content-link': 'onContentEdit',
 				'click .ttfmake-overlay-open': 'openConfigurationOverlay',
 				'overlay-close': 'onOverlayClose',
+				'click .configure-button': 'toggleConfigureDropdown',
+				'click .configure-options a': 'onOptionClick'
 			},
 
 			onViewReady: function(e) {
@@ -71,6 +73,32 @@ var oneApp = oneApp || {};
 
 				oneApp.builder.setMakeContentFromTextArea(iframeID, textAreaID);
 				oneApp.builder.tinymceOverlay.open(this);
+			},
+
+			toggleConfigureDropdown: function(evt) {
+				var $cogLink;
+
+				if (typeof evt !== 'undefined') {
+					evt.preventDefault();
+					evt.stopPropagation();
+					$cogLink = $(evt.target);
+				} else {
+					$cogLink = this.$el.find('.configure-button');
+				}
+
+				var $configureOptions = this.$el.find('.configure-options');
+
+				if ($configureOptions.is(':visible')) {
+					$cogLink.removeClass('active');
+				} else {
+					$cogLink.addClass('active');
+				}
+
+				$configureOptions.toggle();
+			},
+
+			onOptionClick: function(evt) {
+				this.toggleConfigureDropdown();
 			}
 		});
 })(window, Backbone, jQuery, _, oneApp);
