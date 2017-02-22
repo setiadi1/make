@@ -17,23 +17,23 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 
 	$column_buttons = array(
 		100 => array(
-			'label'              => __( 'Configure column', 'make' ),
-			'href'               => '#',
-			'class'              => 'ttfmake-overlay-open',
-			'title'              => __( 'Configure column', 'make' ),
-			'other-a-attributes' => ' data-overlay="#' . $overlay_id .'"',
-		),
-		200 => array(
 			'label'              => __( 'Edit content', 'make' ),
 			'href'               => '#',
-			'class'              => 'edit-text-column-link edit-content-link {{ (get("content")) ? "item-has-content" : "" }}',
+			'class'              => 'edit-text-column-link edit-content-link ttfmake-icon-pencil {{ (get("content")) ? "item-has-content" : "" }}',
 			'title'              => __( 'Edit content', 'make' ),
 			'other-a-attributes' => 'data-textarea="' . $textarea_id . '" data-iframe="' . $iframe_id . '"',
+		),
+		200 => array(
+			'label'              => __( 'Configure column', 'make' ),
+			'href'               => '#',
+			'class'              => 'ttfmake-overlay-open ttfmake-icon-cog',
+			'title'              => __( 'Configure column', 'make' ),
+			'other-a-attributes' => ' data-overlay="#' . $overlay_id .'"',
 		),
 		600 => array(
 			'label'              => __( 'Trash column', 'make' ),
 			'href'               => '#',
-			'class'              => 'ttfmake-text-column-remove',
+			'class'              => 'ttfmake-text-column-remove ttfmake-icon-trash',
 			'title'              => __( 'Trash column', 'make' )
 		)
 	);
