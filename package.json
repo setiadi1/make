@@ -9,7 +9,12 @@
     "type": "git",
     "url": "git@github.com:thethemefoundry/make.git"
   },
-  "dependencies": {
+  "scripts": {
+    "test-server": "node_modules/.bin/chromedriver --port=4444 --url-base=wd/hub",
+    "test": "node_modules/.bin/intern-runner config=tests/intern"
+  },
+  "devDependencies": {
+    "chromedriver": "^2.27.3",
     "grunt": "~0.4.1",
     "grunt-bump": "~0.0.11",
     "grunt-contrib-clean": "~0.5.0",
@@ -28,6 +33,7 @@
     "grunt-wp-css": "~0.1.0",
     "grunt-wp-i18n": "~0.4.0",
     "grunt-yaml": "~0.4.1",
+    "intern": "^3.4.2",
     "load-grunt-tasks": "~0.2.0",
     "lodash": "~2.4.1",
     "semver": "~2.2.1"
