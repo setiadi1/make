@@ -81,8 +81,6 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	do_action( 'make_section_text_before_column', $ttfmake_section_data );
 	?>
 
-	
-
 	<ul class="configure-options">
 		<?php foreach ( $column_buttons as $button ) : ?>
 			<li>
