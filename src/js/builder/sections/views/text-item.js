@@ -41,7 +41,7 @@ var oneApp = oneApp || {};
 		onColumnRemove: function(evt) {
 			evt.preventDefault();
 
-			if (!confirm('Are you sure you want to remove this column?')) {
+			if (!confirm('Are you sure you want to trash this column permanently?')) {
 				return;
 			}
 
