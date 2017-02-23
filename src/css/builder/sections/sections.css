@@ -422,11 +422,10 @@
 	top: 0; /*reset*/
 }
 .configure-button {
-	height: 34px;
-	border-bottom: 0;
-	border-top: 0;
-	border-right: 0;
 	right: 0;
+	height: 34px;
+	border: 0;
+	background: transparent;
 }
 .remove-text-column-link {
   right: 10px;
