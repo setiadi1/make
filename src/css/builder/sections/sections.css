@@ -530,6 +530,10 @@
 .ttfmake-banner-slide .configure-options {
 	top: 30px;
 }
+.ttfmake-gallery-item .configure-options {
+	top: 30px;
+	right: 0;
+}
 .configure-options li {
 	margin-bottom: 0;
 }

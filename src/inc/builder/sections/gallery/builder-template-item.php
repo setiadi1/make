@@ -14,26 +14,31 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 
 	<div title="<?php esc_attr_e( 'Drag-and-drop this item into place', 'make' ); ?>" class="ttfmake-sortable-handle">
 		<div class="sortable-background"></div>
+
+		<a href="#" class="column-buttons configure-button" title="Configure column">
+			<span>Configure options</span>
+		</a>
 	</div>
 
+	<ul class="configure-options">
+		<li>
+			<a href="#" class="edit-content-link ttfmake-icon-pencil{{ get('description') && ' item-has-content' || ''}}" data-textarea="ttfmake-content-<?php echo $combined_id; ?>" title="<?php esc_attr_e( 'Edit content', 'make' ); ?>">
+				<?php esc_html_e( 'Edit content', 'make' ); ?>
+			</a>
+		</li>
+		<li>
+			<a href="#" class="ttfmake-icon-cog ttfmake-overlay-open" title="<?php esc_attr_e( 'Configure item', 'make' ); ?>" data-overlay="#<?php echo $overlay_id; ?>">
+				<?php esc_html_e( 'Configure item', 'make' ); ?>
+			</a>
+		</li>
+		<li>
+			<a href="#" class="ttfmake-icon-trash ttfmake-gallery-item-remove" title="<?php esc_attr_e( 'Delete item', 'make' ); ?>">
+				<?php esc_html_e( 'Trash item', 'make' ); ?>
+			</a>
+		</li>
+	</ul>
+
 	<?php echo ttfmake_get_builder_base()->add_uploader( $section_name, 0, __( 'Set gallery image', 'make' ), 'image-url' ); ?>
-
-	<a href="#" class="configure-gallery-item-link ttfmake-overlay-open" title="<?php esc_attr_e( 'Configure item', 'make' ); ?>" data-overlay="#<?php echo $overlay_id; ?>">
-		<span>
-			<?php esc_html_e( 'Configure item', 'make' ); ?>
-		</span>
-	</a>
-	<a href="#" class="edit-content-link edit-gallery-item-link{{ get('description') && ' item-has-content' || ''}}" data-textarea="ttfmake-content-<?php echo $combined_id; ?>" title="<?php esc_attr_e( 'Edit content', 'make' ); ?>">
-		<span>
-			<?php esc_html_e( 'Edit content', 'make' ); ?>
-		</span>
-	</a>
-	<a href="#" class="remove-gallery-item-link ttfmake-gallery-item-remove" title="<?php esc_attr_e( 'Delete item', 'make' ); ?>">
-		<span>
-			<?php esc_html_e( 'Delete item', 'make' ); ?>
-		</span>
-	</a>
-
 	<?php ttfmake_get_builder_base()->add_frame( $combined_id, 'description', '', '', false ); ?>
 
 	<?php
