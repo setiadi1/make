@@ -190,7 +190,7 @@
 	height: 35px;
 	border: 1px solid #d9d9d9;
 	border-bottom: 0; /*reset*/
-	background-color: #fff;
+	background-color: #fafafa;
 	cursor: move;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -200,8 +200,6 @@
 .ttfmp-widget-list li .sortable-background {
 	display: block;
 	height: 32px;
-	background: url(images/sortable-background.png) center center repeat-x;
-	opacity: .5;
 }
 .ttfmake-gallery-item:hover .sortable-background,
 .ttfmake-text-column:hover .sortable-background.column-sortable-background,
