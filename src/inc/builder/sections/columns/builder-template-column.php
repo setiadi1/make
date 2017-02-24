@@ -65,7 +65,7 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	<div title="<?php esc_attr_e( 'Drag-and-drop this column into place', 'make' ); ?>" class="ttfmake-sortable-handle">
 		<div class="sortable-background column-sortable-background"></div>
 
-		<a href="#" class="column-buttons configure-button" title="Configure column">
+		<a href="#" class="ttfmake-configure-item-button" title="Configure column">
 			<span>Configure options</span>
 		</a>
 	</div>
@@ -81,7 +81,7 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	do_action( 'make_section_text_before_column', $ttfmake_section_data );
 	?>
 
-	<ul class="configure-options">
+	<ul class="configure-item-dropdown">
 		<?php foreach ( $column_buttons as $button ) : ?>
 			<li>
 				<a href="<?php echo esc_url( $button['href'] ); ?>" class="column-buttons <?php echo esc_attr( $button['class'] ); ?>" title="<?php echo esc_attr( $button['title'] ); ?>" <?php if ( ! empty( $button['other-a-attributes'] ) ) echo $button['other-a-attributes']; ?>>

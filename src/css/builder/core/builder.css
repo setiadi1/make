@@ -730,3 +730,24 @@
 .ttfmake-section-open .ttfmake-section-toggle__indicator:before {
 	content: '\f142';
 }
+.ttfmake-configure-item-button {
+	display: inline-block;
+	position: absolute;
+	clear: both;
+	top: 2px;
+	right: 10px;
+	width: 30px;
+	height: 30px;
+	margin-bottom: 0; /*reset*/
+	color: #aaaaaa;
+	text-decoration: none;  /*reset*/
+	outline: none !important;
+	text-indent: -9999px;
+	background: url(images/menu-icon.png) no-repeat center center;
+	background-size: 30px 30px;
+	transition: all 0.3s ease-in-out;
+}
+.ttfmake-configure-item-button.active {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
