@@ -91,7 +91,6 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 		<?php endforeach; ?>
 	</ul>
 
-	<?php // ttfmake_get_builder_base()->add_uploader( $column_name, 0, __( 'Set image', 'make' ), 'image-url' ); ?>
 	<?php ttfmake_get_builder_base()->add_frame( $combined_id, 'content', '', $content ); ?>
 
 	<?php
