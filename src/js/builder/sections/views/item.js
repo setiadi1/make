@@ -88,6 +88,10 @@ var oneApp = oneApp || {};
 					$cogLink = this.$el.find('.ttfmake-configure-item-button');
 				}
 
+				if (!$cogLink.hasClass('ttfmake-configure-item-button')) {
+					return;
+				}
+
 				var $configureItemDropdown = this.$el.find('.configure-item-dropdown');
 
 				if ($cogLink.hasClass('active')) {
@@ -99,8 +103,15 @@ var oneApp = oneApp || {};
 				}
 			},
 
+			hideConfigureDropdown: function(evt) {
+				evt.stopPropagation();
+				
+				this.$el.find('.configure-item-dropdown').hide();
+				this.$el.find('ttfmake-configure-item-button').removeClass('active');
+			},
+
 			onOptionClick: function(evt) {
-				this.toggleConfigureDropdown();
+				this.hideConfigureDropdown(evt);
 			}
 		});
 })(window, Backbone, jQuery, _, oneApp);
