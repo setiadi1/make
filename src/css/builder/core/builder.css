@@ -460,7 +460,7 @@
 }
 .ttfmake-section-body iframe {
 	background: #fff !important;
-	min-height: 300px;
+	height: 450px;
 }
 /*---------------------------------------------------------
  Media placeholder if has image set (builder.css)
@@ -676,13 +676,28 @@
 	top: 0;
 	left: 0;
 	width: 100%; /* same as iframe */
-	height: 300px; /* same as iframe */
+	height: 100%; /* same as iframe */
 }
 .ttfmake-iframe-overlay .edit-content-link {
-	display: block;
+	display: table;
 	width: 100%;
 	height: 100%;
+	text-align: center;
+	text-decoration: none;
+	color: inherit;
 }
+
+.ttfmake-iframe-overlay .edit-content-link .ttfmake-iframe-content-placeholder {
+	display: table-cell;
+  	vertical-align: middle;
+  	font-size: 14px;
+  	color: #adadad;
+}
+
+.ttfmake-iframe-overlay .edit-content-link.item-has-content .ttfmake-iframe-content-placeholder {
+	display: none;
+}
+
 /*---------------------------------------------------------
  Media Modal (builder.css)
 -------------------------------------------------------- */
