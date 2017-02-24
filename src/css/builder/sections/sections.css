@@ -269,15 +269,8 @@
 	height: 76px;
 	background-color: #fff;
 	border: 1px solid #dfdfdf;
-}
-.ttfmake-banner-add-item:before,
-.ttfmake-gallery-add-item:before,
-.ttfmake-text-columns-add-column:before {
-	content: "\f502";
-	display: block;
-	color: #1bc865;
-	font: 36px/76px dashicons;
 	text-align: center;
+	line-height: 76px;
 }
 .ttfmake-banner-add-item-link,
 .ttfmake-gallery-add-item-link,
@@ -294,11 +287,22 @@
 .ttfmake-banner-add-item span,
 .ttfmake-gallery-add-item span,
 .ttfmake-text-columns-add-column span {
-	display: none; /*reset*/
-	text-indent: -9999px;
-	white-space: nowrap;
-	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+	color: #00b8ee;
 }
+
+.ttfmake-banner-add-item span:before,
+.ttfmake-gallery-add-item span:before,
+.ttfmake-text-columns-add-column span:before {
+	content: "\f502";
+	display: inline-block;
+	vertical-align: middle;
+	color: #00b8ee;
+	font-size: 2em;
+	font-family: dashicons;
+}
+
 /*---------------------------------------------------------
  Banner: Slide (sections.css)
 -------------------------------------------------------- */
