@@ -26,6 +26,11 @@ Please see the Make documentation: https://thethemefoundry.com/make-help/
 
 == Changelog ==
 
+= 1.8.5 - February 24 2017 =
+* Bug fix: Wrong event bubbling prevented Columns section titles from being refreshed in the builder.
+* Bug fix: Content preview of columns wouldn't refresh after dragging around columns.
+* Bug fix: Overlays were erroneously carrying around configuration data.
+
 = 1.8.4 - February 16 2017 =
 * New feature: Added an option to open Gallery item links in a new tab.
 * New feature: Added option to configure what menu turns into a mobile menu.

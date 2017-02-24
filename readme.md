@@ -2,7 +2,7 @@
 
 **Make** is a powerful, flexible, open-source [WordPress](https://wordpress.org) theme created by [The Theme Foundry](https://thethemefoundry.com). It's available for free [in the WordPress.org theme directory](https://wordpress.org/themes/make/). The Theme Foundry offers a premium companion plugin, **[Make Plus](https://thethemefoundry.com/make/)**, that adds extra features and functionality to **Make**.
 
-* **Stable version:** 1.8.4
+* **Stable version:** 1.8.5
 * **Theme directory listing:** [https://wordpress.org/themes/make/](https://wordpress.org/themes/make/)
 * **Contributors:** @dstrojny, @scottrrollo, @tollmanz, @coreymckrill, @samikeijonen, @jeremyfelt, @stdt, Timm K, @mauryaratan, @LeoOosterloo, @Laurisade, Roman Shatsky, @michaek, @boonebgorges, @eightam, @sixfingers, @tomasstark
 
