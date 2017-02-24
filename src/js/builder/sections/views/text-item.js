@@ -30,6 +30,10 @@ var oneApp = oneApp || {};
 			var html = this.template(this.model);
 			this.setElement(html);
 
+			if ('' !== this.model.get('content')) {
+				$('.edit-content-link', this.$el).addClass('item-has-content');
+			}
+
 			return this;
 		},
 
