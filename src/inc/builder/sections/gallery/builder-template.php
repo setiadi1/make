@@ -13,7 +13,7 @@ global $ttfmake_section_data;
 	<a href="#" class="ttfmake-add-item ttfmake-gallery-add-item-link" title="<?php esc_attr_e( 'Add new item', 'make' ); ?>">
 		<div class="ttfmake-gallery-add-item">
 			<span>
-				<?php esc_html_e( 'Add Item', 'make' ); ?>
+				<?php esc_html_e( 'Add new item', 'make' ); ?>
 			</span>
 		</div>
 	</a>

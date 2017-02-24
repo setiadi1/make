@@ -12,7 +12,7 @@ global $ttfmake_section_data;
 	<a href="#" class="ttfmake-add-slide ttfmake-banner-add-item-link" title="<?php esc_attr_e( 'Add new slide', 'make' ); ?>">
 		<div class="ttfmake-banner-add-item">
 			<span>
-				<?php esc_html_e( 'Add Item', 'make' ); ?>
+				<?php esc_html_e( 'Add new slide', 'make' ); ?>
 			</span>
 		</div>
 	</a>
