@@ -64,7 +64,7 @@ var oneApp = oneApp || {};
 			onContentEdit: function(e) {
 				e.preventDefault();
 
-				var $target = $(e.target);
+				var $target = $(e.currentTarget);
 				var iframeID = ($target.attr('data-iframe')) ? $target.attr('data-iframe') : '';
 				var textAreaID = $target.attr('data-textarea');
 				var $overlay = oneApp.builder.tinymceOverlay.$el;

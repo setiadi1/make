@@ -516,6 +516,9 @@ class TTFMAKE_Builder_Base {
 					<span class="screen-reader-text">
 						<?php esc_html_e( 'Edit content', 'make' ); ?>
 					</span>
+					<span class="ttfmake-iframe-content-placeholder">
+						<?php esc_html_e( 'Click to Edit', 'make' ); ?>
+					</span>
 				</a>
 			</div>
 			<iframe width="100%" height="300" id="<?php echo esc_attr( $iframe_id ); ?>" scrolling="no"></iframe>
