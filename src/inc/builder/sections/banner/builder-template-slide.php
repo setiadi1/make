@@ -15,12 +15,12 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	<div title="<?php esc_attr_e( 'Drag-and-drop this slide into place', 'make' ); ?>" class="ttfmake-sortable-handle">
 		<div class="sortable-background"></div>
 
-		<a href="#" class="column-buttons configure-button" title="Configure column">
+		<a href="#" class="ttfmake-configure-item-button" title="Configure banner">
 			<span>Configure options</span>
 		</a>
 	</div>
 
-	<ul class="configure-options">
+	<ul class="configure-item-dropdown">
 		<li>
 			<a href="#" class="edit-content-link ttfmake-icon-pencil{{ get('content') && get('content').length ? ' item-has-content': '' }}" title="<?php esc_attr_e( 'Edit content', 'make' ); ?>" data-textarea="ttfmake-content-<?php echo $combined_id; ?>">
 				<?php esc_html_e( 'Edit content', 'make' ); ?>

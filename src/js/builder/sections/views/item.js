@@ -15,7 +15,7 @@ var oneApp = oneApp || {};
 				'click .edit-content-link': 'onContentEdit',
 				'click .ttfmake-overlay-open': 'openConfigurationOverlay',
 				'overlay-close': 'onOverlayClose',
-				'click .configure-button': 'toggleConfigureDropdown',
+				'click .ttfmake-configure-item-button': 'toggleConfigureDropdown',
 				'click .configure-options a': 'onOptionClick'
 			},
 
@@ -78,23 +78,25 @@ var oneApp = oneApp || {};
 			toggleConfigureDropdown: function(evt) {
 				var $cogLink;
 
+				$('.configure-item-dropdown').hide();
+
 				if (typeof evt !== 'undefined') {
 					evt.preventDefault();
 					evt.stopPropagation();
 					$cogLink = $(evt.target);
 				} else {
-					$cogLink = this.$el.find('.configure-button');
+					$cogLink = this.$el.find('.ttfmake-configure-item-button');
 				}
 
-				var $configureOptions = this.$el.find('.configure-options');
+				var $configureItemDropdown = this.$el.find('.configure-item-dropdown');
 
-				if ($configureOptions.is(':visible')) {
+				if ($cogLink.hasClass('active')) {
 					$cogLink.removeClass('active');
+					$configureItemDropdown.hide();
 				} else {
 					$cogLink.addClass('active');
+					$configureItemDropdown.show();
 				}
-
-				$configureOptions.toggle();
 			},
 
 			onOptionClick: function(evt) {

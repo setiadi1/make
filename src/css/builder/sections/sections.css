@@ -484,8 +484,7 @@
 	font: 400 20px/39px dashicons;
 	speak: none; /*reset*/
 }
-.configure-gallery-item-link:before,
-.configure-button:before {
+.configure-gallery-item-link:before {
 	position: relative;
 	top: -2px;
 	content: "\f111";
@@ -504,18 +503,18 @@
 /*---------------------------------------------------------
  Configure item dropdown (sections.css)
 -------------------------------------------------------- */
-.configure-options {
+.configure-item-dropdown {
 	display: none;
 	position: absolute;
-	top: 0;
-	right: -10px;
+	top: 3px;
+	right: -6px;
 	z-index: 5;
 	margin: 10px 0 0;
 	padding: 6px 0 10px;
 	border: 1px solid #dfdfdf;
 	background-color: #32373c;
 }
-.configure-options:before {
+.configure-item-dropdown:before {
 	position: absolute;
 	top: -10px;
 	right: 22px;
@@ -527,42 +526,42 @@
 	border-right: 10px solid transparent;
 	border-bottom: 10px solid #32373c;
 }
-.ttfmake-banner-slide .configure-options {
-	top: 30px;
+.ttfmake-banner-slide .configure-item-dropdown {
+	top: 40px;
 }
-.ttfmake-gallery-item .configure-options {
-	top: 30px;
-	right: 0;
+.ttfmake-gallery-item .configure-item-dropdown {
+	top: 40px;
+	right: 3px;
 }
-.configure-options li {
+.configure-item-dropdown li {
 	margin-bottom: 0;
 }
-.configure-options li a {
+.configure-item-dropdown li a {
 	display: block;
 	padding: 3px 12px;
 	color: rgba(240, 245, 250, 0.7);
 	text-decoration: none;
 }
-.configure-options li a:before {
+.configure-item-dropdown li a:before {
 	position: relative;
 	top: 4px;
 	padding-right: 3px;
 	font-family: dashicons;
 	font-size: 1.1rem;
 }
-.configure-options li a.ttfmake-icon-cog:before {
+.configure-item-dropdown li a.ttfmake-icon-cog:before {
 	content: "\f111";
 }
-.configure-options li a.ttfmake-icon-pencil:before {
+.configure-item-dropdown li a.ttfmake-icon-pencil:before {
 	content: "\f464";
 }
-.configure-options li a.ttfmake-icon-gauge:before {
+.configure-item-dropdown li a.ttfmake-icon-gauge:before {
 	content: "\f226";
 }
-.configure-options li a.ttfmake-icon-trash:before {
+.configure-item-dropdown li a.ttfmake-icon-trash:before {
 	content: "\f182";
 }
-.configure-options li a:hover {
+.configure-item-dropdown li a:hover {
 	color: #00b9eb;
 }
 /*---------------------------------------------------------

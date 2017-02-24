@@ -66,8 +66,8 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 			});
 
 			$('body').on('click', function(e) {
-				self.$stage.find('.configure-button').removeClass('active');
-				self.$stage.find('.configure-options').hide();
+				self.$stage.find('.ttfmake-configure-item-button').removeClass('active');
+				self.$stage.find('.configure-item-dropdown').hide();
 			});
 
 			return this;
