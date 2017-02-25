@@ -734,18 +734,18 @@
 	display: inline-block;
 	position: absolute;
 	clear: both;
-	top: 2px;
+	top: 5px;
 	right: 10px;
-	width: 30px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 	margin-bottom: 0; /*reset*/
 	color: #aaaaaa;
 	text-decoration: none;  /*reset*/
 	outline: none !important;
 	text-indent: -9999px;
 	background: url(images/menu-icon.png) no-repeat center center;
-	background-size: 30px 30px;
-	transition: all 0.2s ease-in-out;
+	background-size: 25px 25px;
+	transition: all 0.15s ease-out;
 }
 .ttfmake-configure-item-button.active {
 	-webkit-transform: rotate(90deg);
