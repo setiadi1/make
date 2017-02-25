@@ -276,13 +276,15 @@
 .ttfmake-add-item-wrapper span {
 	display: inline-block;
 	vertical-align: middle;
+	color: #0073aa;
+}
+.ttfmake-add-item-wrapper span:hover {
 	color: #00b8ee;
 }
 .ttfmake-add-item-wrapper span:before {
 	content: "\f502";
 	display: inline-block;
 	vertical-align: middle;
-	color: #00b8ee;
 	font-size: 2em;
 	font-family: dashicons;
 }
