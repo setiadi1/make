@@ -731,17 +731,17 @@
 	content: '\f142';
 }
 .ttfmake-configure-item-button {
-	display: inline-block;
 	position: absolute;
-	clear: both;
 	top: 5px;
 	right: 10px;
+	clear: both;
+	display: inline-block;
 	width: 25px;
 	height: 25px;
-	margin-bottom: 0; /*reset*/
-	color: #aaaaaa;
-	text-decoration: none;  /*reset*/
+	margin-bottom: 0;
 	outline: none !important;
+	color: #aaaaaa;
+	text-decoration: none;
 	text-indent: -9999px;
 	background: url(images/menu-icon.png) no-repeat center center;
 	background-size: 25px 25px;
