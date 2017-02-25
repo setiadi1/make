@@ -387,35 +387,6 @@
 	float: left;
 	width: 100%;
 }
-.edit-content-link.item-has-content {
-	color: #1bc865;
-}
-.edit-content-link.item-has-content.edit-gallery-item-link:before,
-.edit-content-link.item-has-content.edit-banner-slide-link:before {
-	content: "\f214";
-}
-.edit-gallery-item-link,
-.remove-gallery-item-link,
-.edit-banner-slide-link,
-.remove-banner-slide-link,
-.configure-gallery-item-link,
-.configure-button,
-.remove-widget-link,
-.remove-text-column-link {
-	display: inline-block;
-	position: absolute;
-	clear: both;
-	top: 20px;
-	right: 45px;
-	height: 39px;
-	margin-bottom: 0; /*reset*/
-	padding: 0 12px;
-	border: 1px solid #d9d9d9;
-	background-color: #eeeeee;
-	color: #aaaaaa;
-	text-decoration: none;  /*reset*/
-	outline: none !important;
-}
 .configure-button,
 .remove-widget-link {
 	top: 0; /*reset*/
@@ -426,70 +397,8 @@
 	border: 0;
 	background: transparent;
 }
-.remove-text-column-link {
-  right: 10px;
-}
-.make-plus-enabled .remove-text-column-link {
-  top: 0;
-  right: 0;
-}
-.remove-gallery-item-link,
-.remove-banner-slide-link,
 .remove-widget-link {
 	right: 0; /*reset*/
-}
-.remove-gallery-item-link {
-	right: 10px;
-}
-.edit-gallery-item-link {
-	right: 55px; /*45px+10px*/
-}
-.configure-gallery-item-link {
-	right: 100px;
-}
-.edit-gallery-item-link:hover,
-.remove-gallery-item-link:hover,
-.edit-banner-slide-link:hover,
-.remove-banner-slide-link:hover,
-.configure-gallery-item-link:hover,
-.configure-button:hover,
-.remove-widget-link:hover,
-.remove-text-column-link:hover {
-	color: #222222;
-}
-.edit-gallery-item-link span,
-.remove-gallery-item-link span,
-.edit-banner-slide-link span,
-.remove-banner-slide-link span,
-.configure-gallery-item-link span,
-.configure-button span,
-.remove-widget-link span,
-.remove-text-column-link span {
-	display: none;
-	text-indent: -9999px;
-	white-space: nowrap;
-	overflow: hidden;
-}
-.edit-gallery-item-link:before,
-.edit-banner-slide-link:before {
-	content: "\f464";
-	font: 400 20px/39px dashicons;
-	speak: none; /*reset*/
-}
-.remove-gallery-item-link:before,
-.remove-banner-slide-link:before,
-.remove-widget-link:before,
-.remove-text-column-link:before {
-	content: "\f182";
-	font: 400 20px/39px dashicons;
-	speak: none; /*reset*/
-}
-.configure-gallery-item-link:before {
-	position: relative;
-	top: -2px;
-	content: "\f111";
-	font: 400 20px/39px dashicons;
-	speak: none; /*reset*/
 }
 .column-buttons {
 	z-index: 1;
