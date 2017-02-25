@@ -28,6 +28,10 @@ var oneApp = oneApp || {};
 		onItemRemove: function (evt) {
 			evt.preventDefault();
 
+			if (!confirm('Are you sure you want to trash this gallery item permanently?')) {
+				return;
+			}
+
 			var $stage = this.$el.parents('.ttfmake-gallery-items'),
 				$orderInput = $('.ttfmake-gallery-item-order', $stage);
 

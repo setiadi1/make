@@ -28,6 +28,10 @@ var oneApp = oneApp || {};
 		onSlideRemove: function (evt) {
 			evt.preventDefault();
 
+			if (!confirm('Are you sure you want to trash this banner slide permanently?')) {
+				return;
+			}
+
 			var $stage = this.$el.parents('.ttfmake-banner-slides');
 
 			// Fade and slide out the section, then cleanup view
