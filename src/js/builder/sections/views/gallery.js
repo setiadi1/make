@@ -13,7 +13,7 @@ var oneApp = oneApp || {};
 			return _.extend({}, oneApp.views.section.prototype.events, {
 				'change .ttfmake-gallery-columns' : 'handleColumns',
 				'view-ready': 'onViewReady',
-				'click .ttfmake-gallery-add-item' : 'onItemAdd',
+				'click .ttfmake-gallery-add-item-link' : 'onItemAdd',
 				'model-item-change': 'onItemChange',
 				'item-sort': 'onItemSort',
 				'item-remove': 'onItemRemove',
@@ -28,7 +28,7 @@ var oneApp = oneApp || {};
 					self = this;
 
 			if (items.length == 0) {
-				var $addButton = $('.ttfmake-gallery-add-item', this.$el);
+				var $addButton = $('.ttfmake-gallery-add-item-link', this.$el);
 				$addButton.trigger('click', true);
 				$addButton.trigger('click', true);
 				$addButton.trigger('click', true);
