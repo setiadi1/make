@@ -507,11 +507,12 @@
 	display: none;
 	position: absolute;
 	top: 3px;
-	right: -6px;
+	right: -8px;
 	z-index: 5;
 	margin: 10px 0 0;
 	padding: 6px 0 10px;
-	border: 1px solid #dfdfdf;
+	-webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 	background-color: #32373c;
 }
 .configure-item-dropdown:before {
@@ -531,14 +532,14 @@
 }
 .ttfmake-gallery-item .configure-item-dropdown {
 	top: 40px;
-	right: 3px;
+	right: 2px;
 }
 .configure-item-dropdown li {
 	margin-bottom: 0;
 }
 .configure-item-dropdown li a {
 	display: block;
-	padding: 3px 12px;
+	padding: 3px 25px 3px 10px;
 	color: rgba(240, 245, 250, 0.7);
 	text-decoration: none;
 }
