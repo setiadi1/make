@@ -16,7 +16,7 @@ var oneApp = oneApp || {};
 				'click .ttfmake-overlay-open': 'openConfigurationOverlay',
 				'overlay-close': 'onOverlayClose',
 				'click .ttfmake-configure-item-button': 'toggleConfigureDropdown',
-				'click .configure-options a': 'onOptionClick'
+				'click .configure-item-dropdown a': 'onOptionClick'
 			},
 
 			onViewReady: function(e) {
@@ -107,10 +107,12 @@ var oneApp = oneApp || {};
 				evt.stopPropagation();
 				
 				this.$el.find('.configure-item-dropdown').hide();
-				this.$el.find('ttfmake-configure-item-button').removeClass('active');
+				this.$el.find('.ttfmake-configure-item-button').removeClass('active');
 			},
 
 			onOptionClick: function(evt) {
+				evt.stopPropagation();
+
 				this.hideConfigureDropdown(evt);
 			}
 		});
