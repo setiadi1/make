@@ -258,16 +258,9 @@
 .ttfmake-banner-options-title {
 	margin-top: 8px;
 }
-.ttfmake-gallery-add-item {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-.ttfmake-banner-add-item,
-.ttfmake-gallery-add-item,
-.ttfmake-text-columns-add-column {
+.ttfmake-add-item-wrapper {
 	clear: both;
 	height: 76px;
-	background-color: #fff;
 	text-align: center;
 	line-height: 76px;
 }
@@ -275,25 +268,17 @@
 .ttfmake-gallery-add-item-link,
 .ttfmake-text-columns-add-column-link {
 	text-decoration: none; /*reset*/
-}
-.ttfmake-text-columns-add-column-link {
-  display: block;
-  padding: 0 10px;
+	padding: 0 20px;
 }
 .make-plus-enabled .ttfmake-text-columns-add-column-link {
   padding: 0 0 0 10px;
 }
-.ttfmake-banner-add-item span,
-.ttfmake-gallery-add-item span,
-.ttfmake-text-columns-add-column span {
+.ttfmake-add-item-wrapper span {
 	display: inline-block;
 	vertical-align: middle;
 	color: #00b8ee;
 }
-
-.ttfmake-banner-add-item span:before,
-.ttfmake-gallery-add-item span:before,
-.ttfmake-text-columns-add-column span:before {
+.ttfmake-add-item-wrapper span:before {
 	content: "\f502";
 	display: inline-block;
 	vertical-align: middle;
