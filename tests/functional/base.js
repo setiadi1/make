@@ -33,12 +33,15 @@ define([
 		});
 
 		tdd.test('Set Post title', function () {
-			return builder.setPostTitle('Mixed Layout Test').sleep(1000);
+			var command = builder.showCursor();
+			return builder.setPostTitle('Mixed Layout Test', command);
 		});
 
 		tdd.test('Create Columns section', function () {
+			var command = builder.showCursor();
+
 			// Create the section
-			var command = builder.createSection('columns');
+			command = builder.createSection('columns', command);
 			command = command.sleep(1000);
 
 			command = builder.openOverlay(command);
@@ -46,32 +49,32 @@ define([
 			command = builder.applyOverlay(command);
 			command = command.sleep(1000);
 
-			command = builder.openItemOverlay(1, command);
-			command = builder.setOverlayTitle('First Column Title', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
+			// command = builder.openItemOverlay(1, command);
+			// command = builder.setOverlayTitle('First Column Title', command);
+			// command = builder.applyOverlay(command);
+			// command = command.sleep(1000);
 
-			command = builder.setItemContent(1, 'First column content', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
+			// command = builder.setItemContent(1, 'First column content', command);
+			// command = builder.applyOverlay(command);
+			// command = command.sleep(1000);
 
-			command = builder.openItemOverlay(2, command);
-			command = builder.setOverlayTitle('Second Column Title', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
+			// command = builder.openItemOverlay(2, command);
+			// command = builder.setOverlayTitle('Second Column Title', command);
+			// command = builder.applyOverlay(command);
+			// command = command.sleep(1000);
 
-			command = builder.setItemContent(2, 'Second column content', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
+			// command = builder.setItemContent(2, 'Second column content', command);
+			// command = builder.applyOverlay(command);
+			// command = command.sleep(1000);
 
-			command = builder.openItemOverlay(3, command);
-			command = builder.setOverlayTitle('Third Column Title', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
+			// command = builder.openItemOverlay(3, command);
+			// command = builder.setOverlayTitle('Third Column Title', command);
+			// command = builder.applyOverlay(command);
+			// command = command.sleep(1000);
 
-			command = builder.setItemContent(3, 'Third column content', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
+			// command = builder.setItemContent(3, 'Third column content', command);
+			// command = builder.applyOverlay(command);
+			// command = command.sleep(1000);
 
 			command = builder.moveColumn(1, 1, command);
 			command = command.sleep(1000);

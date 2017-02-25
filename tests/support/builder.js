@@ -4,9 +4,47 @@ define(function (require) {
 
 	function Builder(remote) {
 		this.remote = remote;
-  }
+	}
 
   Builder.prototype = {
+  	showCursor: function(command) {
+  		command = command || this.remote;
+  		return command
+  			.execute(this.buildCursor)
+  			.end();
+  	},
+
+  	buildCursor: function() {
+  		var cursorRadius = 10;
+  		var el = document.createElement('div');
+  		el.style.pointerEvents = 'none';
+  		el.style.position = 'fixed';
+  		el.style.zIndex = '99999999999';
+  		el.style.top = '0';
+  		el.style.left = '0';
+  		el.style.display = 'block';
+  		el.style.width = (cursorRadius * 2) + 'px';
+  		el.style.height = (cursorRadius * 2) + 'px';
+  		el.style.backgroundColor = '#666';
+  		el.style.borderRadius = '50%';
+  		el.style.border = '2px solid #666';
+
+  		document.addEventListener('mousemove', function(e) {
+  			el.style.top = (e.clientY - cursorRadius) + 'px';
+  			el.style.left = (e.clientX - cursorRadius) + 'px';
+  		});
+
+  		document.addEventListener('mousedown', function(e) {
+  			el.style.backgroundColor = '#fff';
+  		});
+
+  		document.addEventListener('mouseup', function(e) {
+  			el.style.backgroundColor = '#666';
+  		});
+
+  		document.body.appendChild(el);
+  	},
+
   	// Return the slug (or type,
   	// but with exceptions) of a section
   	getSectionSlug: function(type) {
