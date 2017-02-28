@@ -28,7 +28,7 @@ var oneApp = oneApp || {};
 		onItemRemove: function (evt) {
 			evt.preventDefault();
 
-			if (!confirm('Are you sure you want to trash this gallery item permanently?')) {
+			if (!confirm('Are you sure you want to trash this item permanently?')) {
 				return;
 			}
 
