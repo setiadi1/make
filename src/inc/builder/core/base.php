@@ -356,7 +356,7 @@ class TTFMAKE_Builder_Base {
 		$data = array(
 			'pageID'        => get_the_ID(),
 			'postRefresh'   => true,
-			'confirmString' => esc_html__( 'Delete the section?', 'make' ),
+			'confirmString' => esc_html__( 'Are you sure you want to trash this section permanently?', 'make' ),
 		);
 
 		wp_localize_script(
