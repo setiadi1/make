@@ -28,7 +28,7 @@ var oneApp = oneApp || {};
 		onSlideRemove: function (evt) {
 			evt.preventDefault();
 
-			if (!confirm('Are you sure you want to trash this banner slide permanently?')) {
+			if (!confirm('Are you sure you want to trash this slide permanently?')) {
 				return;
 			}
 

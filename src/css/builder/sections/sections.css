@@ -416,15 +416,15 @@
 }
 .configure-item-dropdown:before {
 	position: absolute;
-	top: -10px;
+	top: -8px;
 	right: 22px;
 	content: ' ';
 	display: block;
 	width: 0;
 	height: 0;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-	border-bottom: 10px solid #32373c;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid #32373c;
 }
 .ttfmake-banner-slide .configure-item-dropdown {
 	top: 40px;
