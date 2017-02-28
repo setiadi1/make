@@ -517,7 +517,7 @@ class TTFMAKE_Builder_Base {
 						<?php esc_html_e( 'Edit content', 'make' ); ?>
 					</span>
 					<span class="ttfmake-iframe-content-placeholder">
-						<?php esc_html_e( 'Click to Edit', 'make' ); ?>
+						<?php esc_html_e( 'Click to edit', 'make' ); ?>
 					</span>
 				</a>
 			</div>
