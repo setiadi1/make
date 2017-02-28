@@ -9,8 +9,8 @@ $links = array(
 	100 => array(
 		'href'  => '#',
 		'class' => 'ttfmake-section-remove',
-		'label' => __( 'Delete section', 'make' ),
-		'title' => __( 'Delete section', 'make' ),
+		'label' => __( 'Trash section', 'make' ),
+		'title' => __( 'Trash section', 'make' ),
 	)
 );
 

@@ -32,7 +32,7 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 			</a>
 		</li>
 		<li>
-			<a href="#" class="ttfmake-icon-trash ttfmake-banner-slide-remove" title="<?php esc_attr_e( 'Delete slide', 'make' ); ?>">
+			<a href="#" class="ttfmake-icon-trash ttfmake-banner-slide-remove" title="<?php esc_attr_e( 'Trash slide', 'make' ); ?>">
 				<?php esc_html_e( 'Trash slide', 'make' ); ?>
 			</a>
 		</li>
