@@ -60,6 +60,14 @@ var oneApp = oneApp || {};
 			if (oneApp.builder.isVisualActive()) {
 				focusOn = tinyMCE.get('make');
 
+				if (view.model.get('parentID')) {
+					var parentModel = _(oneApp.builder.sections.models).findWhere({id: view.model.get('parentID')});
+
+					if (parentModel.get('background-color')) {
+						focusOn.getBody().style.backgroundColor = parentModel.get('background-color');
+					}
+				}
+
 				// Trap keypresses in the editor content area.
 				// No need to .off this handler later.
 				focusOn.on('keydown', _.bind(this.onKeyDown, this));
