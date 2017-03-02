@@ -383,15 +383,13 @@ div.custom-logo {
 .header-text {
 	@include for(large-screens) {
 		float: left;
-		@include rem('margin-top', 2px);
-		@include rem('padding', $base/2 0);
 	}
 	@include for(medium-screens) {
 		text-align: left;
+		@include rem('padding', $base/2 0);
 	}
 	text-align: center;
 	display: block;
-	@include rem('margin-bottom', $base);
 	@include rem('font-size', 13px);
 	.header-bar-flipped & {
 		float: right;
