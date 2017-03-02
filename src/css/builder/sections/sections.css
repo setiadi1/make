@@ -6,7 +6,15 @@
 	padding-right: 0;
 }
 .ttfmake-section-text .ttfmake-text-column .ttfmake-media-uploader-placeholder {
-	border-bottom: 0; /*reset*/
+	border: 0;
+}
+.ttfmake-section-text .ttfmake-uploader {
+	padding: 15px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.ttfmake-section-text .ttfmake-iframe-wrapper {
+	border-top: 0;
 }
 .ttfmake-section-text .ttfmake-section-body,
 .ttfmake-section-gallery .ttfmake-section-body {
