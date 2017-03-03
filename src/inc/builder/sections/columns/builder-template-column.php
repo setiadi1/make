@@ -10,9 +10,6 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	$column_name = $section_name . '[columns][{{ get("id") }}]';
 	$iframe_id = 'ttfmake-iframe-'. $combined_id;
 	$textarea_id = 'ttfmake-content-'. $combined_id;
-	$link        = '{{ get("image-link") }}';
-	$image_id    = '{{ get("image-id") }}';
-	$title       = '{{ get("title") }}';
 	$content     = '{{ get("content") }}';
 
 	$column_buttons = array(
@@ -24,13 +21,6 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 			'other-a-attributes' => 'data-textarea="' . $textarea_id . '" data-iframe="' . $iframe_id . '"',
 		),
 		200 => array(
-			'label'              => __( 'Configure column', 'make' ),
-			'href'               => '#',
-			'class'              => 'ttfmake-overlay-open ttfmake-icon-cog',
-			'title'              => __( 'Configure column', 'make' ),
-			'other-a-attributes' => ' data-overlay="#' . $overlay_id .'"',
-		),
-		600 => array(
 			'label'              => __( 'Trash column', 'make' ),
 			'href'               => '#',
 			'class'              => 'ttfmake-text-column-remove ttfmake-icon-trash',
@@ -103,51 +93,4 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 	 */
 	do_action( 'make_section_text_after_column', $ttfmake_section_data );
 	?>
-
-	<?php
-	global $ttfmake_overlay_class, $ttfmake_overlay_id, $ttfmake_overlay_title;
-	$ttfmake_overlay_class = 'ttfmake-configuration-overlay';
-	$ttfmake_overlay_id    = $overlay_id;
-	$ttfmake_overlay_title = __( 'Configure column', 'make' );
-
-	get_template_part( '/inc/builder/core/templates/overlay', 'header' );
-
-	/**
-	 * Filter the definitions of the Columns section's column configuration inputs.
-	 *
-	 * @since 1.4.0.
-	 *
-	 * @param array    $inputs    The input definition array.
-	 */
-	$inputs = apply_filters( 'make_column_configuration', array(
-		100 => array(
-			'type'    => 'section_title',
-			'name'    => 'title',
-			'label'   => __( 'Enter column title', 'make' ),
-			'default' => '{{ get("title") }}',
-			'class'   => 'ttfmake-configuration-title',
-		)
-	) );
-
-	// Sort the config in case 3rd party code added another input
-	ksort( $inputs, SORT_NUMERIC );
-
-	// Print the inputs
-	$output = '';
-
-	foreach ( $inputs as $input ) {
-		if ( isset( $input['type'] ) && isset( $input['name'] ) ) {
-			$output       .= ttfmake_create_input( $column_name, $input, array() );
-		}
-	}
-
-	echo $output;
-
-?>
-	<div class="ttfmake-configuration-overlay-input-wrap">
-		<label for="image-link"><?php echo __( 'Image link URL', 'make' ); ?></label>
-		<input type="text" name="image-link" id="image-link" value="{{ get('image-link') }}" data-model-attr="image-link">
-	</div>
-
-	<?php get_template_part( '/inc/builder/core/templates/overlay', 'footer' ); ?>
-</v>
+</div>
