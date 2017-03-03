@@ -13,8 +13,6 @@ var oneApp = oneApp || {};
 
 		events: function() {
 			return _.extend({}, oneApp.views.item.prototype.events, {
-				'click .edit-content-link': 'onContentEdit',
-				'click .ttfmake-overlay-open': 'openConfigurationOverlay',
 				'overlay-open': 'onOverlayOpen',
 				'click .ttfmake-text-column-remove': 'onColumnRemove'
 			});
