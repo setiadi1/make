@@ -20,7 +20,7 @@ $overlay_id  = "ttfmake-overlay-" . $combined_id;
 			'title'              => __( 'Edit content', 'make' ),
 			'other-a-attributes' => 'data-textarea="' . $textarea_id . '" data-iframe="' . $iframe_id . '"',
 		),
-		200 => array(
+		600 => array(
 			'label'              => __( 'Trash column', 'make' ),
 			'href'               => '#',
 			'class'              => 'ttfmake-text-column-remove ttfmake-icon-trash',
