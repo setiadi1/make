@@ -9,7 +9,6 @@ var oneApp = oneApp || {};
 	oneApp.models.text = oneApp.models.section.extend({
 		defaults: function() {
 			return {
-				'id': '',
 				'section-type': 'text',
 				'state': 'open',
 				'columns': []
