@@ -16,44 +16,23 @@ $darken   = ( isset( $ttfmake_section_data[ 'darken' ] ) ) ? absint( $ttfmake_se
 	<?php endif; ?>
 	<div class="builder-section-content">
 		<?php $columns_layout_size = $ttfmake_section_data['columns-number']; ?>
-		<?php if ( ! empty( $text_columns ) ) : $i = 1; foreach ( $text_columns as $column ) :
-			$link_front = '';
-			$link_back = '';
-			if ( '' !== $column['image-link'] ) :
-				$link_front = '<a href="' . esc_url( $column['image-link'] ) . '">';
-				$link_back = '</a>';
-			endif;
-		?>
-		<?php if ( $i == 1 ): ?>
-			<div class="builder-text-row">
-		<?php endif; ?>
-		<div class="builder-text-column builder-text-column-<?php echo $i; ?>" id="builder-section-<?php echo esc_attr( $ttfmake_section_data['id'] ); ?>-column-<?php echo $i; ?>">
-			<?php if ( isset( $column['image-id'] ) && !empty( $column['image-id'] ) ):
-				$image_html =  ttfmake_get_image( $column['image-id'], 'large' );
-			?>
-				<?php if ( isset( $image_html ) && !empty( $image_html ) ) : ?>
-				<figure class="builder-text-image">
-					<?php echo $link_front . $image_html . $link_back; ?>
-				</figure>
-				<?php endif; ?>
-			<?php endif; ?>
-			<?php if ( '' !== $column['title'] ) : ?>
-			<h3 class="builder-text-title">
-				<?php echo apply_filters( 'the_title', $column['title'] ); ?>
-			</h3>
-			<?php endif; ?>
-			<?php if ( '' !== $column['content'] ) : ?>
-			<div class="builder-text-content">
-				<?php ttfmake_get_builder_save()->the_builder_content( $column['content'] ); ?>
-			</div>
-			<?php endif; ?>
-		</div>
-		<?php if ( $i % $columns_layout_size == 0 ): ?>
-			</div>
-			<?php if ( $i < sizeof( $text_columns ) ): ?>
+		<?php if ( ! empty( $text_columns ) ) : $i = 1; foreach ( $text_columns as $column ) : ?>
+			<?php if ( $i == 1 ): ?>
 				<div class="builder-text-row">
 			<?php endif; ?>
-		<?php endif; ?>
+			<div class="builder-text-column builder-text-column-<?php echo $i; ?>" id="builder-section-<?php echo esc_attr( $ttfmake_section_data['id'] ); ?>-column-<?php echo $i; ?>">
+				<?php if ( '' !== $column['content'] ) : ?>
+				<div class="builder-text-content">
+					<?php ttfmake_get_builder_save()->the_builder_content( $column['content'] ); ?>
+				</div>
+				<?php endif; ?>
+			</div>
+			<?php if ( $i % $columns_layout_size == 0 ): ?>
+				</div>
+				<?php if ( $i < sizeof( $text_columns ) ): ?>
+					<div class="builder-text-row">
+				<?php endif; ?>
+			<?php endif; ?>
 		<?php $i++; endforeach; endif; ?>
 	</div>
 	<?php if ( 0 !== $darken ) : ?>
