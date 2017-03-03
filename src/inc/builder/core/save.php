@@ -489,7 +489,7 @@ class TTFMAKE_Builder_Save {
 				break;
 			}
 
-			if ( $current_section['id'] === $id ) {
+			if ( $current_section['id'] == $id ) {
 				$next_is_the_one = true;
 			}
 		}
@@ -517,7 +517,7 @@ class TTFMAKE_Builder_Save {
 	 */
 	public function get_prev_section_data( $current_section, $sections ) {
 		foreach ( $sections as $id => $data ) {
-			if ( $current_section['id'] === $id ) {
+			if ( $current_section['id'] == $id ) {
 				break;
 			} else {
 				$prev_key = $id;
@@ -587,7 +587,7 @@ class TTFMAKE_Builder_Save {
 		// Get the previous section's type
 		$prev_data = $this->get_prev_section_data( $current_section, $sections );
 		$prev      = ( ! empty( $prev_data ) && isset( $prev_data['section-type'] ) ) ? $prefix . 'prev-' . $prev_data['section-type'] : $prefix . 'first';
-
+		
 		/**
 		 * Filter the section classes.
 		 *
