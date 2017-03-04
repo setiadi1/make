@@ -77,9 +77,9 @@ var oneApp = oneApp || {};
 
 			var columns = parseInt($('.ttfmake-text-column', this.$el).length, 10);
 			columnView.$el.addClass('ttfmake-text-column-position-'+columns);
-
+			
 			this.$el.trigger('column-added');
-
+			
 			return columnView;
 		},
 
@@ -210,6 +210,8 @@ var oneApp = oneApp || {};
 				start: function(event, ui) {
 					var $item = $(ui.item.get(0)),
 						$stage = $item.parents('.ttfmake-text-columns-stage');
+
+					ui.placeholder.height(ui.item.height());
 
 					/**
 					 * Make Plus feature from here

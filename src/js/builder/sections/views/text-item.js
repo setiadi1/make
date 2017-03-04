@@ -14,7 +14,8 @@ var oneApp = oneApp || {};
 		events: function() {
 			return _.extend({}, oneApp.views.item.prototype.events, {
 				'overlay-open': 'onOverlayOpen',
-				'click .ttfmake-text-column-remove': 'onColumnRemove'
+				'click .ttfmake-text-column-remove': 'onColumnRemove',
+				'overlay-close': 'onOverlayClose'
 			});
 		},
 
@@ -23,12 +24,18 @@ var oneApp = oneApp || {};
 		},
 
 		render: function () {
+			var self = this;
+
 			var html = this.template(this.model);
 			this.setElement(html);
 
 			if ('' !== this.model.get('content')) {
 				$('.edit-content-link', this.$el).addClass('item-has-content');
 			}
+
+			setTimeout(function() {
+				self.updateIframeHeight();
+			}, 1000);
 
 			return this;
 		},
@@ -38,6 +45,24 @@ var oneApp = oneApp || {};
 
 			var $button = $('.ttfmake-overlay-close-update', $overlay);
 			$button.text('Update column');
+		},
+
+		onOverlayClose: function(e, changeset) {
+			e.stopPropagation();
+
+			this.model.set(changeset);
+
+			if (this.model.hasChanged()) {
+				this.$el.trigger('model-item-change');
+			}
+
+			this.updateIframeHeight();
+		},
+
+		updateIframeHeight: function() {
+			var $iframe = this.$el.find('iframe');
+			var iframeContentHeight = $iframe.contents().height();
+			$iframe.height(iframeContentHeight);
 		},
 
 		onColumnRemove: function(evt) {
