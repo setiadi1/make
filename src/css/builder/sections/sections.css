@@ -23,7 +23,7 @@
 	padding-right: 10px;
 }
 .ttfmake-section-text .ttfmake-section-body {
-	padding-right: 10px;
+	padding-right: 0;
 }
 .ttfmake-gallery-items-stage .sortable-placeholder {
 	width: 100%;
@@ -65,7 +65,7 @@
 }
 .ttfmake-text-column {
 	position: relative;
-	margin-right: 10px;
+	margin-right: 20px;
 	border: 1px solid #ddd;
 }
 .ttfmake-text-columns-stage .sortable-placeholder {
@@ -112,9 +112,9 @@
  Text: Two column (sections.css)
 -------------------------------------------------------- */
 .ttfmake-text-columns-2 .ttfmake-text-column {
-	flex: 0 48.9%;
-	-ms-flex: 0 48.9%;
-	-webkit-flex: 0 48.9%;
+	flex: 0 48%;
+	-ms-flex: 0 48%;
+	-webkit-flex: 0 48%;
 }
 .make-plus-enabled .ttfmake-text-columns-2 .ttfmake-text-column {
   flex: 0 47.75%;
@@ -126,9 +126,9 @@
 -------------------------------------------------------- */
 .ttfmake-text-columns-3 .ttfmake-text-column,
 .ttfmake-text-columns-3 .sortable-placeholder {
-	flex: 0 32.233%;
-	-ms-flex: 0 32.233%;
-	-webkit-flex: 0 32.233%;
+	flex: 0 31.333%;
+	-ms-flex: 0 31.333%;
+	-webkit-flex: 0 31.333%;
 }
 .make-plus-enabled .ttfmake-text-columns-3 .ttfmake-text-column,
 .make-plus-enabled .ttfmake-text-columns-3 .sortable-placeholder {
@@ -151,9 +151,9 @@
  Text: Four column (sections.css)
 -------------------------------------------------------- */
 .ttfmake-text-columns-4 .ttfmake-text-column {
-  flex: 0 23.9%;
-  -ms-flex: 0 23.9%;
-  -webkit-flex: 0 23.9%;
+  flex: 0 23.05%;
+  -ms-flex: 0 23.05%;
+  -webkit-flex: 0 23.05%;
 }
 .make-plus-enabled .ttfmake-text-columns-4 .ttfmake-text-column {
   flex: 0 22.9%;
@@ -164,9 +164,9 @@
  Text: Five column (sections.css)
 -------------------------------------------------------- */
 .ttfmake-text-columns-5 .ttfmake-text-column {
-	flex: 0 18.9%;
-  -ms-flex: 0 18.9%;
-  -webkit-flex: 0 18.9%;
+	flex: 0 18.05%;
+  -ms-flex: 0 18.05%;
+  -webkit-flex: 0 18.05%;
 }
 .make-plus-enabled .ttfmake-text-columns-5 .ttfmake-text-column {
   flex: 0 18%;
@@ -177,9 +177,9 @@
  Text: Six column (sections.css)
 -------------------------------------------------------- */
 .ttfmake-text-columns-6 .ttfmake-text-column {
-	flex: 0 15.566%;
-  -ms-flex: 0 15.566%;
-  -webkit-flex: 0 15.566%;
+	flex: 0 14.73%;
+  -ms-flex: 0 14.73%;
+  -webkit-flex: 0 14.73%;
 }
 .make-plus-enabled .ttfmake-text-columns-6 .ttfmake-text-column {
   flex: 0 14.66%;
