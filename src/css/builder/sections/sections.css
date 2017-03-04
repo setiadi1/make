@@ -98,9 +98,9 @@
  Text: One column (sections.css)
 -------------------------------------------------------- */
 .ttfmake-text-columns-1 .ttfmake-text-column {
-	flex: 0 100%;
-	-ms-flex: 0 100%;
-	-webkit-flex: 0 100%;
+	flex: 0 96.5%;
+	-ms-flex: 0 96.5%;
+	-webkit-flex: 0 96.5%;
 }
 .ttfmake-text-columns-1 .ttfmake-text-column .column-buttons {
     top: 0;
@@ -117,9 +117,9 @@
 	-webkit-flex: 0 48%;
 }
 .make-plus-enabled .ttfmake-text-columns-2 .ttfmake-text-column {
-  flex: 0 47.75%;
-  -ms-flex: 0 47.75%;
-  -webkit-flex: 0 47.75%;
+  flex: 0 47.25%;
+  -ms-flex: 0 47.25%;
+  -webkit-flex: 0 47.25%;
 }
 /*---------------------------------------------------------
  Text: Three column (sections.css)
@@ -132,9 +132,9 @@
 }
 .make-plus-enabled .ttfmake-text-columns-3 .ttfmake-text-column,
 .make-plus-enabled .ttfmake-text-columns-3 .sortable-placeholder {
-  flex: 0 31.19%;
-  -ms-flex: 0 31.19%;
-  -webkit-flex: 0 31.19%;
+  flex: 0 30.89%;
+  -ms-flex: 0 30.89%;
+  -webkit-flex: 0 30.89%;
 }
 @media screen and ( min-width: 1160px ) {
 	.ttfmake-text-columns-2,
@@ -156,9 +156,9 @@
   -webkit-flex: 0 23.05%;
 }
 .make-plus-enabled .ttfmake-text-columns-4 .ttfmake-text-column {
-  flex: 0 22.9%;
-  -ms-flex: 0 22.9%;
-  -webkit-flex: 0 22.9%;
+  flex: 0 22.7%;
+  -ms-flex: 0 22.7%;
+  -webkit-flex: 0 22.7%;
 }
 /*---------------------------------------------------------
  Text: Five column (sections.css)
@@ -169,9 +169,9 @@
   -webkit-flex: 0 18.05%;
 }
 .make-plus-enabled .ttfmake-text-columns-5 .ttfmake-text-column {
-  flex: 0 18%;
-  -ms-flex: 0 18%;
-  -webkit-flex: 0 18%;
+  flex: 0 17.8%;
+  -ms-flex: 0 17.8%;
+  -webkit-flex: 0 17.8%;
 }
 /*---------------------------------------------------------
  Text: Six column (sections.css)
@@ -182,9 +182,9 @@
   -webkit-flex: 0 14.73%;
 }
 .make-plus-enabled .ttfmake-text-columns-6 .ttfmake-text-column {
-  flex: 0 14.66%;
-  -ms-flex: 0 14.66%;
-  -webkit-flex: 0 14.66%;
+  flex: 0 14.5%;
+  -ms-flex: 0 14.5%;
+  -webkit-flex: 0 14.5%;
 }
 /*---------------------------------------------------------
  Gallery: One column (sections.css)
