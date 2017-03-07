@@ -608,7 +608,7 @@
 	padding: 20px !important;
 	clear: both;
 	overflow-y: auto;
-	max-height: 500px;
+	max-height: 400px;
     border-bottom: 1px solid #dfdfdf;
 }
 .ttfmake-overlay-body .ttfmake-configuration-overlay-input-wrap:last-of-type {
