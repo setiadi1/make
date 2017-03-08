@@ -54,6 +54,7 @@
 }
 .ttfmake-text-columns-stage .ttfmake-sortable-handle {
 	border: 0;
+	border-bottom: 1px solid #ddd;
 }
 .ttfmake-text-column,
 .ttfmake-gallery-item {
