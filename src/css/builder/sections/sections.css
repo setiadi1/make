@@ -15,7 +15,7 @@
 	background-color: #fff;
 }
 .ttfmake-section-text .ttfmake-iframe-wrapper {
-	height: 84%;
+	height: calc(100% - 35px);
 	border: 0;
 }
 .ttfmake-section-gallery .ttfmake-section-body {
