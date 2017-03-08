@@ -422,14 +422,18 @@
 .configure-item-dropdown {
 	display: none;
 	position: absolute;
-	top: 5px;
-	right: -6px;
+	top: 35px;
+	right: -7px;
 	z-index: 5;
 	margin: 10px 0 0;
 	padding: 6px 0 10px;
 	-webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 	background-color: #32373c;
+}
+.make-plus-enabled .configure-item-dropdown {
+	top: 5px;
+	right: -6px;
 }
 .configure-item-dropdown:before {
 	position: absolute;
