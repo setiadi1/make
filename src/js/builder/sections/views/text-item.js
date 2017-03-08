@@ -61,10 +61,14 @@ var oneApp = oneApp || {};
 
 		updateIframeHeight: function() {
 			var $iframe = this.$el.find('iframe');
+			$iframe.css('height', 'auto');
+
 			var iframeContentHeight = $iframe.contents().height();
 
 			if (iframeContentHeight > 500) {
 				iframeContentHeight = 500;
+			} else {
+				iframeContentHeight = 275;
 			}
 
 			$iframe.height(iframeContentHeight);
