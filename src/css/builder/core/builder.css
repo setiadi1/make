@@ -763,6 +763,7 @@
 	transition: all 0.15s ease-out;
 }
 .ttfmake-configure-item-button.active {
+	top: 4px;
 	-webkit-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
