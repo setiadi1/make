@@ -269,13 +269,13 @@
 	width: 100%;
 	margin: 0;
 	padding: 8px 12px;
-	color: #23282d;
+	color: #777;
 	font-size: 13px !important;
 	font-weight: 700 !important;
 	font-family: 'Open Sans', sans-serif !important;
 	line-height: 1.7 !important;
-	border-top: 1px solid #e5e5e5;
-	border-bottom: 1px solid #e5e5e5;
+	border-top: 1px solid #d9d9d9;
+	border-bottom: 1px solid #d9d9d9;
 	background-color: #fafafa;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -286,16 +286,13 @@
 	-ms-transition: background-color 300ms ease;
 	transition: background-color 300ms ease;
 }
-.ttfmake-section:hover .ttfmake-section-header h3 {
-	border-color: #999;
-}
 .ttfmake-section-open .ttfmake-section-header h3 {
-	color: #fff;
-	border-color: #23282d;
-	background-color: #23282d;
+	color: #777;
+	border-color: #ddd;
+	background-color: #fafafa;
 }
 .ttfmake-section-open:hover .ttfmake-section-header h3 {
-	border-color: #23282d;
+	border-color: #ddd;
 }
 .ttfmake-section-header span {
 	font-weight: bold;
@@ -309,7 +306,7 @@
 	font-style: normal !important;
 }
 .ttfmake-section-open .ttfmake-section-header em {
-	color: #bbb;
+	color: #777;
 }
 .ttfmake-section-toggle:focus {
 	border: none !important;
@@ -341,7 +338,7 @@
 	display: inline-block;
 	height: 100%;
 	padding: 0 8px;
-	color: #aaa;
+	color: #bbb;
 	text-decoration: none;  /*reset*/
 }
 .ttfmake-section-open .ttfmake-section-remove,
@@ -380,7 +377,7 @@
 .ttfmake-section-open .ttfmake-section-remove:hover,
 .ttfmake-section-open .ttfmake-section-configure:hover,
 .ttfmake-section-open .ttfmp-duplicate-section:hover {
-	color: #fff;
+	color: #777;
 }
 /*---------------------------------------------------------
  Section header icons (builder.css)
@@ -724,10 +721,7 @@
 	line-height: 40px;
 }
 .ttfmake-section:hover .ttfmake-section-toggle__wrapper {
-	border-color: #999;
-}
-.ttfmake-section-open:hover .ttfmake-section-toggle__wrapper {
-	border-color: #e5e5e5;
+	border-color: #d9d9d9;
 }
 .ttfmake-section-toggle__indicator {
 	color: #bbb;
@@ -736,7 +730,7 @@
 	color: #23282d;
 }
 .ttfmake-section-open .ttfmake-section-toggle__wrapper:hover .ttfmake-section-toggle__indicator {
-	color: #fff;
+	color: #777;
 }
 .ttfmake-section-toggle__indicator:before {
 	content: '\f140';
