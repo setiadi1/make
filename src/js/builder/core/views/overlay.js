@@ -50,6 +50,8 @@ var oneApp = oneApp || {};
 
 	// Content editor overlay
 	oneApp.views['tinymce-overlay'] = oneApp.views.overlay.extend({
+		keyDownHandler: null,
+
 		open: function(view) {
 			oneApp.views.overlay.prototype.open.apply(this, arguments)
 
@@ -68,9 +70,10 @@ var oneApp = oneApp || {};
 					}
 				}
 
+				this.keyDownHandler = _.bind(this.onKeyDown, this)
 				// Trap keypresses in the editor content area.
 				// No need to .off this handler later.
-				focusOn.on('keydown', _.bind(this.onKeyDown, this));
+				focusOn.on('keydown', this.keyDownHandler);
 			}
 
 			focusOn.focus();
@@ -81,7 +84,7 @@ var oneApp = oneApp || {};
 			var editor = tinyMCE.get('make');
 
 			if (editor) {
-				editor.off('keydown');
+				editor.off('keydown', this.keyDownHandler);
 			}
 
 			oneApp.views.overlay.prototype.close.apply(this, arguments);
