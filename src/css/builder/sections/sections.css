@@ -16,14 +16,13 @@
 }
 .ttfmake-section-text .ttfmake-iframe-wrapper {
 	height: calc(100% - 35px);
-	border: 0;
+	border: 1px solid #ddd;
+	border-top: 0;
 }
+.ttfmake-section-text .ttfmake-section-body,
 .ttfmake-section-gallery .ttfmake-section-body {
 	padding-left: 10px;
 	padding-right: 10px;
-}
-.ttfmake-section-text .ttfmake-section-body {
-	padding-right: 0;
 }
 .ttfmake-gallery-items-stage .sortable-placeholder {
 	width: 100%;
@@ -53,7 +52,6 @@
 	-webkit-flex-wrap: wrap;
 }
 .ttfmake-text-columns-stage .ttfmake-sortable-handle {
-	border: 0;
 	border-bottom: 1px solid #ddd;
 }
 .ttfmake-text-column,
@@ -66,12 +64,13 @@
 }
 .ttfmake-text-column {
 	position: relative;
-	margin-right: 20px;
-	border: 1px solid #ddd;
+	padding: 0 0.625%;
 }
 .ttfmake-text-columns-stage .sortable-placeholder {
 	width: 100%;
 	height: 100%;
+	margin: 0 0.625%;
+	padding: 0 0.625%;
 	margin-bottom: 20px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -99,43 +98,42 @@
  Text: One column (sections.css)
 -------------------------------------------------------- */
 .ttfmake-text-columns-1 .ttfmake-text-column {
-	flex: 0 96.5%;
-	-ms-flex: 0 96.5%;
-	-webkit-flex: 0 96.5%;
+	flex: 0 100%;
+	-ms-flex: 0 100%;
+	-webkit-flex: 0 100%;
 }
 .ttfmake-text-columns-1 .ttfmake-text-column .column-buttons {
     top: 0;
 }
-.ttfmake-text-columns-1 .sortable-placeholder {
-  height: 546px;
-}
 /*---------------------------------------------------------
  Text: Two column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-2 .ttfmake-text-column {
-	flex: 0 48%;
-	-ms-flex: 0 48%;
-	-webkit-flex: 0 48%;
+.ttfmake-text-columns-2 .ttfmake-text-column,
+.ttfmake-text-columns-2 .sortable-placeholder {
+	flex: 0 48.7%;
+	-ms-flex: 0 48.7%;
+	-webkit-flex: 0 48.7%;
 }
-.make-plus-enabled .ttfmake-text-columns-2 .ttfmake-text-column {
-  flex: 0 47.25%;
-  -ms-flex: 0 47.25%;
-  -webkit-flex: 0 47.25%;
+.make-plus-enabled .ttfmake-text-columns-2 .ttfmake-text-column,
+.make-plus-enabled .ttfmake-text-columns-2 .sortable-placeholder {
+  flex: 0 48.65%;
+  -ms-flex: 0 48.65%;
+  -webkit-flex: 0 48.65%;
 }
 /*---------------------------------------------------------
  Text: Three column (sections.css)
 -------------------------------------------------------- */
 .ttfmake-text-columns-3 .ttfmake-text-column,
 .ttfmake-text-columns-3 .sortable-placeholder {
-	flex: 0 31.333%;
-	-ms-flex: 0 31.333%;
-	-webkit-flex: 0 31.333%;
+	flex: 0 1 32.033%;
+	-ms-flex: 0 1 32.033%;
+	-webkit-flex: 0 1 32.033%;
 }
 .make-plus-enabled .ttfmake-text-columns-3 .ttfmake-text-column,
 .make-plus-enabled .ttfmake-text-columns-3 .sortable-placeholder {
-  flex: 0 30.89%;
-  -ms-flex: 0 30.89%;
-  -webkit-flex: 0 30.89%;
+  flex: 0 32%;
+  -ms-flex: 0 32%;
+  -webkit-flex: 0 32%;
 }
 @media screen and ( min-width: 1160px ) {
 	.ttfmake-text-columns-2,
@@ -151,41 +149,29 @@
 /*---------------------------------------------------------
  Text: Four column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-4 .ttfmake-text-column {
-  flex: 0 23.05%;
-  -ms-flex: 0 23.05%;
-  -webkit-flex: 0 23.05%;
-}
-.make-plus-enabled .ttfmake-text-columns-4 .ttfmake-text-column {
-  flex: 0 22.7%;
-  -ms-flex: 0 22.7%;
-  -webkit-flex: 0 22.7%;
+.ttfmake-text-columns-4 .ttfmake-text-column,
+.ttfmake-text-columns-4 .sortable-placeholder {
+  flex: 0 23.75%;
+  -ms-flex: 0 23.75%;
+  -webkit-flex: 0 23.75%;
 }
 /*---------------------------------------------------------
  Text: Five column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-5 .ttfmake-text-column {
-	flex: 0 18.05%;
-  -ms-flex: 0 18.05%;
-  -webkit-flex: 0 18.05%;
-}
-.make-plus-enabled .ttfmake-text-columns-5 .ttfmake-text-column {
-  flex: 0 17.8%;
-  -ms-flex: 0 17.8%;
-  -webkit-flex: 0 17.8%;
+.ttfmake-text-columns-5 .ttfmake-text-column,
+.ttfmake-text-columns-5 .sortable-placeholder {
+	flex: 0 18.75%;
+  -ms-flex: 0 18.75%;
+  -webkit-flex: 0 18.75%;
 }
 /*---------------------------------------------------------
  Text: Six column (sections.css)
 -------------------------------------------------------- */
-.ttfmake-text-columns-6 .ttfmake-text-column {
-	flex: 0 14.73%;
-  -ms-flex: 0 14.73%;
-  -webkit-flex: 0 14.73%;
-}
-.make-plus-enabled .ttfmake-text-columns-6 .ttfmake-text-column {
-  flex: 0 14.5%;
-  -ms-flex: 0 14.5%;
-  -webkit-flex: 0 14.5%;
+.ttfmake-text-columns-6 .ttfmake-text-column,
+.ttfmake-text-columns-6 .sortable-placeholder {
+	flex: 0 15.41%;
+  -ms-flex: 0 15.41%;
+  -webkit-flex: 0 15.41%;
 }
 /*---------------------------------------------------------
  Gallery: One column (sections.css)

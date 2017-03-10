@@ -236,9 +236,8 @@ var oneApp = oneApp || {};
 
 						$stage.addClass(addClass);
 
-						ui.placeholder.css('flex', $item.css('flex'));
-         		ui.placeholder.css('margin-right', $item.css('margin-right'));
-         		ui.placeholder.css('margin-left', $item.css('margin-left'));
+         		ui.placeholder.css('padding', $item.css('padding'));
+         		ui.placeholder.css('margin-bottom', $item.css('margin-bottom'));
 					}
 				},
 				stop: function(event, ui) {
