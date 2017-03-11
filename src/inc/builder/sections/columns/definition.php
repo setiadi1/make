@@ -271,11 +271,18 @@ class MAKE_Builder_Sections_Columns_Definition {
 						$image_link = esc_url_raw( $column['image-link'] );
 						$image_tag = sprintf( '<a href="%s">%s</a>', $image_link, $image_tag );
 					}
+
+					$image_tag = sprintf( '<p>%s</p>', $image_tag, $image_tag );
 				}
 
 				if ( isset( $column['title'] ) && '' !== $column['title'] ) {
 					$column_title = apply_filters( 'the_title', $column['title'] );
 					$column_title = sprintf( '<h3>%s</h3>', $column_title );
+				}
+
+				if ( '' == $column_title && '</p>' == substr( $image_tag, -4 ) && '<p>' == substr( $column['content'], 0, 3 ) ) {
+					$image_tag = substr( $image_tag, 0, -4 );
+					$column['content'] = substr( $column['content'], 3 );
 				}
 
 				$column['content'] = $image_tag . $column_title . $column['content'];
