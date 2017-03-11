@@ -408,8 +408,8 @@
 .configure-item-dropdown {
 	display: none;
 	position: absolute;
-	top: 35px;
-	right: -7px;
+	top: 40px;
+	right: 1px;
 	z-index: 5;
 	margin: 10px 0 0;
 	padding: 6px 0 10px;
