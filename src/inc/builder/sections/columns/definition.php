@@ -260,6 +260,9 @@ class MAKE_Builder_Sections_Columns_Definition {
 	public function embed_column_images( $data ) {
 		if ( $data['section-type'] == 'text' ) {
 			foreach ( $data['columns'] as $s => $column ) {
+				$image_tag = '';
+				$column_title = '';
+
 				if ( isset( $column['image-id'] ) && '' !== $column['image-id'] ) {
 					$attachment_id = $column['image-id'];
 					$image_tag = wp_get_attachment_image( $attachment_id, 'large' );
@@ -268,21 +271,20 @@ class MAKE_Builder_Sections_Columns_Definition {
 						$image_link = esc_url_raw( $column['image-link'] );
 						$image_tag = sprintf( '<a href="%s">%s</a>', $image_link, $image_tag );
 					}
-
-					$column_title = '';
-					if ( isset( $column['title'] ) && '' !== $column['title'] ) {
-						$column_title = apply_filters( 'the_title', $column['title'] );
-						$column_title = sprintf( '<h3>%s</h3>', $column_title );
-					}
-
-					$column['content'] = $image_tag . $column_title . $column['content'];
-					$data['columns'][$s] = $column;
-
-					unset( $column['image-id'] );
-					unset( $column['image-url'] );
-					unset( $column['image-link'] );
-					unset( $column['title'] );
 				}
+
+				if ( isset( $column['title'] ) && '' !== $column['title'] ) {
+					$column_title = apply_filters( 'the_title', $column['title'] );
+					$column_title = sprintf( '<h3>%s</h3>', $column_title );
+				}
+
+				$column['content'] = $image_tag . $column_title . $column['content'];
+				$data['columns'][$s] = $column;
+
+				unset( $column['image-id'] );
+				unset( $column['image-url'] );
+				unset( $column['image-link'] );
+				unset( $column['title'] );
 			}
 		}
 
