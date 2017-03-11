@@ -67,7 +67,9 @@ var oneApp = oneApp || {};
 
 			if (iframeContentHeight > 500) {
 				iframeContentHeight = 500;
-			} else {
+			}
+
+			if (iframeContentHeight < 275) {
 				iframeContentHeight = 275;
 			}
 
