@@ -15,7 +15,7 @@ var oneApp = oneApp || {};
 				'click .edit-content-link': 'onContentEdit',
 				'click .ttfmake-overlay-open': 'openConfigurationOverlay',
 				'overlay-close': 'onOverlayClose',
-				'click .ttfmake-configure-item-button': 'toggleConfigureDropdown',
+				'click .ttfmake-sortable-handle .ttfmake-configure-item-button': 'toggleConfigureDropdown',
 				'click .configure-item-dropdown a': 'onOptionClick'
 			},
 
