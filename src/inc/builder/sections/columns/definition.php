@@ -269,8 +269,9 @@ class MAKE_Builder_Sections_Columns_Definition {
 						$image_tag = sprintf( '<a href="%s">%s</a>', $image_link, $image_tag );
 					}
 
-					$column_title = apply_filters( 'the_title', $column['title'] );
-					if ( '' !== $column_title ) {
+					$column_title = '';
+					if ( isset( $column['title'] ) && '' !== $column['title'] ) {
+						$column_title = apply_filters( 'the_title', $column['title'] );
 						$column_title = sprintf( '<h3>%s</h3>', $column_title );
 					}
 
