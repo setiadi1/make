@@ -154,6 +154,11 @@ define(function (require) {
   	setContent: function(content, command) {
   		command = command || this.remote;
   		return command
+  			.findByCssSelector('#make-tmce')
+  				.moveMouseTo(0, 0)
+	  			.click()
+					.end()
+					.sleep(500)
   			.findByCssSelector('#ttfmake-tinymce-overlay iframe')
 					.moveMouseTo(20, 20)
 					.clickMouseButton()
