@@ -12,7 +12,7 @@ define([
 	// The Builder testing interface
 	var builder;
 
-	tdd.suite('One Section Per Type Layout', function () {
+	tdd.suite('Basic layout test', function () {
 		tdd.before(function() {
 			builder = new Builder(this.remote);
 			this.remote.setWindowSize(1440, 768);
@@ -34,7 +34,7 @@ define([
 
 		tdd.test('Set Post title', function () {
 			var command = builder.showCursor();
-			command = builder.setPostTitle('Mixed Layout Test', command);
+			command = builder.setPostTitle('Basic layout test', command);
 			command = command.sleep(1000);
 
 			return command;
@@ -53,32 +53,14 @@ define([
 			command = command.sleep(1000);
 
 			command = builder.openItemDropdown(1, command);
-			command = builder.openItemOverlay(1, command);
-			command = builder.setOverlayTitle('First Column Title', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
-
-			command = builder.openItemDropdown(1, command);
 			command = builder.openItemEditor(1, command);
 			command = builder.setContent('First column content', command);
 			command = builder.applyOverlay(command);
 			command = command.sleep(1000);
 
 			command = builder.openItemDropdown(2, command);
-			command = builder.openItemOverlay(2, command);
-			command = builder.setOverlayTitle('Second Column Title', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
-
-			command = builder.openItemDropdown(2, command);
 			command = builder.openItemEditor(2, command);
 			command = builder.setContent('Second column content', command);
-			command = builder.applyOverlay(command);
-			command = command.sleep(1000);
-
-			command = builder.openItemDropdown(3, command);
-			command = builder.openItemOverlay(3, command);
-			command = builder.setOverlayTitle('Third Column Title', command);
 			command = builder.applyOverlay(command);
 			command = command.sleep(1000);
 

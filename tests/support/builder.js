@@ -173,7 +173,7 @@ define(function (require) {
   		command = command || this.remote;
   		command = command
   			.findByCssSelector('.ttfmake-section:last-child .ttfmake-section-body .ui-sortable .ttfmake-text-column:nth-child(' + column + ')')
-	  			.moveMouseTo(0, 0)
+	  			.moveMouseTo(10, 0)
 	  			.pressMouseButton(0)
 	  			.sleep(1000);
 
@@ -196,13 +196,15 @@ define(function (require) {
   		command = command || this.remote;
   		return command
   			.findByCssSelector('.ttfmake-section:last-child .ttfmake-section-body .ui-sortable > div:nth-child(' + column + ')')
-	  			.moveMouseTo(direction > 0 && 300 || -10, 0)
+	  			.moveMouseTo(direction > 0 && 295 || -10, 0)
 	  			.pressMouseButton(0)
-	  			.sleep(1000)
+	  			.end()
+	  		.sleep(1000)
+	  		.findByCssSelector('.ttfmake-section:last-child .ttfmake-section-body .ui-sortable > div:nth-child(' + column + ')')
 	  			.moveMouseTo(direction * 100, 0)
-	  			.sleep(1000)
 	  			.releaseMouseButton(0)
-	  			.end();
+	  			.end()
+	  		.sleep(1000);
   	},
 
   	addBannerSlide: function(command) {
