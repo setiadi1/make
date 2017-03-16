@@ -3458,6 +3458,7 @@ div.wp-video-shortcode {
 }
 
 .builder-gallery-captions-reveal .builder-gallery-item:hover .builder-gallery-content,
+.builder-gallery-item.touchstart .builder-gallery-content,
 .builder-gallery-captions-overlay .builder-gallery-item .builder-gallery-content {
 	visibility: visible;
 }
@@ -3466,7 +3467,8 @@ div.wp-video-shortcode {
 	display: none;
 }
 
-.builder-gallery-captions-overlay .builder-gallery-item:hover .builder-gallery-content {
+.builder-gallery-captions-overlay .builder-gallery-item:hover .builder-gallery-content,
+.builder-gallery-item.touchstart .builder-gallery-content {
 	visibility: hidden;
 }
 
