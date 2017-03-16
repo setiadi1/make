@@ -63,6 +63,7 @@ var MakeFrontEnd = MakeFrontEnd || {};
 				self.skipLinkFocusFix();
 				self.navigationHoverFix();
 				self.fitVidsInit( $('.ttfmake-embed-wrapper') );
+				self.handleGalleryOverlayOnMobileDevices();
 			} );
 
 			// Infinite Scroll support
@@ -237,6 +238,27 @@ var MakeFrontEnd = MakeFrontEnd || {};
 			// Fix padding issue with Blip.tv. Note that this *must* happen after Fitvids runs.
 			// The selector finds the Blip.tv iFrame, then grabs the .fluid-width-video-wrapper div sibling.
 			$container.find('.fluid-width-video-wrapper:nth-child(2)').css({ 'paddingTop': 0 });
+		},
+
+		/**
+		 * Handle gallery overlay show / hide on mobile devices "hover".
+		 *
+		 * @since  1.8.6
+		 *
+		 * @return void
+		 */
+		handleGalleryOverlayOnMobileDevices: function() {
+			$('.builder-section-gallery .builder-gallery-item').on('touchstart', function() {
+				var $this = $(this);
+
+				if ($this.find('.builder-gallery-content').length) {
+					$this.addClass('touchstart');
+				}
+			});
+
+			$('body:not(.builder-gallery-item)').on('touchstart', function() {
+				$('.builder-gallery-item').removeClass('touchstart');
+			});
 		}
 	});
 

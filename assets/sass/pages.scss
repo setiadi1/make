@@ -368,6 +368,7 @@ position: relative;
 		position: relative;
 	}
 	.builder-gallery-captions-reveal &:hover,
+	&.touchstart,
 	.builder-gallery-captions-overlay & {
 		.builder-gallery-content {
 			visibility: visible;
@@ -378,7 +379,8 @@ position: relative;
 			display: none;
 		}
 	}
-	.builder-gallery-captions-overlay &:hover {
+	.builder-gallery-captions-overlay &:hover,
+	&.touchstart {
 		.builder-gallery-content {
 			visibility: hidden;
 		}
