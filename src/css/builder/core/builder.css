@@ -300,13 +300,13 @@
 }
 .ttfmake-section-header em {
 	margin-left: 10px;
-	color: #777;
+	color: #575d65;
 	font-size: 12px;
 	font-weight: normal !important;
 	font-style: normal !important;
 }
 .ttfmake-section-open .ttfmake-section-header em {
-	color: #777;
+	color: #575d65;
 }
 .ttfmake-section-toggle:focus {
 	border: none !important;
@@ -377,7 +377,7 @@
 .ttfmake-section-open .ttfmake-section-remove:hover,
 .ttfmake-section-open .ttfmake-section-configure:hover,
 .ttfmake-section-open .ttfmp-duplicate-section:hover {
-	color: #777;
+	color: #575d65;
 }
 /*---------------------------------------------------------
  Section header icons (builder.css)
@@ -685,7 +685,7 @@
 	display: table-cell;
   	vertical-align: middle;
   	font-size: 14px;
-  	color: #adadad;
+  	color: #ddd;
 }
 
 .ttfmake-iframe-overlay .edit-content-link.item-has-content .ttfmake-iframe-content-placeholder {
