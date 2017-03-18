@@ -34,7 +34,7 @@ var oneApp = oneApp || {};
 			}
 
 			setTimeout(function() {
-				self.updateIframeHeight();
+				self.updateIframeHeight(true);
 			}, 1000);
 
 			return this;
@@ -61,7 +61,6 @@ var oneApp = oneApp || {};
 
 		updateIframeHeight: function() {
 			var $iframe = this.$el.find('iframe');
-			$iframe.css('height', 'auto');
 
 			var iframeContentHeight = $iframe.contents().height();
 
@@ -69,8 +68,8 @@ var oneApp = oneApp || {};
 				iframeContentHeight = 500;
 			}
 
-			if (iframeContentHeight < 275) {
-				iframeContentHeight = 275;
+			if (iframeContentHeight < 305) {
+				iframeContentHeight = 305;
 			}
 
 			$iframe.height(iframeContentHeight);
