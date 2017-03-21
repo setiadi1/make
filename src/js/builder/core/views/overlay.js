@@ -50,8 +50,6 @@ var oneApp = oneApp || {};
 
 	// Content editor overlay
 	oneApp.views['tinymce-overlay'] = oneApp.views.overlay.extend({
-		keyDownHandler: null,
-
 		open: function(view) {
 			oneApp.views.overlay.prototype.open.apply(this, arguments)
 
@@ -62,18 +60,10 @@ var oneApp = oneApp || {};
 			if (oneApp.builder.isVisualActive()) {
 				focusOn = tinyMCE.get('make');
 
-				if (view.model.get('parentID')) {
-					var parentModel = _(oneApp.builder.sections.models).findWhere({id: view.model.get('parentID')});
-
-					if (parentModel.get('background-color')) {
-						focusOn.getBody().style.backgroundColor = parentModel.get('background-color');
-					}
-				}
+				// Trap keypresses in the editor content area.
+				// No need to .off this handler later.
+				focusOn.on('keydown', _.bind(this.onKeyDown, this));
 			}
-
-			this.keyDownHandler = _.bind(this.onKeyDown, this)
-			focusOn.on('keydown', this.keyDownHandler);
-			$('body').on('keydown', this.keyDownHandler);
 
 			focusOn.focus();
 			view.$el.trigger('overlay-open', this.$el);
@@ -83,10 +73,10 @@ var oneApp = oneApp || {};
 			var editor = tinyMCE.get('make');
 
 			if (editor) {
-				editor.off('keydown', this.keyDownHandler);
+				editor.off('keydown');
 			}
 
-			$('body').off('keydown', this.keyDownHandler);
+			$('.mce-toolbar-grp').hide();
 
 			oneApp.views.overlay.prototype.close.apply(this, arguments);
 
