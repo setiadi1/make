@@ -727,14 +727,12 @@
 .ttfmake-section:hover .ttfmake-section-toggle__wrapper {
 	border-color: #e5e5e5;
 }
-.ttfmake-section-toggle__indicator {
-	color: #bbb;
+
+.ttfmake-section .ttfmake-section-toggle__wrapper .ttfmake-section-toggle__indicator {
+	color: #82878c;
 }
 .ttfmake-section .ttfmake-section-toggle__wrapper:hover .ttfmake-section-toggle__indicator {
 	color: #23282d;
-}
-.ttfmake-section-open .ttfmake-section-toggle__wrapper:hover .ttfmake-section-toggle__indicator {
-	color: #777;
 }
 .ttfmake-section-toggle__indicator:before {
 	content: '\f140';
