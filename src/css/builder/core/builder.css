@@ -188,7 +188,7 @@
 	position: relative;
 	width: 100%;
 	height: 35px;
-	border: 1px solid #d9d9d9;
+	border: 1px solid #e5e5e5;
 	border-bottom: 0; /*reset*/
 	background-color: #fafafa;
 	cursor: move;
@@ -274,8 +274,8 @@
 	font-weight: 700 !important;
 	font-family: 'Open Sans', sans-serif !important;
 	line-height: 1.7 !important;
-	border-top: 1px solid #d9d9d9;
-	border-bottom: 1px solid #d9d9d9;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
 	background-color: #fafafa;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -725,7 +725,7 @@
 	line-height: 40px;
 }
 .ttfmake-section:hover .ttfmake-section-toggle__wrapper {
-	border-color: #d9d9d9;
+	border-color: #e5e5e5;
 }
 .ttfmake-section-toggle__indicator {
 	color: #bbb;
