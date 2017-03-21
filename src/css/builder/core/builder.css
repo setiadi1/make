@@ -297,16 +297,14 @@
 .ttfmake-section-header span {
 	font-weight: bold;
 	font-weight: 600;
+	color: #23282d;
 }
 .ttfmake-section-header em {
 	margin-left: 10px;
-	color: #575d65;
+	color: #82878c;
 	font-size: 12px;
 	font-weight: normal !important;
 	font-style: normal !important;
-}
-.ttfmake-section-open .ttfmake-section-header em {
-	color: #575d65;
 }
 .ttfmake-section-toggle:focus {
 	border: none !important;
