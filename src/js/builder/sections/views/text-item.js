@@ -35,7 +35,7 @@ var oneApp = oneApp || {};
 
 			setTimeout(function() {
 				self.updateIframeHeight();
-			}, 250);
+			}, 500);
 
 			return this;
 		},
@@ -61,6 +61,7 @@ var oneApp = oneApp || {};
 
 		updateIframeHeight: function() {
 			var $iframe = this.$el.find('iframe');
+
 			$iframe.css('height', 'auto');
 
 			var iframeContentHeight = $iframe.contents().height();
@@ -72,10 +73,14 @@ var oneApp = oneApp || {};
 			if (iframeContentHeight <= 305) {
 				iframeContentHeight = 305;
 			}
-
-			console.log(iframeContentHeight);
-
+			
 			$iframe.height(iframeContentHeight);
+
+			if (this.model.get('content')) {
+				this.$el.find('.ttfmake-iframe-content-placeholder').hide();
+			} else {
+				this.$el.find('.ttfmake-iframe-content-placeholder').show();
+			}
 		},
 
 		onColumnRemove: function(evt) {
