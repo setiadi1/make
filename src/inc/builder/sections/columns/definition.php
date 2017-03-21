@@ -265,7 +265,9 @@ class MAKE_Builder_Sections_Columns_Definition {
 
 				if ( isset( $column['image-id'] ) && '' !== $column['image-id'] ) {
 					$attachment_id = $column['image-id'];
-					$image_tag = wp_get_attachment_image( $attachment_id, 'large' );
+					$image_attrs = wp_get_attachment_image_src( $attachment_id, 'full' );
+					$image_template = '<img src="%s" width="%s" height="%s" class="alignnone size-full wp-image-%s" />';
+					$image_tag = sprintf( $image_template, $image_attrs[0], $image_attrs[1], $image_attrs[2], $attachment_id, $image_tag );
 
 					if ( isset( $column['image-link'] ) && '' !== $column['image-link'] ) {
 						$image_link = esc_url_raw( $column['image-link'] );
