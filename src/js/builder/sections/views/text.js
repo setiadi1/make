@@ -79,6 +79,7 @@ var oneApp = oneApp || {};
 			columnView.$el.addClass('ttfmake-text-column-position-'+columns);
 			
 			this.$el.trigger('column-added');
+			columnView.$el.trigger('column-ready');
 			
 			return columnView;
 		},
