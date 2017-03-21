@@ -510,14 +510,14 @@ class TTFMAKE_Builder_Base {
 		$textarea_attr_name = 'ttfmake-section[' .$id. '][' .$textarea_name. ']';
 	?>
 		<?php if ( true === $iframe ) : ?>
+		<span class="ttfmake-iframe-content-placeholder">
+			<?php esc_html_e( 'Click to edit', 'make' ); ?>
+		</span>
 		<div class="ttfmake-iframe-wrapper">
 			<div class="ttfmake-iframe-overlay">
 				<a href="#" class="edit-content-link" data-textarea="<?php echo esc_attr( $textarea_id ); ?>" data-iframe="<?php echo esc_attr( $iframe_id ); ?>">
 					<span class="screen-reader-text">
 						<?php esc_html_e( 'Edit content', 'make' ); ?>
-					</span>
-					<span class="ttfmake-iframe-content-placeholder">
-						<?php esc_html_e( 'Click to edit', 'make' ); ?>
 					</span>
 				</a>
 			</div>
