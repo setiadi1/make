@@ -76,8 +76,6 @@ var oneApp = oneApp || {};
 				editor.off('keydown');
 			}
 
-			$('.mce-toolbar-grp').hide();
-
 			oneApp.views.overlay.prototype.close.apply(this, arguments);
 
 			if (apply) {
