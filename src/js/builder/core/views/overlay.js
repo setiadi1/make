@@ -73,6 +73,8 @@ var oneApp = oneApp || {};
 			var editor = tinyMCE.get('make');
 
 			if (editor) {
+				editor.selection.select(editor.getBody(), true);
+				editor.selection.collapse(false);
 				editor.off('keydown');
 			}
 
