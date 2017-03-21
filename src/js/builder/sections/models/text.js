@@ -39,8 +39,6 @@ var oneApp = oneApp || {};
 				}
 			});
 
-			console.log(json);
-
 			return json;
 		},
 
