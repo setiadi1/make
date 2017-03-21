@@ -116,12 +116,16 @@
 	flex: 0 48.7%;
 	-ms-flex: 0 48.7%;
 	-webkit-flex: 0 48.7%;
+	margin-left: calc(0.645% - 1px);
+	margin-right: calc(0.645% - 1px);
 }
 .make-plus-enabled .ttfmake-text-columns-2 .ttfmake-text-column,
 .make-plus-enabled .ttfmake-text-columns-2 .sortable-placeholder {
   flex: 0 48.65%;
   -ms-flex: 0 48.65%;
   -webkit-flex: 0 48.65%;
+  margin-left: calc(0.665% - 1px);
+  margin-right: calc(0.665% - 1px);
 }
 /*---------------------------------------------------------
  Text: Three column (sections.css)
@@ -131,12 +135,16 @@
 	flex: 0 1 32.033%;
 	-ms-flex: 0 1 32.033%;
 	-webkit-flex: 0 1 32.033%;
+	margin-left: calc(0.645% - 1px);
+	margin-right: calc(0.645% - 1px);
 }
 .make-plus-enabled .ttfmake-text-columns-3 .ttfmake-text-column,
 .make-plus-enabled .ttfmake-text-columns-3 .sortable-placeholder {
   flex: 0 32%;
   -ms-flex: 0 32%;
   -webkit-flex: 0 32%;
+  margin-left: calc(0.665% - 1px);
+  margin-right: calc(0.665% - 1px);
 }
 @media screen and ( min-width: 1160px ) {
 	.ttfmake-text-columns-2,
