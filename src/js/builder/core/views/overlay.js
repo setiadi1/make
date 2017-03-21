@@ -69,12 +69,11 @@ var oneApp = oneApp || {};
 						focusOn.getBody().style.backgroundColor = parentModel.get('background-color');
 					}
 				}
-
-				this.keyDownHandler = _.bind(this.onKeyDown, this)
-				// Trap keypresses in the editor content area.
-				// No need to .off this handler later.
-				focusOn.on('keydown', this.keyDownHandler);
 			}
+
+			this.keyDownHandler = _.bind(this.onKeyDown, this)
+			focusOn.on('keydown', this.keyDownHandler);
+			$('body').on('keydown', this.keyDownHandler);
 
 			focusOn.focus();
 			view.$el.trigger('overlay-open', this.$el);
@@ -86,6 +85,8 @@ var oneApp = oneApp || {};
 			if (editor) {
 				editor.off('keydown', this.keyDownHandler);
 			}
+
+			$('body').off('keydown', this.keyDownHandler);
 
 			oneApp.views.overlay.prototype.close.apply(this, arguments);
 
