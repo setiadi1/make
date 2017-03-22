@@ -74,10 +74,10 @@
 }
 .ttfmake-menu-list a {
 	text-decoration: none; /*reset*/
-	color: #777777 !important;
+	color: #82878c !important;
 }
 .ttfmake-menu-list a:hover {
-	color: #333333 !important;
+	color: #23282d !important;
 }
 .ttfmake-menu-list a .ttfmake-menu-list-item-link-icon {
 	display: block;
