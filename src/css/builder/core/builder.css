@@ -425,7 +425,7 @@
 .ttfmake-media-uploader-placeholder:before {
 	content: "\f128";
 	display: block;
-	color: #CBCDCE;
+	color: #cbcdce;
 	font: 60px/220px dashicons;
 	text-align: center;
 }
@@ -433,7 +433,7 @@
  Media placeholder hover state (builder.css)
 -------------------------------------------------------- */
 .ttfmake-media-uploader-placeholder:hover:before {
-	color: #B4B9BE;
+	color: #b4b9be;
 }
 .ttfmake-media-uploader-placeholder img {
 	position: absolute;
@@ -689,7 +689,7 @@
 	width: 100%;
 	font-size: 14px;
 	text-align: center;
-	color: #e5e5e5;
+	color: #b4b9be;
 }
 
 .ttfmake-iframe-overlay .edit-content-link.item-has-content .ttfmake-iframe-content-placeholder {
