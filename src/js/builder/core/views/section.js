@@ -114,6 +114,12 @@ var oneApp = oneApp || {};
 
 			if ('title' in changeset) {
 				this.$headerTitle.html(_.escape(changeset['title']));
+
+				if (changeset['title']) {
+					this.$el.find('.ttfmake-section-header h3').addClass('has-title');
+				} else {
+					this.$el.find('.ttfmake-section-header h3').removeClass('has-title');
+				}
 			}
 
 			this.model.set(changeset);
