@@ -257,6 +257,10 @@
 	max-width: 90%;
 	display: inline-block;
 }
+.ttfmake-section-header h3.has-title .ttfmake-section-header-title {
+	padding-left: 10px;
+	padding-right: 12px;
+}
 .ttfmake-section h4 {
 	margin: 20px 0 10px;
 	font-size: 13px;
@@ -305,6 +309,9 @@
 	font-size: 13px;
 	font-weight: normal !important;
 	font-style: normal !important;
+}
+.ttfmake-section-header h3.has-title em {
+	margin-left: 0;
 }
 .ttfmake-section-toggle:focus {
 	border: none !important;
