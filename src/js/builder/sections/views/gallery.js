@@ -11,13 +11,13 @@ var oneApp = oneApp || {};
 
 		events: function() {
 			return _.extend({}, oneApp.views.section.prototype.events, {
-				'change .ttfmake-gallery-columns' : 'handleColumns',
 				'view-ready': 'onViewReady',
 				'click .ttfmake-gallery-add-item-link' : 'onItemAdd',
 				'model-item-change': 'onItemChange',
 				'item-sort': 'onItemSort',
 				'item-remove': 'onItemRemove',
 				'overlay-open': 'onOverlayOpen',
+				'overlay-close': 'onOverlayClose',
 			});
 		},
 
@@ -134,11 +134,9 @@ var oneApp = oneApp || {};
 			});
 		},
 
-		handleColumns : function (evt) {
-			evt.preventDefault();
-
-			var columns = $(evt.target).val(),
-				$stage = $('.ttfmake-gallery-items-stage', this.$el);
+		handleColumns: function() {
+			var columns = this.model.get('columns');
+			var $stage = $('.ttfmake-gallery-items-stage', this.$el);
 
 			$stage.removeClass('ttfmake-gallery-columns-1 ttfmake-gallery-columns-2 ttfmake-gallery-columns-3 ttfmake-gallery-columns-4');
 			$stage.addClass('ttfmake-gallery-columns-' + parseInt(columns, 10));
@@ -148,5 +146,14 @@ var oneApp = oneApp || {};
 			var $button = $('.ttfmake-overlay-close-update', $overlay);
 			$button.text('Update gallery settings');
 		},
+
+		onOverlayClose: function(e, changeset) {
+			oneApp.views.section.prototype.onOverlayClose.apply(this, arguments);
+			this.model.set(changeset);
+
+			if ('columns' in changeset) {
+				this.handleColumns();
+			}
+		}
 	});
 })(window, jQuery, _, oneApp);
