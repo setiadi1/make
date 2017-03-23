@@ -35,7 +35,7 @@ var oneApp = oneApp || {};
 
 			setTimeout(function() {
 				self.updateIframeHeight();
-			}, 500);
+			}, 1000);
 
 			return this;
 		},
