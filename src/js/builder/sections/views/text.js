@@ -80,6 +80,7 @@ var oneApp = oneApp || {};
 			
 			this.$el.trigger('column-added');
 			columnView.$el.trigger('column-ready');
+			columnView.$el.trigger('column-load');
 			
 			return columnView;
 		},
