@@ -297,6 +297,14 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 		},
 
 		wrapShortcodes: function(content) {
+			// Render captions
+			content = content.replace(
+				/\[caption.*?\](\<img.*?\/\>)[ ]*(\w+)\[\/caption\]/,
+				'<div><dl class="wp-caption alignnone">'
+				+ '<dt class="wp-caption-dt">$1</dt>'
+				+ '<dd class="wp-caption-dd">$2</dd></dl></div>'
+			);
+
 			return content.replace(/^(<p>)?(\[.*\])(<\/p>)?$/gm, '<div class="shortcode-wrapper">$2</div>');
 		},
 
