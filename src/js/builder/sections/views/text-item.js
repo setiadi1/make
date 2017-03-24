@@ -90,9 +90,9 @@ var oneApp = oneApp || {};
 				$iframe.height(iframeContentHeight);
 
 				if (this.model.get('content')) {
-					this.$el.find('.ttfmake-iframe-content-placeholder').hide();
+					this.$el.find('.ttfmake-iframe-content-placeholder').removeClass('show');
 				} else {
-					this.$el.find('.ttfmake-iframe-content-placeholder').show();
+					this.$el.find('.ttfmake-iframe-content-placeholder').addClass('show');
 				}
 			}
 		},

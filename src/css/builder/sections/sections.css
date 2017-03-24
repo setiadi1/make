@@ -18,7 +18,6 @@
 	height: calc(100% - 35px);
 	border: 0;
 	overflow: hidden;
-	background-color: #fff;
 	-webkit-transform: translateZ(0px);
 }
 .ttfmake-section-text .ttfmake-section-body,

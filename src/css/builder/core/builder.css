@@ -458,9 +458,6 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-.ttfmake-section-body iframe {
-	background: #fff !important;
-}
 /*---------------------------------------------------------
  Media placeholder if has image set (builder.css)
 -------------------------------------------------------- */
@@ -661,6 +658,7 @@
 -------------------------------------------------------- */
 .ttfmake-iframe-wrapper {
 	position: relative;
+	z-index: 3;
 	border: 1px solid #e5e5e5;
 }
 .ttfmake-iframe-wrapper iframe {
@@ -692,11 +690,15 @@
 	position: absolute;
 	top: 50%;
 	z-index: 1;
-	display: block;
+	display: none;
 	width: 100%;
 	font-size: 14px;
 	text-align: center;
 	color: #b4b9be;
+}
+
+.ttfmake-iframe-content-placeholder.show {
+	display: block;
 }
 
 .ttfmake-iframe-overlay .edit-content-link.item-has-content .ttfmake-iframe-content-placeholder {
