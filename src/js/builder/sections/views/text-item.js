@@ -13,6 +13,7 @@ var oneApp = oneApp || {};
 
 		events: function() {
 			return _.extend({}, oneApp.views.item.prototype.events, {
+				'column-load': 'onColumnLoad',
 				'overlay-open': 'onOverlayOpen',
 				'click .ttfmake-text-column-remove': 'onColumnRemove',
 				'overlay-close': 'onOverlayClose'
@@ -29,15 +30,26 @@ var oneApp = oneApp || {};
 			var html = this.template(this.model);
 			this.setElement(html);
 
-			if ('' !== this.model.get('content')) {
+			if (this.model.get('content')) {
 				$('.edit-content-link', this.$el).addClass('item-has-content');
 			}
 
-			setTimeout(function() {
-				self.updateIframeHeight();
-			}, 1000);
-
 			return this;
+		},
+
+		onColumnLoad: function() {
+			var self = this;
+			
+			$('iframe', this.$el).ready(function() {
+				setTimeout(function() {
+					self.updateIframeHeight();
+				}, 150);
+			});
+
+			// update again - this is for browsers not detecting iframe ready before window load
+			$(window).load(function() {
+				self.updateIframeHeight();
+			});
 		},
 
 		onOverlayOpen: function (e, $overlay) {
@@ -60,26 +72,28 @@ var oneApp = oneApp || {};
 		},
 
 		updateIframeHeight: function() {
-			var $iframe = this.$el.find('iframe');
-
-			$iframe.css('height', 'auto');
-
-			var iframeContentHeight = $iframe.contents().height();
-
-			if (iframeContentHeight > 500) {
-				iframeContentHeight = 500;
-			}
-
-			if (iframeContentHeight <= 305) {
-				iframeContentHeight = 305;
-			}
-			
-			$iframe.height(iframeContentHeight);
-
 			if (this.model.get('content')) {
-				this.$el.find('.ttfmake-iframe-content-placeholder').hide();
-			} else {
-				this.$el.find('.ttfmake-iframe-content-placeholder').show();
+				var $iframe = this.$el.find('iframe');
+
+				$iframe.css('height', 'auto');
+
+				var iframeContentHeight = $iframe.contents().height();
+
+				if (iframeContentHeight > 500) {
+					iframeContentHeight = 500;
+				}
+
+				if (iframeContentHeight <= 305) {
+					iframeContentHeight = 305;
+				}
+				
+				$iframe.height(iframeContentHeight);
+
+				if (this.model.get('content')) {
+					this.$el.find('.ttfmake-iframe-content-placeholder').hide();
+				} else {
+					this.$el.find('.ttfmake-iframe-content-placeholder').show();
+				}
 			}
 		},
 
