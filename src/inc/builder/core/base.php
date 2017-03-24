@@ -510,7 +510,7 @@ class TTFMAKE_Builder_Base {
 		$textarea_attr_name = 'ttfmake-section[' .$id. '][' .$textarea_name. ']';
 	?>
 		<?php if ( true === $iframe ) : ?>
-		<span class="ttfmake-iframe-content-placeholder"{{ (get('<?php echo $textarea_name; ?>')) ? ' style="display: none"' : '' }}>
+		<span class="ttfmake-iframe-content-placeholder{{ (!get('<?php echo $textarea_name; ?>')) ? ' show' : '' }}">
 			<?php esc_html_e( 'Click to edit', 'make' ); ?>
 		</span>
 		<div class="ttfmake-iframe-wrapper">
