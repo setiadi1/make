@@ -299,7 +299,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 		wrapShortcodes: function(content) {
 			// Render captions
 			content = content.replace(
-				/\[caption.*?\](\<img.*?\/\>)[ ]*(\w+)\[\/caption\]/,
+				/\[caption.*?\](\<img.*?\/\>)[ ]*(.*?)\[\/caption\]/g,
 				'<div><dl class="wp-caption alignnone">'
 				+ '<dt class="wp-caption-dt">$1</dt>'
 				+ '<dd class="wp-caption-dd">$2</dd></dl></div>'
