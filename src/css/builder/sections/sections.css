@@ -68,6 +68,7 @@
 	position: relative;
 	margin: 0 calc(0.625% - 1px);
 	border: 1px solid #e5e5e5;
+	background-color: #fff;
 }
 .ttfmake-text-columns-stage .sortable-placeholder {
 	width: 100%;
