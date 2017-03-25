@@ -39,7 +39,7 @@ var oneApp = oneApp || {};
 
 		onColumnLoad: function() {
 			var self = this;
-			
+
 			$('iframe', this.$el).ready(function() {
 				setTimeout(function() {
 					self.updateIframeHeight();
@@ -65,6 +65,12 @@ var oneApp = oneApp || {};
 			this.model.set(changeset);
 
 			if (this.model.hasChanged()) {
+				if ('' !== this.model.get('content')) {
+					this.$el.find('.ttfmake-iframe-content-placeholder').removeClass('show');
+				} else {
+					this.$el.find('.ttfmake-iframe-content-placeholder').addClass('show');
+				}
+
 				this.$el.trigger('model-item-change');
 			}
 
@@ -86,10 +92,10 @@ var oneApp = oneApp || {};
 				if (iframeContentHeight <= 305) {
 					iframeContentHeight = 305;
 				}
-				
+
 				$iframe.height(iframeContentHeight);
 
-				if (this.model.get('content')) {
+				if ('' !== this.model.get('content')) {
 					this.$el.find('.ttfmake-iframe-content-placeholder').removeClass('show');
 				} else {
 					this.$el.find('.ttfmake-iframe-content-placeholder').addClass('show');
