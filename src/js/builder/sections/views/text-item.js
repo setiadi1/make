@@ -80,29 +80,33 @@ var oneApp = oneApp || {};
 		updateIframeHeight: function() {
 			var $iframe = this.$el.find('iframe');
 
-			if (this.model.get('content')) {
-				$iframe.css('height', 'auto');
+			var self = this;
+			
+			setTimeout(function() {
+				if (self.model.get('content')) {
+					$iframe.height($iframe.contents().height());
+					
+					var iframeContentHeight = $iframe.contents().innerHeight();
+					
+					if (iframeContentHeight > 500) {
+						iframeContentHeight = 500;
+					}
 
-				var iframeContentHeight = $iframe.contents().innerHeight();
+					if (iframeContentHeight <= 300) {
+						iframeContentHeight = 300;
+					}
 
-				if (iframeContentHeight > 500) {
-					iframeContentHeight = 500;
-				}
+					$iframe.innerHeight(iframeContentHeight);
 
-				if (iframeContentHeight <= 300) {
-					iframeContentHeight = 300;
-				}
-
-				$iframe.innerHeight(iframeContentHeight);
-
-				if ('' !== this.model.get('content')) {
-					this.$el.find('.ttfmake-iframe-content-placeholder').removeClass('show');
+					if ('' !== self.model.get('content')) {
+						self.$el.find('.ttfmake-iframe-content-placeholder').removeClass('show');
+					} else {
+						self.$el.find('.ttfmake-iframe-content-placeholder').addClass('show');
+					}
 				} else {
-					this.$el.find('.ttfmake-iframe-content-placeholder').addClass('show');
+					$iframe.innerHeight(300);
 				}
-			} else {
-				$iframe.innerHeight(300);
-			}
+			}, 100);
 		},
 
 		onColumnRemove: function(evt) {
