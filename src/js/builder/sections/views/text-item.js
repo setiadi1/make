@@ -78,28 +78,30 @@ var oneApp = oneApp || {};
 		},
 
 		updateIframeHeight: function() {
-			if (this.model.get('content')) {
-				var $iframe = this.$el.find('iframe');
+			var $iframe = this.$el.find('iframe');
 
+			if (this.model.get('content')) {
 				$iframe.css('height', 'auto');
 
-				var iframeContentHeight = $iframe.contents().height();
+				var iframeContentHeight = $iframe.contents().innerHeight();
 
 				if (iframeContentHeight > 500) {
 					iframeContentHeight = 500;
 				}
 
-				if (iframeContentHeight <= 305) {
-					iframeContentHeight = 305;
+				if (iframeContentHeight <= 300) {
+					iframeContentHeight = 300;
 				}
 
-				$iframe.height(iframeContentHeight);
+				$iframe.innerHeight(iframeContentHeight);
 
 				if ('' !== this.model.get('content')) {
 					this.$el.find('.ttfmake-iframe-content-placeholder').removeClass('show');
 				} else {
 					this.$el.find('.ttfmake-iframe-content-placeholder').addClass('show');
 				}
+			} else {
+				$iframe.innerHeight(300);
 			}
 		},
 
