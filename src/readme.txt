@@ -496,6 +496,9 @@ Please see the Make documentation: https://thethemefoundry.com/make-help/
 
 == Upgrade Notice ==
 
+= 1.8.6 =
+Column rows, refreshed builder design, bug fixes.
+
 = 1.8.2 =
 Bug fixes for a number of small glitches introduced in 1.8.0.
 
