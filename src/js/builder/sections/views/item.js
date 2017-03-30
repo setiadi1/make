@@ -79,6 +79,7 @@ var oneApp = oneApp || {};
 				var $cogLink;
 
 				$('.configure-item-dropdown').hide();
+				$('.ttfmake-configure-item-button').removeClass('active');
 
 				if (typeof evt !== 'undefined') {
 					evt.preventDefault();
