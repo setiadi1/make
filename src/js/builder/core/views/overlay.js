@@ -68,6 +68,8 @@ var oneApp = oneApp || {};
 
 					if (parentModel.get('background-color')) {
 						focusOn.getBody().style.backgroundColor = parentModel.get('background-color');
+					} else {
+						focusOn.getBody().style.backgroundColor = '#ffffff';
 					}
 				}
 			}
