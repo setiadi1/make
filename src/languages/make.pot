@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Make 1.8.5\n"
+"Project-Id-Version: Make 1.8.6\n"
 "Report-Msgid-Bugs-To: https://thethemefoundry.com/support/\n"
-"POT-Creation-Date: 2017-02-24 09:49:48+00:00\n"
+"POT-Creation-Date: 2017-03-30 08:53:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -123,7 +123,7 @@ msgid "Use Page Builder"
 msgstr ""
 
 #: inc/builder/core/base.php:359
-msgid "Delete the section?"
+msgid "Are you sure you want to trash this section permanently?"
 msgstr ""
 
 #: inc/builder/core/base.php:380
@@ -131,25 +131,29 @@ msgid "Note: the Builder Template does not display a featured image."
 msgstr ""
 
 #: inc/builder/core/base.php:483 inc/builder/core/configuration-helpers.php:113
-#: inc/builder/sections/columns/builder-template-column.php:82
 msgid "Set image"
 msgstr ""
 
-#: inc/builder/core/base.php:517
+#: inc/builder/core/base.php:514
+msgid "Click to edit"
+msgstr ""
+
+#: inc/builder/core/base.php:520
 #: inc/builder/core/templates/overlay-tinymce.php:4
+#: inc/builder/sections/banner/builder-template-slide.php:25
 #: inc/builder/sections/banner/builder-template-slide.php:26
-#: inc/builder/sections/banner/builder-template-slide.php:28
-#: inc/builder/sections/columns/builder-template-column.php:30
+#: inc/builder/sections/columns/builder-template-column.php:17
+#: inc/builder/sections/columns/builder-template-column.php:20
+#: inc/builder/sections/gallery/builder-template-item.php:25
 #: inc/builder/sections/gallery/builder-template-item.php:26
-#: inc/builder/sections/gallery/builder-template-item.php:28
 msgid "Edit content"
 msgstr ""
 
-#: inc/builder/core/base.php:599
+#: inc/builder/core/base.php:602
 msgid "Current image"
 msgstr ""
 
-#: inc/builder/core/base.php:601
+#: inc/builder/core/base.php:604
 msgid "Remove Current Image"
 msgstr ""
 
@@ -169,7 +173,7 @@ msgstr ""
 
 #: inc/builder/core/templates/section-header.php:12
 #: inc/builder/core/templates/section-header.php:13
-msgid "Delete section"
+msgid "Trash section"
 msgstr ""
 
 #: inc/builder/core/templates/section-header.php:82
@@ -180,28 +184,24 @@ msgstr ""
 msgid "Drag-and-drop this slide into place"
 msgstr ""
 
-#: inc/builder/sections/banner/builder-template-slide.php:19
-msgid "Set banner image"
-msgstr ""
-
-#: inc/builder/sections/banner/builder-template-slide.php:21
-#: inc/builder/sections/banner/builder-template-slide.php:23
-#: inc/builder/sections/banner/builder-template-slide.php:43
+#: inc/builder/sections/banner/builder-template-slide.php:30
+#: inc/builder/sections/banner/builder-template-slide.php:31
+#: inc/builder/sections/banner/builder-template-slide.php:48
 msgid "Configure slide"
 msgstr ""
 
-#: inc/builder/sections/banner/builder-template-slide.php:31
-#: inc/builder/sections/banner/builder-template-slide.php:33
-msgid "Delete slide"
+#: inc/builder/sections/banner/builder-template-slide.php:35
+#: inc/builder/sections/banner/builder-template-slide.php:36
+msgid "Trash slide"
 msgstr ""
 
-#: inc/builder/sections/banner/builder-template.php:12
-msgid "Add new slide"
+#: inc/builder/sections/banner/builder-template-slide.php:41
+msgid "Set banner image"
 msgstr ""
 
+#: inc/builder/sections/banner/builder-template.php:13
 #: inc/builder/sections/banner/builder-template.php:15
-#: inc/builder/sections/gallery/builder-template.php:16
-msgid "Add Item"
+msgid "Add new slide"
 msgstr ""
 
 #: inc/builder/sections/banner/definition.php:40
@@ -213,7 +213,7 @@ msgid "Display multiple types of content in a banner or a slider."
 msgstr ""
 
 #: inc/builder/sections/banner/definition.php:65
-#: inc/builder/sections/columns/definition.php:64
+#: inc/builder/sections/columns/definition.php:65
 #: inc/builder/sections/gallery/definition.php:65
 msgid "Enter section title"
 msgstr ""
@@ -289,33 +289,33 @@ msgid "Aspect"
 msgstr ""
 
 #: inc/builder/sections/banner/definition.php:124
-#: inc/builder/sections/columns/definition.php:92
+#: inc/builder/sections/columns/definition.php:93
 #: inc/builder/sections/gallery/definition.php:124
 msgid "Background image"
 msgstr ""
 
 #: inc/builder/sections/banner/definition.php:130
 #: inc/builder/sections/banner/definition.php:169
-#: inc/builder/sections/columns/definition.php:98
+#: inc/builder/sections/columns/definition.php:99
 #: inc/builder/sections/gallery/definition.php:130
 msgid "Darken background to improve readability"
 msgstr ""
 
 #: inc/builder/sections/banner/definition.php:137
-#: inc/builder/sections/columns/definition.php:105
+#: inc/builder/sections/columns/definition.php:106
 #: inc/builder/sections/gallery/definition.php:137
 msgid "Background style"
 msgstr ""
 
 #: inc/builder/sections/banner/definition.php:140
-#: inc/builder/sections/columns/definition.php:108
+#: inc/builder/sections/columns/definition.php:109
 #: inc/builder/sections/gallery/definition.php:140
 #: inc/choices/definitions/choices.php:46
 msgid "Tile"
 msgstr ""
 
 #: inc/builder/sections/banner/definition.php:141
-#: inc/builder/sections/columns/definition.php:109
+#: inc/builder/sections/columns/definition.php:110
 #: inc/builder/sections/gallery/definition.php:141
 #: inc/choices/definitions/choices.php:52
 msgid "Cover"
@@ -323,7 +323,7 @@ msgstr ""
 
 #: inc/builder/sections/banner/definition.php:146
 #: inc/builder/sections/banner/definition.php:175
-#: inc/builder/sections/columns/definition.php:114
+#: inc/builder/sections/columns/definition.php:115
 #: inc/builder/sections/gallery/definition.php:146
 msgid "Background color"
 msgstr ""
@@ -346,30 +346,22 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: inc/builder/sections/columns/builder-template-column.php:20
-#: inc/builder/sections/columns/builder-template-column.php:23
-#: inc/builder/sections/columns/builder-template-column.php:100
-msgid "Configure column"
-msgstr ""
-
+#: inc/builder/sections/columns/builder-template-column.php:24
 #: inc/builder/sections/columns/builder-template-column.php:27
-msgid "Edit text column"
+msgid "Trash column"
 msgstr ""
 
-#: inc/builder/sections/columns/builder-template-column.php:59
+#: inc/builder/sections/columns/builder-template-column.php:55
 msgid "Drag-and-drop this column into place"
 msgstr ""
 
-#: inc/builder/sections/columns/builder-template-column.php:115
-msgid "Enter column title"
-msgstr ""
-
-#: inc/builder/sections/columns/builder-template-column.php:137
-msgid "Image link URL"
+#: inc/builder/sections/columns/builder-template.php:53
+#: inc/builder/sections/columns/builder-template.php:55
+msgid "Add new column"
 msgstr ""
 
 #: inc/builder/sections/columns/definition.php:40
-#: inc/builder/sections/columns/definition.php:78
+#: inc/builder/sections/columns/definition.php:79
 #: inc/builder/sections/gallery/definition.php:78
 msgid "Columns"
 msgstr ""
@@ -378,7 +370,7 @@ msgstr ""
 msgid "Create rearrangeable columns of content and images."
 msgstr ""
 
-#: inc/builder/sections/columns/definition.php:70
+#: inc/builder/sections/columns/definition.php:71
 #: inc/builder/sections/gallery/definition.php:71
 msgid "Full width"
 msgstr ""
@@ -387,22 +379,23 @@ msgstr ""
 msgid "Drag-and-drop this item into place"
 msgstr ""
 
-#: inc/builder/sections/gallery/builder-template-item.php:19
-msgid "Set gallery image"
-msgstr ""
-
-#: inc/builder/sections/gallery/builder-template-item.php:21
-#: inc/builder/sections/gallery/builder-template-item.php:23
-#: inc/builder/sections/gallery/builder-template-item.php:43
+#: inc/builder/sections/gallery/builder-template-item.php:30
+#: inc/builder/sections/gallery/builder-template-item.php:31
+#: inc/builder/sections/gallery/builder-template-item.php:48
 msgid "Configure item"
 msgstr ""
 
-#: inc/builder/sections/gallery/builder-template-item.php:31
-#: inc/builder/sections/gallery/builder-template-item.php:33
-msgid "Delete item"
+#: inc/builder/sections/gallery/builder-template-item.php:35
+#: inc/builder/sections/gallery/builder-template-item.php:36
+msgid "Trash item"
 msgstr ""
 
-#: inc/builder/sections/gallery/builder-template.php:13
+#: inc/builder/sections/gallery/builder-template-item.php:41
+msgid "Set gallery image"
+msgstr ""
+
+#: inc/builder/sections/gallery/builder-template.php:14
+#: inc/builder/sections/gallery/builder-template.php:16
 msgid "Add new item"
 msgstr ""
 
