@@ -26,6 +26,24 @@ Please see the Make documentation: https://thethemefoundry.com/make-help/
 
 == Changelog ==
 
+= 1.8.6 - March 30 2017 =
+* New feature: Columns now support additional rows.
+* Improved: Columns now support up to 6 columns per row.
+* Improved: Section and items configuration links are now grouped in a dropdown.
+* Improved: New UI for the Builder, with more focus on content and less waste of space.
+* Improved: Better color scheme integration with current WordPress.
+* Improved: Columns previews in the Builder now resize with content.
+* Improved: Columns images and titles are now treated as pure content.
+* Bug fix: Changing Columns column count option didn't refresh the view in the builder.
+* Bug fix: Changing Gallery column count option didn't refresh the view in the builder.
+* Bug fix: Gallery caption overlay was not working properly on mobile devices.
+* Bug fix: Content overlays were partially cut out on mobile devices.
+* Bug fix: Link popovers were still on screen after closing the overlay.
+* Bug fix: Content overlays didn't pick up the section's background color.
+* Bug fix: Banner text content wasn't vertically aligned, and sizing was partially wrong.
+* Bug fix: Sections were erroneously given a "builder-section-last" CSS class.
+* Bug fix: Overlays were carrying around stale attributes causing data corruption.
+
 = 1.8.5 - February 24 2017 =
 * Bug fix: Wrong event bubbling prevented Columns section titles from being refreshed in the builder.
 * Bug fix: Content preview of columns wouldn't refresh after dragging around columns.
