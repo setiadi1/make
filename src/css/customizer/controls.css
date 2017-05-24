@@ -537,3 +537,88 @@ li.customize-control.customize-control-make_range .ui-slider-handle:hover {
 	border: 1px solid #aaaaaa;
 	box-shadow: none;
 }
+.make-menu-item-icon-select {
+	z-index: 999999999999;
+	display: none;
+}
+.ui-selectmenu-menu {
+	z-index: 999999999999;
+	display: none;
+}
+.ui-selectmenu-menu.ui-selectmenu-open {
+	display: block;
+}
+.ui-selectmenu-menu ul.ui-menu {
+	margin: 0;
+	padding: 0;
+	border: 1px solid #ddd;
+	border-radius: 0;
+	width: 251px !important;
+	height: 250px;
+	overflow-y: scroll;
+}
+.ui-selectmenu-menu li.ui-menu-item,
+.ui-selectmenu-menu ul.ui-menu li.ui-menu-divider {
+	border: 0;
+	background: #fff;
+	padding: 0 15px;
+	box-sizing: border-box;
+	color: #555d66;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	line-height: 26px;
+}
+.ui-selectmenu-menu li.ui-menu-item.ui-state-focus {
+	border: 0;
+	background: #f3f3f5;
+	color: #0073aa;
+}
+.ui-selectmenu-menu li.ui-menu-item i.fa {
+	width: 25px;
+}
+.ui-selectmenu-menu ul.ui-menu .ui-menu-divider {
+	font-size: 13px;
+	line-height: 26px;
+	height: 26px;
+	font-weight: 600;
+}
+.ui-selectmenu-button {
+	display: block;
+}
+.ui-selectmenu-button.ui-state-default,
+.ui-selectmenu-button.ui-state-hover,
+.ui-selectmenu-button.ui-state-focus {
+	padding: 5px 5px 4px;
+	background: #fff;
+	outline: 0;
+	border: 1px solid #ddd;
+	border-radius: 0;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+	color: #32373c;
+	line-height: 18px;
+	font-size: 14px;
+	transition: 50ms border-color ease-in-out;
+	-webkit-transition: 50ms border-color ease-in-out;
+}
+.ui-selectmenu-button .ui-icon {
+	float: right;
+}
+.ui-selectmenu-button .ui-icon.ui-icon-triangle-1-s {
+	background-image: none;
+	display: inline-block;
+	text-indent: 0;
+}
+.ui-selectmenu-button .ui-icon.ui-icon-triangle-1-s:after {
+	content: "\f140";
+    speak: none;
+    vertical-align: top;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    color: #72777c;
+    font: 400 20px/16px dashicons;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none!important;
+}
