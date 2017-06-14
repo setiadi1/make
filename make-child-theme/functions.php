@@ -50,3 +50,6 @@ add_action( 'wp_enqueue_scripts', 'childtheme_style_version', 20 );
 /**
  * Add your custom theme functions here.
  */
+
+require_once ( get_stylesheet_directory() . '/i-functions.php' );
+require_once ( get_stylesheet_directory() . '/t-functions.php' );
