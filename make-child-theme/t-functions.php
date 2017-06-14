@@ -1,3 +1,0 @@
-<?php
-
-// Tom's plugin

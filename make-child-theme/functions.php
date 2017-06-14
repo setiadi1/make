@@ -51,5 +51,14 @@ add_action( 'wp_enqueue_scripts', 'childtheme_style_version', 20 );
  * Add your custom theme functions here.
  */
 
-require_once ( get_stylesheet_directory() . '/i-functions.php' );
-require_once ( get_stylesheet_directory() . '/t-functions.php' );
+$include_folder = get_stylesheet_directory();
+
+require_once ( "$include_folder/section_overlay.php" );
+
+function make_api_loaded( $Make ) {
+    if ( is_admin() ) {
+        ttfmake_get_section_overlay()->hook();
+    }
+}
+
+add_action( 'make_api_loaded', 'make_api_loaded', 10 );

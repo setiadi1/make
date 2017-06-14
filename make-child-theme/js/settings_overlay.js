@@ -420,17 +420,17 @@
 			default: wp.media.view.Sidebar,
 			image: wp.media.view.Sidebar.extend( {
 					render: function() {
-						this.$el.html( wp.media.template( 'media-frame-remove-image' ) );
+						this.$el.html( wp.template( 'ttfmake-media-frame-remove-image' ) );
 						return this;
 					},
 				} ),
 		},
 
+		currentAttachmentID: false,
+
 		events: {
 			'click .ttfmake-media-uploader-placeholder': 'onMediaAdd',
 		},
-
-		currentAttachmentID: false,
 
 		onMediaAdd: function( e ) {
 			wp.media.view.Sidebar = this.sidebars.image;

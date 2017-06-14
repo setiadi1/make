@@ -164,7 +164,7 @@ class TTFMAKE_Settings_Overlay {
 		<input type="text" class="ttfmake-text-background-color ttfmake-configuration-color-picker {{ data.class }}" value="">
 		</script>
 
-		<script type="text/html" id="tmpl-media-frame-remove-image">
+		<script type="text/html" id="tmpl-ttfmake-media-frame-remove-image">
 		<div class="ttfmake-remove-current-image">
 			<h3><?php esc_html_e( 'Current image', 'make' ); ?></h3>
 			<a href="#" class="ttfmake-media-frame-remove-image">
