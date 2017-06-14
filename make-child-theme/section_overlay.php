@@ -140,16 +140,25 @@ class TTFMAKE_Settings_Overlay {
 			<option value="{{ o }}">{{ data.options[o] }}</option>
 			<# } #>
 		</select>
+		<# if ( data.description ) { #>
+		<div class="ttfmake-configuration-description">{{ data.description }}</div>
+		<# } #>
 		</script>
 
 		<script type="text/html" id="tmpl-ttfmake-settings-checkbox">
 		<label>{{ data.label }}</label>
 		<input type="checkbox" value="1" class="{{ data.class }}">
+		<# if ( data.description ) { #>
+		<div class="ttfmake-configuration-description">{{ data.description }}</div>
+		<# } #>
 		</script>
 
 		<script type="text/html" id="tmpl-ttfmake-settings-text">
 		<label>{{ data.label }}</label>
 		<input type="text" value="" class="{{ data.class }}">
+		<# if ( data.description ) { #>
+		<div class="ttfmake-configuration-description">{{ data.description }}</div>
+		<# } #>
 		</script>
 
 		<script type="text/html" id="tmpl-ttfmake-settings-image">
@@ -157,11 +166,17 @@ class TTFMAKE_Settings_Overlay {
 		<div class="ttfmake-uploader">
 			<div data-title="Set image" class="ttfmake-media-uploader-placeholder ttfmake-media-uploader-add {{ data.class }}"></div>
 		</div>
+		<# if ( data.description ) { #>
+		<div class="ttfmake-configuration-description">{{ data.description }}</div>
+		<# } #>
 		</script>
 
 		<script type="text/html" id="tmpl-ttfmake-settings-color">
 		<label>{{ data.label }}</label>
 		<input type="text" class="ttfmake-text-background-color ttfmake-configuration-color-picker {{ data.class }}" value="">
+		<# if ( data.description ) { #>
+		<div class="ttfmake-configuration-description">{{ data.description }}</div>
+		<# } #>
 		</script>
 
 		<script type="text/html" id="tmpl-ttfmake-media-frame-remove-image">
