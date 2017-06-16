@@ -83,7 +83,7 @@ class TTFMAKE_Sections {
 	 * @param  array     $custom              Array of additional custom data to be appended to the section.
 	 * @return void
 	 */
-	public function add_section( $id, $label, $icon, $description, $save_callback, $builder_template, $display_template, $order, $path, $config = array(), $custom = array() ) {
+	public function add_section( $id, $label, $icon, $description, $save_callback, $builder_template, $display_template, $order, $path, $config = false, $custom = false ) {
 
 		$section = array(
 			'id'               => $id,
@@ -95,7 +95,7 @@ class TTFMAKE_Sections {
 			'display_template' => $display_template,
 			'order'            => $order,
 			'path'             => $path,
-			'config'           => $config,
+			'config'           => ttfmake_get_sections_settings( $id ),
 		);
 
 		$section = array_merge( $custom, $section );
