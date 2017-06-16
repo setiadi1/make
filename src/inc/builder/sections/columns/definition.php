@@ -36,6 +36,7 @@ class MAKE_Builder_Sections_Columns_Definition {
 
 	public function __construct() {
 		add_filter( 'make_section_choices', array( $this, 'section_choices' ), 10, 3 );
+		add_filter( 'make_sections_settings', array( $this, 'section_settings' ) );
 		add_filter( 'make_section_defaults', array( $this, 'section_defaults' ) );
 		add_filter( 'make_get_section_json', array ( $this, 'get_section_json' ), 10, 1 );
 		add_filter( 'make_get_section_json', array ( $this, 'embed_column_images' ), 20, 1 );
@@ -53,27 +54,26 @@ class MAKE_Builder_Sections_Columns_Definition {
 			),
 			'sections/columns/frontend-template',
 			100,
-			get_template_directory() . '/inc/builder/',
-			$this->get_settings()
+			get_template_directory() . '/inc/builder/'
 		);
 	}
 
 	public function get_settings() {
 		return array(
-			array(
+			100 => array(
 				'type'  => 'divider',
 				'label' => __( 'General', 'make' ),
 				'name'  => 'divider-general',
 				'class' => 'ttfmake-configuration-divider open',
 			),
-			array(
+			200 => array(
 				'type'  => 'section_title',
 				'name'  => 'title',
 				'label' => __( 'Enter section title', 'make' ),
 				'class' => 'ttfmake-configuration-title ttfmake-section-header-title-input',
 				'default' => ttfmake_get_section_default( 'title', 'text' ),
 			),
-			array(
+			300 => array(
 				'type'    => 'select',
 				'name'    => 'columns-number',
 				'class'   => 'ttfmake-text-columns',
@@ -81,26 +81,26 @@ class MAKE_Builder_Sections_Columns_Definition {
 				'default' => ttfmake_get_section_default( 'columns-number', 'text' ),
 				'options' => ttfmake_get_section_choices( 'columns-number', 'text' ),
 			),
-			array(
+			400 => array(
 				'type'    => 'checkbox',
 				'label'   => __( 'Full width', 'make' ),
 				'name'    => 'full-width',
 				'default' => ttfmake_get_section_default( 'full-width', 'text' ),
 			),
-			array(
+			500 => array(
 				'type'    => 'divider',
 				'label'   => __( 'Background', 'make-plus' ),
 				'name'    => 'divider-background',
 				'class'   => 'ttfmake-configuration-divider',
 			),
-			array(
+			600 => array(
 				'type'  => 'image',
 				'name'  => 'background-image',
 				'label' => __( 'Background image', 'make' ),
 				'class' => 'ttfmake-configuration-media',
 				'default' => ttfmake_get_section_default( 'background-image', 'text' ),
 			),
-			array(
+			700 => array(
 				'type'  => 'select',
 				'name'  => 'background-position',
 				'label' => __( 'Position', 'make' ),
@@ -108,7 +108,7 @@ class MAKE_Builder_Sections_Columns_Definition {
 				'default' => ttfmake_get_section_default( 'background-position', 'text' ),
 				'options' => ttfmake_get_section_choices( 'background-position', 'text' ),
 			),
-			array(
+			800 => array(
 				'type'    => 'select',
 				'name'    => 'background-style',
 				'label'   => __( 'Display', 'make' ),
@@ -116,13 +116,13 @@ class MAKE_Builder_Sections_Columns_Definition {
 				'default' => ttfmake_get_section_default( 'background-style', 'text' ),
 				'options' => ttfmake_get_section_choices( 'background-style', 'text' ),
 			),
-			array(
+			900 => array(
 				'type'    => 'checkbox',
 				'label'   => __( 'Darken', 'make' ),
 				'name'    => 'darken',
 				'default' => ttfmake_get_section_default( 'darken', 'text' ),
 			),
-			array(
+			1000 => array(
 				'type'    => 'color',
 				'label'   => __( 'Background color', 'make' ),
 				'name'    => 'background-color',
@@ -130,6 +130,23 @@ class MAKE_Builder_Sections_Columns_Definition {
 				'default' => ttfmake_get_section_default( 'background-color', 'text' ),
 			),
 		);
+	}
+
+	/**
+	 * Define settings for this section
+	 *
+	 * @since 1.8.10.
+	 *
+	 * @hooked filter make_sections_settings
+	 *
+	 * @param array $settings   The existing array of section settings.
+	 *
+	 * @return array             The modified array of section settings.
+	 */
+	public function section_settings( $settings ) {
+		$settings['text'] = $this->get_settings();
+
+		return $settings;
 	}
 
 	/**
