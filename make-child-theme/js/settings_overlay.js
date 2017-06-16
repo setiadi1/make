@@ -1,4 +1,4 @@
-( function( $, _, ajax_settings ) {
+( function( $, _, settings ) {
 
 	var sectionPrototype = oneApp.views.section.prototype;
 
@@ -35,18 +35,10 @@
 
 			var $target = $( e.currentTarget );
 			var $section = $target.parents( '.ttfmake-section' );
-			var payload = {
-				nonce: ajax_settings.nonce,
-				action: ajax_settings.action,
-				type: $section.data( 'section-type' ),
-				id: $section.data( 'id' ),
-			};
+			var sectionType = $section.data( 'section-type' );
+			var sectionSettings = settings[sectionType];
 
-			var self = this;
-
-			$.get( ajax_settings.url, payload, function( response ) {
-				new oneApp.views.overlays.settings( { model: self.model }, response.data ).open();
-			} );
+			new oneApp.views.overlays.settings( { model: this.model }, sectionSettings ).open();
 		}
 	} );
 
@@ -513,4 +505,4 @@
 		},
 	} );
 
-} ) ( jQuery, _, ajax_settings );
+} ) ( jQuery, _, settings );

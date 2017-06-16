@@ -43,11 +43,9 @@ class TTFMAKE_Settings_Overlay {
 			true
 		);
 
-		wp_localize_script( 'make-settings-overlay', 'ajax_settings', array(
-			'url' => admin_url( 'admin-ajax.php' ),
-			'nonce' => wp_create_nonce( 'make-settings-overlay' ),
-			'action' => 'get_overlay_settings',
-		) );
+		// Section settings
+		$settings = ttfmake_get_sections_settings();
+		wp_localize_script( 'make-settings-overlay', 'settings', $settings );
 
 		if ( ! is_array( $deps ) ) {
 			$deps = array();
