@@ -200,7 +200,7 @@ if ( ! function_exists( 'ttfmake_get_section_overlay' ) ) :
  *
  * @since  1.9.0.
  *
- * @return TTFMAKE_Builder_Base
+ * @return TTFMAKE_Settings_Overlay
  */
 function ttfmake_get_section_overlay() {
 	return TTFMAKE_Settings_Overlay::instance();
