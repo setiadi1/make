@@ -1,5 +1,9 @@
 /*----------  Background media  ----------*/
 
+.ttfmake-configuration-overlay-input-wrap.ttfmake-configuration-video-wrap .ttfmake-uploader {
+    margin-top: 20px !important;
+}
+
 .ttfmake-has-image-set ~ .ttfmake-configuration-media-related-wrap {
     display: block;
 }
