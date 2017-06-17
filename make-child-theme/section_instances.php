@@ -28,7 +28,7 @@ class TTFMAKE_Section_Instances {
 	}
 
 	public function hook() {
-		add_filter( 'make_section_settings', array( $this, 'section_settings' ), 50 );
+		add_filter( 'make_section_settings', array( $this, 'section_settings' ), 70, 2 );
 		add_filter( 'make_sections_defaults', array( $this, 'add_section_defaults' ), 999 );
 		add_filter( 'make_prepare_data_section', array( $this, 'save_section' ), 20, 2 );
 		add_filter( 'make_prepare_data_section', array( $this, 'save_sid_field' ), 10, 2 );
@@ -36,19 +36,23 @@ class TTFMAKE_Section_Instances {
 		add_filter( 'make_get_section_data', array( $this, 'read_layout' ), 10, 2 );
 	}
 
-	public function section_settings( $settings ) {
-		end( $settings );
-		$key = key( $settings );
-		$index = ( (int) $key + 1 ) * 100;
+	public function section_settings( $settings, $section_type ) {
+		if ( ! in_array( $section_type, array(
+			'text', 'banner', 'gallery', 'panels', 'postlist', 'productgrid', 'downloads'
+			) ) ) {
+			return $settings;
+		}
 
-		$settings[$index] = array(
+		$index = max( array_keys( $settings ) );
+
+		$settings[$index + 100] = array(
 			'type'    => 'checkbox',
 			'label'   => __( 'Master', 'make-plus' ),
 			'name'    => 'master',
 			'default' => 0,
 		);
 
-		$settings[$index + 100] = array(
+		$settings[$index + 150] = array(
 			'type'    => 'text',
 			'label'   => __( 'Master ID', 'make-plus' ),
 			'name'    => 'master-id',

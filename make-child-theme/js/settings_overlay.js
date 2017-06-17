@@ -2,6 +2,8 @@
 
 	var sectionPrototype = oneApp.views.section.prototype;
 
+	console.log(oneApp.views);
+
 	oneApp.views.section = oneApp.views.section.extend( {
 		initialize: function() {
 			sectionPrototype.initialize.apply( this, arguments );
@@ -42,9 +44,21 @@
 		}
 	} );
 
+	var itemPrototype = oneApp.views.item.prototype;
+
 	oneApp.views.item = oneApp.views.item.extend( {
+		onViewReady: function( e ) {
+			itemPrototype.onViewReady.apply( this, arguments );
+			this.model.on( 'change', this.onModelChange, this );
+		},
+
+		onModelChange: function() {
+			this.$el.trigger( 'model-item-change' );
+		},
+
 		openConfigurationOverlay: function( e ) {
 			e.preventDefault();
+			e.stopPropagation();
 
 			var $target = $( e.currentTarget );
 			var $item = $target.parents( '[data-section-type]' );
@@ -95,6 +109,10 @@
 			// Scroll to the open divider
 			var $overlay = $( '.ttfmake-overlay-body', this.$el );
 			var $dividers = $( '.ttfmake-configuration-divider-wrap', this.$el );
+
+			if ( ! $dividers.length ) {
+				return;
+			}
 
 			// This can later be removed ...
 			$dividers.removeClass( 'open-wrap' );

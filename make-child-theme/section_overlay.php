@@ -29,19 +29,22 @@ class TTFMAKE_Settings_Overlay {
 
 	public function hook() {
 		add_filter( 'make_builder_js_dependencies', array( $this, 'builder_dependencies' ) );
-		add_action( 'wp_ajax_get_overlay_settings', array( $this, 'ajax_get_overlay_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 	}
 
 	public function builder_dependencies( $deps ) {
+		if ( ! is_array( $deps ) ) {
+			$deps = array();
+		}
+
 		wp_register_script(
 			'make-settings-overlay',
 			get_stylesheet_directory_uri() . '/js/settings_overlay.js',
 			array(
 				'ttfmake-builder/js/views/section.js',
-				'builder-views-item',
 				'ttfmake-builder/js/views/overlay.js',
+				'builder-views-item',
 			),
 			TTFMAKE_VERSION,
 			true
@@ -51,45 +54,9 @@ class TTFMAKE_Settings_Overlay {
 		$settings = ttfmake_get_sections_settings();
 		wp_localize_script( 'make-settings-overlay', 'settings', $settings );
 
-		if ( ! is_array( $deps ) ) {
-			$deps = array();
-		}
-
 		return array_merge( $deps, array(
 			'make-settings-overlay'
 		) );
-	}
-
-	public function ajax_get_overlay_settings() {
-		if ( $this->validate_request() ) {
-			$defaults = array(
-				'type' => false,
-				'id' => false,
-			);
-			$parameters = wp_array_slice_assoc( $_GET, array_keys( $defaults ) );
-
-			// Sets $type, $id
-			extract( $parameters );
-			$sections = ttfmake_get_sections();
-			$settings = isset( $sections[$type] ) ? $sections[$type]['config']: array();
-
-			wp_send_json_success( $settings );
-		} else {
-			wp_send_json_error( array() );
-		}
-
-		exit;
-	}
-
-	public function validate_request() {
-		if ( check_ajax_referer( 'make-settings-overlay', 'nonce' )
-			&& current_user_can( 'edit_pages' )
-			&& current_user_can( 'edit_posts' ) ) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	public function enqueue_styles() {
