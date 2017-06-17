@@ -345,10 +345,22 @@ class TTFMAKE_Builder_Save {
 			$registered_sections = ttfmake_get_sections();
 
 			if ( !isset( $ttfmake_section_data['draft'] ) || $ttfmake_section_data['draft'] != 1 ) {
+				$section_display_template = apply_filters(
+					'make_section_display_template_relative_path',
+					$registered_sections[ $section['section-type'] ]['display_template'],
+					$ttfmake_section_data
+				);
+
+				$section_path = apply_filters(
+					'make_section_path',
+					$registered_sections[ $section['section-type'] ]['path'],
+					$ttfmake_section_data
+				);
+
 				// Get the template for the section
 				ttfmake_load_section_template(
-					$registered_sections[ $section['section-type'] ]['display_template'],
-					$registered_sections[ $section['section-type'] ]['path']
+					$section_display_template,
+					$section_path
 				);
 			}
 
@@ -589,7 +601,7 @@ class TTFMAKE_Builder_Save {
 		// Get the previous section's type
 		$prev_data = $this->get_prev_section_data( $current_section, $sections );
 		$prev      = ( ! empty( $prev_data ) && isset( $prev_data['section-type'] ) ) ? $prefix . 'prev-' . $prev_data['section-type'] : $prefix . 'first';
-		
+
 		/**
 		 * Filter the section classes.
 		 *
