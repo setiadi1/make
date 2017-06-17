@@ -37,7 +37,7 @@ class MAKE_Builder_Sections_Columns_Definition {
 	public function __construct() {
 		add_filter( 'make_section_choices', array( $this, 'section_choices' ), 10, 3 );
 		add_filter( 'make_sections_settings', array( $this, 'section_settings' ) );
-		add_filter( 'make_section_defaults', array( $this, 'section_defaults' ) );
+		add_filter( 'make_sections_defaults', array( $this, 'section_defaults' ) );
 		add_filter( 'make_get_section_json', array ( $this, 'get_section_json' ), 10, 1 );
 		add_filter( 'make_get_section_json', array ( $this, 'embed_column_images' ), 20, 1 );
 		add_filter( 'make_builder_js_dependencies', array( $this, 'add_js_dependencies' ) );
@@ -247,7 +247,7 @@ class MAKE_Builder_Sections_Columns_Definition {
 	 *
 	 * @since 1.6.0.
 	 *
-	 * @hooked filter make_section_defaults
+	 * @hooked filter make_sections_defaults
 	 *
 	 * @param array $defaults    The existing array of section defaults.
 	 *
