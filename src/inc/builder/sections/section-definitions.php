@@ -149,7 +149,7 @@ class TTFMAKE_Section_Definitions {
 	 *
 	 * @since  1.8.10.
 	 *
-	 * @return array                      The array of choices for the section setting.
+	 * @return array        The array of choices for the section setting.
 	 */
 	public function get_settings( $section_type = false ) {
 		/**
@@ -167,9 +167,9 @@ class TTFMAKE_Section_Definitions {
 			 *
 			 * @since 1.8.10.
 			 *
-			 * @param string    $section_type    The type of section the data is for.
-			 * @param string    $settings        Array of current section settings.
-			 * @return mixed                     Array of settings if found; false if not found.
+			 * @param string    $section_settings        Array of current section settings.
+			 * @param string    $section_type            The type of section the data is for.
+			 * @return mixed                             Array of settings if found; false if not found.
 			 */
 			$section_settings = apply_filters( 'make_section_settings', $section_settings, $_section_type );
 			ksort( $section_settings, SORT_NUMERIC );
