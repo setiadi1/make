@@ -42,6 +42,19 @@
 		}
 	} );
 
+	oneApp.views.item = oneApp.views.item.extend( {
+		openConfigurationOverlay: function( e ) {
+			e.preventDefault();
+
+			var $target = $( e.currentTarget );
+			var $item = $target.parents( '[data-section-type]' );
+			var itemType = $item.data( 'section-type' );
+			var itemSettings = settings[itemType];
+
+			new oneApp.views.overlays.settings( { model: this.model }, itemSettings ).open();
+		}
+	} );
+
 	oneApp.views.overlays = {};
 
 	/**

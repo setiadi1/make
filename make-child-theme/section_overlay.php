@@ -38,7 +38,11 @@ class TTFMAKE_Settings_Overlay {
 		wp_register_script(
 			'make-settings-overlay',
 			get_stylesheet_directory_uri() . '/js/settings_overlay.js',
-			array( 'ttfmake-builder/js/views/section.js', 'ttfmake-builder/js/views/overlay.js' ),
+			array(
+				'ttfmake-builder/js/views/section.js',
+				'builder-views-item',
+				'ttfmake-builder/js/views/overlay.js',
+			),
 			TTFMAKE_VERSION,
 			true
 		);
