@@ -122,7 +122,7 @@ class TTFMAKE_Section_Instances {
 			// to an existing master is set, create the master
 			// section entry in wp_options table
 			if ( $section[ 'master' ] && ! $section[ 'master-id' ] ) {
-				$option_id = 'master_' . $section[ 'section-type' ] . '_' . $section[ 'sid' ];
+				$option_id = $this->generate_unique_master_name( $section[ 'section-type' ] );
 				// These keys should be removed from the master,
 				// and be the only keys remaining on the instance.
 				$id_keys = array( 'sid', 'master', 'master-id' );
@@ -181,6 +181,46 @@ class TTFMAKE_Section_Instances {
 		}
 
 		return $sections;
+	}
+
+	public function generate_unique_master_name( $section_type ) {
+		$master_names = $this->get_master_sections( true );
+		$master_slug = "ttfmake_master_{$section_type}";
+		$existing_masters = preg_grep( '/^' . $master_slug . '/', $master_names );
+		$suffix = 1;
+
+		foreach ( $existing_masters as $master_name ) {
+			// Find the highest numbered master name
+			// with the specified section type in the slug
+			preg_match( '/^' . $master_slug . '_+(\d+)/', $master_name, $suffix_match );
+			$master_suffix = (int) $suffix_match[1];
+			$suffix = $master_suffix > $suffix ? $master_suffix: $suffix;
+		}
+
+		// Increment the highest found suffix by 1
+		$suffix ++;
+		return "{$master_slug}_{$suffix}";
+	}
+
+	public function get_master_sections( $names_only = false ) {
+		$options = wp_load_alloptions();
+		$master_names = preg_grep( '/^ttfmake_master_/', array_keys( $options ) );
+
+		if ( true === $names_only ) {
+			return $master_names;
+		}
+
+		$masters = array();
+
+		foreach ( $master_names as $master_name ) {
+			$master_data = $options[ $master_name ];
+			$masters[] = array(
+				'name' => $master_name,
+				'data' => json_decode( wp_unslash( $master_data ), true )
+			);
+		}
+
+		return $masters;
 	}
 
 }
