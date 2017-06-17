@@ -187,7 +187,7 @@ class TTFMAKE_Section_Instances {
 		$master_names = $this->get_master_sections( true );
 		$master_slug = "ttfmake_master_{$section_type}";
 		$existing_masters = preg_grep( '/^' . $master_slug . '/', $master_names );
-		$suffix = 1;
+		$suffix = 0;
 
 		foreach ( $existing_masters as $master_name ) {
 			// Find the highest numbered master name
@@ -202,9 +202,13 @@ class TTFMAKE_Section_Instances {
 		return "{$master_slug}_{$suffix}";
 	}
 
-	public function get_master_sections( $names_only = false ) {
+	public function get_master_sections( $names_only = false, $section_type = false ) {
 		$options = wp_load_alloptions();
 		$master_names = preg_grep( '/^ttfmake_master_/', array_keys( $options ) );
+
+		if ( false !== $section_type ) {
+			$master_names = preg_grep( '/^ttfmake_master_' . $section_type . '_/', array_keys( $options ) );
+		}
 
 		if ( true === $names_only ) {
 			return $master_names;
