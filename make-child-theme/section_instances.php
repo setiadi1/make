@@ -68,7 +68,6 @@ class TTFMAKE_Section_Instances {
 			$defaults[ $section_id ][ 'master-id' ] = '';
 		}
 
-
 		return $defaults;
 	}
 
