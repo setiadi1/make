@@ -316,6 +316,14 @@ class TTFMAKE_Builder_Base {
 		);
 
 		wp_register_script(
+			'builder-views-item',
+			Make()->scripts()->get_js_directory_uri() . '/builder/sections/views/item.js',
+			array(),
+			TTFMAKE_VERSION,
+			true
+		);
+
+		wp_register_script(
 			'ttfmake-builder/js/views/overlay.js',
 			Make()->scripts()->get_js_directory_uri() . '/builder/core/views/overlay.js',
 			array(),
@@ -337,6 +345,7 @@ class TTFMAKE_Builder_Base {
 				array(
 					'ttfmake-builder/js/models/section.js',
 					'ttfmake-builder/js/collections/sections.js',
+					'builder-views-item',
 					'ttfmake-builder/js/views/menu.js',
 					'ttfmake-builder/js/views/section.js',
 					'ttfmake-builder/js/views/overlay.js'
