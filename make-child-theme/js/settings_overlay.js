@@ -32,13 +32,17 @@
 
 		openConfigurationOverlay: function( e ) {
 			e.preventDefault();
+			e.stopPropagation();
 
 			var $target = $( e.currentTarget );
 			var $section = $target.parents( '.ttfmake-section' );
 			var sectionType = $section.data( 'section-type' );
 			var sectionSettings = settings[sectionType];
 
-			new oneApp.views.overlays.settings( { model: this.model }, sectionSettings ).open();
+			if ( oneApp.builder.settingsOverlay ) {
+				delete oneApp.builder.settingsOverlay;
+			}
+			oneApp.builder.settingsOverlay = new oneApp.views.overlays.settings( { model: this.model }, sectionSettings ).open();
 		}
 	} );
 
@@ -67,7 +71,10 @@
 			var itemType = $item.data( 'section-type' );
 			var itemSettings = settings[itemType];
 
-			new oneApp.views.overlays.settings( { model: this.model }, itemSettings ).open();
+			if ( oneApp.builder.settingsOverlay ) {
+				delete oneApp.builder.settingsOverlay;
+			}
+			oneApp.builder.settingsOverlay = new oneApp.views.overlays.settings( { model: this.model }, itemSettings ).open();
 		}
 	} );
 
@@ -81,7 +88,6 @@
 	oneApp.views.overlays.settings = oneApp.views.overlay.extend( {
 		template: wp.template( 'ttfmake-settings' ),
 		className: 'ttfmake-overlay ttfmake-configuration-overlay',
-		controls: {},
 
 		initialize: function( configuration, settings ) {
 			// this.model is the section origin model
@@ -89,6 +95,7 @@
 			// the configuration parameter
 			this.settings = settings;
 			this.changeset = new Backbone.Model();
+			this.controls = {};
 
 			return this.render();
 		},
@@ -106,7 +113,7 @@
 			// Show the overlay
 			$body.append( this.$el );
 			this.$el.css( 'display', 'table' );
-			$body.on( 'keydown', { self: this }, this.onKeyDown );
+			$body.one( 'keydown', { self: this }, this.onKeyDown );
 
 			// Scroll to the open divider
 			var $overlay = $( '.ttfmake-overlay-body', this.$el );
@@ -208,7 +215,6 @@
 
 			var $body = $( 'body' );
 			$body.removeClass( 'modal-open' );
-			$body.off( 'keydown', this.onKeyDown );
 		}
 	} );
 

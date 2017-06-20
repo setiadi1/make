@@ -328,7 +328,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 				el: $('#ttfmake-tinymce-overlay')
 			});
 
-			this.settingsOverlay = new oneApp.views.settings();
+			// this.settingsOverlay = new oneApp.views.settings();
 		},
 
 		initUploader: function ( overlayView, placeholder ) {
