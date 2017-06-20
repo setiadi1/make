@@ -22,6 +22,8 @@ var oneApp = oneApp || {};
 		},
 
 		initialize: function(options) {
+			oneApp.views.item.prototype.initialize.apply( this, arguments );
+
 			this.template = _.template(ttfMakeSectionTemplates['text-item'], oneApp.builder.templateSettings);
 		},
 
@@ -91,9 +93,9 @@ var oneApp = oneApp || {};
 			setTimeout(function() {
 				if (self.model.get('content')) {
 					$iframe.height($iframe.contents().height());
-					
+
 					var iframeContentHeight = $iframe.contents().innerHeight();
-					
+
 					if (iframeContentHeight > 500) {
 						iframeContentHeight = 500;
 					}

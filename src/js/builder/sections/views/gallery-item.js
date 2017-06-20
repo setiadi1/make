@@ -15,6 +15,8 @@ var oneApp = oneApp || {};
 		},
 
 		initialize: function (options) {
+			oneApp.views.item.prototype.initialize.apply( this, arguments );
+
 			this.template = _.template(ttfMakeSectionTemplates['gallery-item'], oneApp.builder.templateSettings);
 		},
 
