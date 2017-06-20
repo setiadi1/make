@@ -111,14 +111,13 @@ class TTFMAKE_Section_Instances {
 			}
 		}
 
-		$s = 1;
 		$layout = array();
 
 		foreach( $sections as $id => $section ) {
 			// If it's the first time we store this section
 			// append the sid value coming from db
 			if ( ! isset( $section[ 'sid' ] ) || ! $section[ 'sid' ] ) {
-				$section_id = add_post_meta( $post_id, "__ttfmake_section_{$s}", '', true );
+				$section_id = add_post_meta( $post_id, '__ttfmake_section', '', true );
 				$section[ 'sid' ] = "{$section_id}";
 			}
 
@@ -149,23 +148,34 @@ class TTFMAKE_Section_Instances {
 				'post',
 				$section[ 'sid' ],
 				wp_slash( json_encode( $section ) ),
-				"__ttfmake_section_{$s}",
+				'__ttfmake_section_' . $section[ 'sid' ],
 				true
 			);
 
 			$layout[] = $section[ 'sid' ];
-			$s ++;
+		}
+
+		// Purge removed sections
+		$current_layout_meta = get_post_meta( $post_id, '__ttfmake_layout', true );
+
+		if ( $current_layout_meta ) {
+			$current_layout = json_decode( wp_unslash( $current_layout_meta ), true );
+			$removed_section_ids = array_diff( $current_layout, $layout );
+
+			foreach ( $removed_section_ids as $section_id ) {
+				delete_post_meta( $post_id, "__ttfmake_section_{$section_id}" );
+			}
 		}
 
 		// Update layout
-		update_post_meta( $post_id, "__ttfmake_layout", wp_slash( json_encode( $layout ) ) );
+		update_post_meta( $post_id, '__ttfmake_layout', wp_slash( json_encode( $layout ) ) );
 	}
 
 	public function read_layout( $sections, $post_id ) {
 		$layout_meta = get_post_meta( $post_id, '__ttfmake_layout', true );
 
 		if ( $layout_meta ) {
-			$layout = json_decode( $layout_meta, true );
+			$layout = json_decode( wp_unslash( $layout_meta ), true );
 			$sections = array();
 
 			foreach ( $layout as $section_id ) {
