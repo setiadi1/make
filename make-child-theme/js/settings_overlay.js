@@ -2,8 +2,6 @@
 
 	var sectionPrototype = oneApp.views.section.prototype;
 
-	console.log(oneApp.views);
-
 	oneApp.views.section = oneApp.views.section.extend( {
 		initialize: function() {
 			sectionPrototype.initialize.apply( this, arguments );
@@ -47,12 +45,16 @@
 	var itemPrototype = oneApp.views.item.prototype;
 
 	oneApp.views.item = oneApp.views.item.extend( {
-		onViewReady: function( e ) {
-			itemPrototype.onViewReady.apply( this, arguments );
+		events: _.extend( itemPrototype.events, {
+			'view-ready.custom': 'onCustomViewReady'
+		} ),
+
+		initialize: function() {
 			this.model.on( 'change', this.onModelChange, this );
 		},
 
 		onModelChange: function() {
+			console.log('onModelChange');
 			this.$el.trigger( 'model-item-change' );
 		},
 

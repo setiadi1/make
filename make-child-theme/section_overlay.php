@@ -28,7 +28,7 @@ class TTFMAKE_Settings_Overlay {
 	}
 
 	public function hook() {
-		add_filter( 'make_builder_js_dependencies', array( $this, 'builder_dependencies' ) );
+		add_filter( 'make_builder_js_dependencies', array( $this, 'builder_dependencies' ), 10 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 	}
@@ -37,6 +37,8 @@ class TTFMAKE_Settings_Overlay {
 		if ( ! is_array( $deps ) ) {
 			$deps = array();
 		}
+
+		$deps = array_diff( $deps, array( 'ttfmake-builder/js/views/overlay.js' ) );
 
 		wp_register_script(
 			'make-settings-overlay',
