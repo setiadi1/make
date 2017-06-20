@@ -52,11 +52,16 @@ class TTFMAKE_Section_Instances {
 			'default' => 0,
 		);
 
+		$master_sections = $this->get_master_sections( false, $section_type );
+		$default_option = array( '' => __( 'Create new master', 'make-plus' ) );
+		$options = array_combine( array_keys( $master_sections ), array_keys( $master_sections ) );
+
 		$settings[$index + 150] = array(
-			'type'    => 'text',
+			'type'    => 'select',
 			'label'   => __( 'Master ID', 'make-plus' ),
 			'name'    => 'master-id',
 			'default' => '',
+			'options' => $default_option + $options
 		);
 
 		return $settings;
@@ -231,10 +236,7 @@ class TTFMAKE_Section_Instances {
 
 		foreach ( $master_names as $master_name ) {
 			$master_data = $options[ $master_name ];
-			$masters[] = array(
-				'name' => $master_name,
-				'data' => json_decode( wp_unslash( $master_data ), true )
-			);
+			$masters[ $master_name ] =  json_decode( wp_unslash( $master_data ), true );
 		}
 
 		return $masters;
