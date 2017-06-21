@@ -584,7 +584,7 @@ class TTFMAKE_Builder_Base {
 
 		foreach ( $templates as $key => $template ) {
 			// Include the template
-			$templates[$key] = ttfmake_load_section_template( $template, $path, $return );
+			$templates[$key] = Make()->section()->load_section_template( $template, $path, $return, $ttfmake_section_data['data'] );
 		}
 
 		// Destroy the variable as a good citizen does
