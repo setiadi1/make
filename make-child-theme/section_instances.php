@@ -125,25 +125,32 @@ class TTFMAKE_Section_Instances {
 				$section[ 'sid' ] = "{$section_id}";
 			}
 
-			// If the section is set as master, and no reference
-			// to an existing master is set, create the master
-			// section entry in wp_options table
-			if ( $section[ 'master' ] && ! $section[ 'master-id' ] ) {
-				$option_id = $this->generate_unique_master_name( $section[ 'section-type' ] );
+			if ( $section[ 'master' ] ) {
+				// If the section is set as master, and no reference
+				// to an existing master is set, create the master
+				// section entry in wp_options table
+				if ( ! $section[ 'master-id' ] ) {
+					$option_id = $this->generate_unique_master_name( $section[ 'section-type' ] );
+					// Set the master-id reference on the instance
+					$section[ 'master-id' ] = $option_id;
+				}
+
 				// These keys should be removed from the master,
 				// and be the only keys remaining on the instance.
-				$id_keys = array( 'sid', 'master', 'master-id' );
+				$id_keys = array( 'id', 'sid', 'master', 'master-id' );
 				$master = array_diff_key( $section, array_flip( $id_keys ) );
 				$section = array_intersect_key( $section, array_flip( $id_keys ) );
-				// Set the master-id reference on the instance
-				$section[ 'master-id' ] = $option_id;
-
+				// Update the master
 				update_option( $option_id, wp_slash( json_encode( $master ) ) );
 			} else if ( ! $section[ 'master' ] ) {
 				// Clear the master-id reference
 				// if section isn't master anymore
 				$section[ 'master-id' ] = ttfmake_get_section_default( 'master-id', $section[ 'section-type' ] );
 			}
+
+			// Convert section virtual ID to string
+			// to avoid JSON decode integer overflows
+			$section[ 'id' ] = strval( $section[ 'id' ] );
 
 			// Avoid adding new metadatas each time.
 			// Instead, update the section meta
