@@ -358,9 +358,11 @@ class TTFMAKE_Builder_Save {
 				);
 
 				// Get the template for the section
-				ttfmake_load_section_template(
+				Make()->section()->load_section_template(
 					$section_display_template,
-					$section_path
+					$section_path,
+					false,
+					$ttfmake_section_data
 				);
 			}
 
