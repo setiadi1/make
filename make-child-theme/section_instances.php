@@ -133,6 +133,8 @@ class TTFMAKE_Section_Instances {
 					$option_id = $this->generate_unique_master_name( $section[ 'section-type' ] );
 					// Set the master-id reference on the instance
 					$section[ 'master-id' ] = $option_id;
+				} else {
+					$option_id = $section[ 'master-id' ];
 				}
 
 				// These keys should be removed from the master,
