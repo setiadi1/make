@@ -101,12 +101,12 @@ class TTFMAKE_Settings_Overlay {
 		</script>
 
 		<script type="text/html" id="tmpl-ttfmake-settings-section_title">
-		<input placeholder="{{ data.label }}" type="text" value="" class="{{ data.class }}" autocomplete="off">
+		<input placeholder="{{ data.label }}" type="text" value="" class="{{ data.class }}" autocomplete="off"">
 		</script>
 
 		<script type="text/html" id="tmpl-ttfmake-settings-select">
 		<label>{{ data.label }}</label>
-		<select class="{{ data.class }}">
+		<select class="{{ data.class }}" {{ data.disabled ? 'disabled' : '' }}>
 			<# for( var o in data.options ) { #>
 			<option value="{{ o }}">{{ data.options[o] }}</option>
 			<# } #>
