@@ -18,11 +18,13 @@ var oneApp = oneApp || {};
 		parse: function(data) {
 			var attributes = _(data).clone();
 
-			attributes['columns'] = _(attributes['columns']).values().map(function(column) {
-				var columnModel = new oneApp.models['text-item'](column);
-				columnModel.set('parentID', data.id);
-				return columnModel;
-			});
+			if ( attributes['columns'] ) {
+				attributes['columns'] = _(attributes['columns']).values().map(function(column) {
+					var columnModel = new oneApp.models['text-item'](column);
+					columnModel.set('parentID', data.id);
+					return columnModel;
+				});
+			}
 
 			return attributes;
 		},

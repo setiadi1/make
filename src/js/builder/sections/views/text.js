@@ -25,6 +25,12 @@ var oneApp = oneApp || {};
 			});
 		},
 
+		initialize: function (options) {
+			oneApp.views.section.prototype.initialize.apply( this, arguments );
+
+			this.model.on( 'change:columns-number', this.onColumnsNumberChange, this )
+		},
+
 		render: function() {
 			oneApp.views.section.prototype.render.apply(this, arguments);
 
@@ -78,11 +84,11 @@ var oneApp = oneApp || {};
 
 			var columns = parseInt($('.ttfmake-text-column', this.$el).length, 10);
 			columnView.$el.addClass('ttfmake-text-column-position-'+columns);
-			
+
 			this.$el.trigger('column-added');
 			columnView.$el.trigger('column-ready');
 			columnView.$el.trigger('column-load');
-			
+
 			return columnView;
 		},
 
@@ -166,6 +172,8 @@ var oneApp = oneApp || {};
 		onColumnsNumberChange: function() {
 			var columns = this.model.get('columns-number'),
 					$stage = $('.ttfmake-text-columns-stage', this.$el);
+
+			console.log( columns );
 
 			var numberOfColumnsToCreate = columns - this.model.get('columns').length;
 
@@ -265,6 +273,11 @@ var oneApp = oneApp || {};
 					oneApp.builder.initFrame(self.model.get('id') + '-' + $item.attr('data-id'));
 				}
 			});
+		},
+
+		triggerColumnChange: function() {
+			console.log( 'changed' );
+			this.$el.trigger('columns-number-change');
 		},
 
 		onOverlayOpen: function(e, $overlay) {
