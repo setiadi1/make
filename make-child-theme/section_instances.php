@@ -34,6 +34,7 @@ class TTFMAKE_Section_Instances {
 		add_filter( 'make_prepare_data_section', array( $this, 'save_sid_field' ), 10, 2 );
 		add_action( 'make_builder_data_saved', array( $this, 'save_layout' ), 10, 2 );
 		add_filter( 'make_get_section_data', array( $this, 'read_layout' ), 10, 2 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 	}
 
 	public function section_settings( $settings, $section_type ) {
@@ -46,6 +47,13 @@ class TTFMAKE_Section_Instances {
 		$index = max( array_keys( $settings ) );
 
 		$settings[$index + 100] = array(
+			'type'    => 'divider',
+			'label'   => __( 'Master', 'make-plus' ),
+			'name'    => 'divider-master',
+			'class'   => 'ttfmake-configuration-divider',
+		);
+
+		$settings[$index + 125] = array(
 			'type'    => 'checkbox',
 			'label'   => __( 'Master', 'make-plus' ),
 			'name'    => 'master',
@@ -59,9 +67,10 @@ class TTFMAKE_Section_Instances {
 		$settings[$index + 150] = array(
 			'type'    => 'select',
 			'label'   => __( 'Master ID', 'make-plus' ),
-			'name'    => 'master-id',
+			'name'    => 'master_id',
 			'default' => '',
-			'options' => $default_option + $options
+			'options' => $default_option + $options,
+			'disabled' => true,
 		);
 
 		return $settings;
@@ -70,7 +79,7 @@ class TTFMAKE_Section_Instances {
 	public function add_section_defaults( $defaults ) {
 		foreach ( $defaults as $section_id => $section_defaults ) {
 			$defaults[ $section_id ][ 'master' ] = 0;
-			$defaults[ $section_id ][ 'master-id' ] = '';
+			$defaults[ $section_id ][ 'master_id' ] = '';
 		}
 
 		return $defaults;
@@ -85,7 +94,7 @@ class TTFMAKE_Section_Instances {
 			}
 		}
 
-		$clean_data[ 'master-id' ] = $raw_data[ 'master-id' ];
+		$clean_data[ 'master_id' ] = $raw_data[ 'master_id' ];
 
 		return $clean_data;
 	}
@@ -129,25 +138,25 @@ class TTFMAKE_Section_Instances {
 				// If the section is set as master, and no reference
 				// to an existing master is set, create the master
 				// section entry in wp_options table
-				if ( ! $section[ 'master-id' ] ) {
+				if ( ! $section[ 'master_id' ] ) {
 					$option_id = $this->generate_unique_master_name( $section[ 'section-type' ] );
-					// Set the master-id reference on the instance
-					$section[ 'master-id' ] = $option_id;
+					// Set the master_id reference on the instance
+					$section[ 'master_id' ] = $option_id;
 				} else {
-					$option_id = $section[ 'master-id' ];
+					$option_id = $section[ 'master_id' ];
 				}
 
 				// These keys should be removed from the master,
 				// and be the only keys remaining on the instance.
-				$id_keys = array( 'id', 'sid', 'master', 'master-id' );
+				$id_keys = array( 'id', 'sid', 'master', 'master_id' );
 				$master = array_diff_key( $section, array_flip( $id_keys ) );
 				$section = array_intersect_key( $section, array_flip( $id_keys ) );
 				// Update the master
 				update_option( $option_id, wp_slash( json_encode( $master ) ) );
 			} else if ( ! $section[ 'master' ] ) {
-				// Clear the master-id reference
+				// Clear the master_id reference
 				// if section isn't master anymore
-				$section[ 'master-id' ] = ttfmake_get_section_default( 'master-id', $section[ 'section-type' ] );
+				$section[ 'master_id' ] = ttfmake_get_section_default( 'master_id', $section[ 'section-type' ] );
 			}
 
 			// Convert section virtual ID to string
@@ -192,22 +201,27 @@ class TTFMAKE_Section_Instances {
 			$sections = array();
 
 			foreach ( $layout as $section_id ) {
-				// Fetch section using its db id
-				$section_meta = get_metadata_by_mid( 'post', $section_id );
-				$section = json_decode( wp_unslash( $section_meta->meta_value ), true );
-
-				if ( $section[ 'master-id' ] ) {
-					$master_option = get_option( $section[ 'master-id' ] );
-					$master = json_decode( wp_unslash( $master_option ), true );
-					// Merge the master data with the section instance
-					$section += $master;
-				}
-
+				$section = $this->read_section( $section_id );
 				$sections[] = $section;
 			}
 		}
 
 		return $sections;
+	}
+
+	public function read_section( $section_id ) {
+		// Fetch section using its db id
+		$section_meta = get_metadata_by_mid( 'post', $section_id );
+		$section = json_decode( wp_unslash( $section_meta->meta_value ), true );
+
+		if ( $section[ 'master_id' ] ) {
+			$master_meta = get_option( $section[ 'master_id' ] );
+			$master = json_decode( wp_unslash( $master_meta ), true );
+			// Merge the master data with the section instance
+			$section += $master;
+		}
+
+		return $section;
 	}
 
 	public function generate_unique_master_name( $section_type ) {
@@ -231,24 +245,50 @@ class TTFMAKE_Section_Instances {
 
 	public function get_master_sections( $names_only = false, $section_type = false ) {
 		$options = wp_load_alloptions();
-		$master_names = preg_grep( '/^ttfmake_master_/', array_keys( $options ) );
+		// Fetch all options prefixed with master prefix
+		$master_ids = preg_grep( '/^ttfmake_master_/', array_keys( $options ) );
 
+		// Filter found masters on section type
 		if ( false !== $section_type ) {
-			$master_names = preg_grep( '/^ttfmake_master_' . $section_type . '_/', array_keys( $options ) );
+			$master_ids = preg_grep( '/^ttfmake_master_' . $section_type . '_/', array_keys( $options ) );
 		}
 
+		// Return only master ids
 		if ( true === $names_only ) {
-			return $master_names;
+			return $master_ids;
 		}
 
+		// Return full master data
 		$masters = array();
 
-		foreach ( $master_names as $master_name ) {
-			$master_data = $options[ $master_name ];
-			$masters[ $master_name ] =  json_decode( wp_unslash( $master_data ), true );
+		foreach ( $master_ids as $master_id ) {
+			$master_data = $options[ $master_id ];
+			$masters[ $master_id ] =  json_decode( wp_unslash( $master_data ), true );
 		}
 
 		return $masters;
+	}
+
+	public function admin_enqueue_scripts( $hook_suffix ) {
+		// Only load resources if they are needed on the current page
+		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) ) || ! ttfmake_post_type_supports_builder( get_post_type() ) ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'make-settings-overlay-master',
+			get_stylesheet_directory_uri() . '/js/settings_master_select.js',
+			array( 'make-settings-overlay' ),
+			TTFMAKE_VERSION,
+			true
+		);
+
+		// Section settings
+		wp_localize_script(
+			'make-settings-overlay-master',
+			'masterSections',
+			$this->get_master_sections()
+		);
 	}
 
 }
