@@ -8,7 +8,7 @@
  *
  * @since 1.7.0.
  */
-final class MAKE_Section_Methods implements MAKE_Section_MethodsInterface, MAKE_Util_HookInterface {
+class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_MethodsInterface, MAKE_Util_HookInterface {
 	/**
 	 * Whether Make Plus is installed and active.
 	 *
@@ -27,6 +27,10 @@ final class MAKE_Section_Methods implements MAKE_Section_MethodsInterface, MAKE_
 	 */
 	private static $hooked = false;
 
+	protected $dependencies = array(
+		'scripts' => 'MAKE_Setup_ScriptsInterface',
+	);
+
 	/**
 	 * Hook into WordPress.
 	 *
@@ -39,7 +43,9 @@ final class MAKE_Section_Methods implements MAKE_Section_MethodsInterface, MAKE_
 			return;
 		}
 
-
+		add_action( 'wp_enqueue_scripts', array( $this, 'frontend_builder_scripts' ) );
+		add_action( 'make_builder_banner_css', array( $this, 'builder_banner_styles' ), 10, 3 );
+		add_action( 'make_style_loaded', array( $this, 'builder_styles' ) );
 
 		// Hooking has occurred.
 		self::$hooked = true;
@@ -113,6 +119,15 @@ final class MAKE_Section_Methods implements MAKE_Section_MethodsInterface, MAKE_
 			foreach ( $sections_meta as $section ) {
 				$section_meta = get_metadata_by_mid( 'post', $section );
 				$section_data = json_decode( wp_unslash( $section_meta->meta_value ), true );
+
+				if ( $section_data['master-id'] ) {
+					$master_option = get_option( $section_data['master-id'] );
+					$master_section_data = json_decode( wp_unslash( $master_option ), true );
+					$master_section_data['id'] = $section_data['id'];
+					$master_section_data['sid'] = $section_data['sid'];
+
+					$section_data = $master_section_data;
+				}
 
 				$sections[$section_data['sid']] = $section_data;
 			}
@@ -211,36 +226,45 @@ final class MAKE_Section_Methods implements MAKE_Section_MethodsInterface, MAKE_
 			$html_class .= ' builder-section-full-width';
 		}
 
+		$bg_color = ( isset( $section_data['background-color'] ) && ! empty( $section_data['background-color'] ) );
+
+		$bg_image = ( isset( $section_data['background-image'] ) && 0 !== absint( $section_data['background-image'] ) );
+		if ( true === $bg_color || true === $bg_image ) {
+			$html_class .= ' has-background';
+		}
+
 		switch( $section_type ) {
 			case 'text':
 				$columns_number = ( isset( $section_data['columns-number'] ) ) ? absint( $section_data['columns-number'] ) : 1;
 				$html_class .= ' builder-text-columns-' . $columns_number;
 
-				$bg_color = ( isset( $section_data['background-color'] ) && ! empty( $section_data['background-color'] ) );
-
-				$bg_image = ( isset( $section_data['background-image'] ) && 0 !== absint( $section_data['background-image'] ) );
-				if ( true === $bg_color || true === $bg_image ) {
-					$html_class .= ' has-background';
-				}
+				/**
+				 * Filter the text section class.
+				 *
+				 * @since 1.2.3.
+				 *
+				 * @param string    $text_class              The computed class string.
+				 * @param array     $ttfmake_section_data    The section data.
+				 * @param array     $sections                The list of sections.
+				 */
+				$section_specific_classes = apply_filters( 'make_builder_get_text_class', $html_class, $section_data, $sections );
 				break;
 
 			case 'gallery':
 				break;
 
 			case 'banner':
+				/**
+				 * Filter the class for the banner section.
+				 *
+				 * @since 1.2.3.
+				 *
+				 * @param string    $banner_class            The banner class.
+				 * @param array     $ttfmake_section_data    The section data.
+				 */
+				$section_specific_classes = apply_filters( 'make_builder_banner_class', $html_class, $section_data );
 				break;
 		}
-
-		/**
-		 * Filter the text section class.
-		 *
-		 * @since 1.2.3.
-		 *
-		 * @param string    $text_class              The computed class string.
-		 * @param array     $ttfmake_section_data    The section data.
-		 * @param array     $sections                The list of sections.
-		 */
-		$section_specific_classes = apply_filters( 'make_builder_get_text_class', $html_class, $section_data, $sections );
 
 		return $section_classes . $section_specific_classes;
 	}
@@ -300,5 +324,286 @@ final class MAKE_Section_Methods implements MAKE_Section_MethodsInterface, MAKE_
 		$content = str_replace( ']]>', ']]&gt;', $content );
 
 		echo $content;
+	}
+
+	public function is_section_type( $type, $data ) {
+		$is_section_type = ( isset( $data['section-type'] ) && $type === $data['section-type'] );
+
+		/**
+		 * Allow developers to alter if a set of data is a specified section type.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param bool      $is_section_type    Whether or not the data represents a specific section.
+		 * @param string    $type               The section type to check.
+		 * @param array     $data               The section data.
+		 */
+		return apply_filters( 'make_builder_is_section_type', $is_section_type, $type, $data );
+	}
+
+	public function banner_get_slider_atts( $section_data ) {
+		$data_attributes = '';
+
+		if ( $this->is_section_type( 'banner', $section_data ) ) {
+			$atts = shortcode_atts( array(
+				'autoplay'   => true,
+				'transition' => 'scrollHorz',
+				'delay'      => 6000
+			), $section_data );
+
+			// Data attributes
+			$data_attributes  = ' data-cycle-log="false"';
+			$data_attributes .= ' data-cycle-slides="div.builder-banner-slide"';
+			$data_attributes .= ' data-cycle-swipe="true"';
+
+			// Autoplay
+			$autoplay = (bool) $atts['autoplay'];
+			if ( false === $autoplay ) {
+				$data_attributes .= ' data-cycle-paused="true"';
+			}
+
+			// Delay
+			$delay = absint( $atts['delay'] );
+			if ( 0 === $delay ) {
+				$delay = 6000;
+			}
+
+			if ( 4000 !== $delay ) {
+				$data_attributes .= ' data-cycle-timeout="' . esc_attr( $delay ) . '"';
+			}
+
+			// Effect
+			$effect = trim( $atts['transition'] );
+			if ( ! in_array( $effect, array( 'fade', 'fadeout', 'scrollHorz', 'none' ) ) ) {
+				$effect = 'scrollHorz';
+			}
+
+			if ( 'fade' !== $effect ) {
+				$data_attributes .= ' data-cycle-fx="' . esc_attr( $effect ) . '"';
+			}
+		}
+
+		return $data_attributes;
+	}
+
+	public function get_banner_slide_class( $slide ) {
+		$slide_class = '';
+
+		// Content position
+		if ( isset( $slide['alignment'] ) && '' !== $slide['alignment'] ) {
+			$slide_class .= ' ' . sanitize_html_class( 'content-position-' . $slide['alignment'] );
+		}
+
+		/**
+		 * Allow developers to alter the class for the banner slide.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param string $slide_class The banner classes.
+		 */
+		return apply_filters( 'make_builder_banner_slide_class', $slide_class, $slide );
+	}
+
+	public function get_banner_slide_style( $slide, $section_data ) {
+		$slide_style = '';
+
+		// Background color
+		if ( isset( $slide['background-color'] ) && '' !== $slide['background-color'] ) {
+			$slide_style .= 'background-color:' . maybe_hash_hex_color( $slide['background-color'] ) . ';';
+		}
+
+		// Background image
+		if ( isset( $slide['background-image'] ) && 0 !== $this->sanitize_image_id( $slide['background-image'] ) ) {
+			$image_src = $this->get_image_src( $slide['background-image'], 'full' );
+			if ( isset( $image_src[0] ) ) {
+				$slide_style .= 'background-image: url(\'' . addcslashes( esc_url_raw( $image_src[0] ), '"' ) . '\');';
+			}
+		}
+
+		/**
+		 * Allow developers to change the CSS for a Banner section.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param string    $slide_style             The CSS for the banner.
+		 * @param array     $slide                   The slide data.
+		 * @param array     $ttfmake_section_data    The section data.
+		 */
+		return apply_filters( 'make_builder_banner_slide_style', esc_attr( $slide_style ), $slide, $section_data );
+	}
+
+	public function sanitize_image_id( $id ) {
+		if ( false !== strpos( $id, 'x' ) ) {
+			$pieces       = explode( 'x', $id );
+			$clean_pieces = array_map( 'absint', $pieces );
+			$id           = implode( 'x', $clean_pieces );
+		} else {
+			$id = absint( $id );
+		}
+
+		return $id;
+	}
+
+	public function get_image_src( $image_id, $size ) {
+		$src = '';
+
+		if ( false === strpos( $image_id, 'x' ) ) {
+			$image = wp_get_attachment_image_src( $image_id, $size );
+
+			if ( false !== $image && isset( $image[0] ) ) {
+				$src = $image;
+			}
+		} else {
+			$image = $this->get_placeholder_image( $image_id );
+
+			if ( isset( $image['src'] ) ) {
+				$wp_src = array(
+					0 => $image['src'],
+					1 => $image['width'],
+					2 => $image['height'],
+				);
+				$src = array_merge( $image, $wp_src );
+			}
+		}
+
+		/**
+		 * Filter the image source attributes.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param string    $src         The image source attributes.
+		 * @param int       $image_id    The ID for the image.
+		 * @param bool      $size        The requested image size.
+		 */
+		return apply_filters( 'make_get_image_src', $src, $image_id, $size );
+	}
+
+	function get_placeholder_image( $image_id ) {
+		global $ttfmake_placeholder_images;
+		$return = array();
+
+		if ( isset( $ttfmake_placeholder_images[ $image_id ] ) ) {
+			$return = $ttfmake_placeholder_images[ $image_id ];
+		}
+
+		/**
+		 * Filter the image source attributes.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param string    $return                        The image source attributes.
+		 * @param int       $image_id                      The ID for the image.
+		 * @param bool      $ttfmake_placeholder_images    The list of placeholder images.
+		 */
+		return apply_filters( 'make_get_placeholder_image', $return, $image_id, $ttfmake_placeholder_images );
+	}
+
+	/**
+	 * Trigger an action hook for each section on a Builder page for the purpose
+	 * of adding section-specific CSS rules to the document head.
+	 *
+	 * @since 1.4.5
+	 *
+	 * @hooked action make_style_loaded
+	 *
+	 * @param MAKE_Style_ManagerInterface $style    The style manager instance.
+	 *
+	 * @return void
+	 */
+	public function builder_styles( MAKE_Style_ManagerInterface $style ) {
+		if ( ttfmake_is_builder_page() ) {
+			$sections_meta = json_decode( wp_unslash( get_post_meta( get_the_ID(), '__ttfmake_layout', true ) ), true );
+			$sections = $this->get_sections( $sections_meta );
+
+			if ( ! empty( $sections ) ) {
+				foreach ( $sections as $id => $data ) {
+					if ( isset( $data['section-type'] ) ) {
+						/**
+						 * Allow section-specific CSS rules to be added to the document head of a Builder page.
+						 *
+						 * @since 1.4.5
+						 * @since 1.7.0. Added the $style parameter.
+						 *
+						 * @param array                       $data     The Builder section's data.
+						 * @param int                         $id       The ID of the Builder section.
+						 * @param MAKE_Style_ManagerInterface $style    The style manager instance.
+						 */
+
+						do_action( 'make_builder_' . $data['section-type'] . '_css', $data, $data['id'], $style );
+					}
+				}
+			}
+		}
+	}
+
+	public function builder_banner_styles( array $data, $id, MAKE_Style_ManagerInterface $style ) {
+		$prefix = 'builder-section-';
+		$id = sanitize_title_with_dashes( $data['id'] );
+		/**
+		 * This filter is documented in inc/builder/core/save.php
+		 */
+		$section_id = apply_filters( 'make_section_html_id', $prefix . $id, $data );
+
+		$responsive = ( isset( $data['responsive'] ) ) ? $data['responsive'] : 'balanced';
+		$slider_height = absint( $data['height'] );
+		if ( 0 === $slider_height ) {
+			$slider_height = 600;
+		}
+		$slider_ratio = ( $slider_height / 960 ) * 100;
+
+		if ( 'aspect' === $responsive ) {
+			$style->css()->add( array(
+				'selectors'    => array( '#' . esc_attr( $section_id ) . ' .builder-banner-slide' ),
+				'declarations' => array(
+					'padding-bottom' => $slider_ratio . '%'
+				),
+			) );
+		} else {
+			$style->css()->add( array(
+				'selectors'    => array( '#' . esc_attr( $section_id ) . ' .builder-banner-slide' ),
+				'declarations' => array(
+					'padding-bottom' => $slider_height . 'px'
+				),
+			) );
+			$style->css()->add( array(
+				'selectors'    => array( '#' . esc_attr( $section_id ) . ' .builder-banner-slide' ),
+				'declarations' => array(
+					'padding-bottom' => $slider_ratio . '%'
+				),
+				'media'        => 'screen and (min-width: 600px) and (max-width: 960px)'
+			) );
+		}
+	}
+
+	public function frontend_builder_scripts() {
+		if ( ttfmake_is_builder_page() ) {
+			$sections_meta = json_decode( wp_unslash( get_post_meta( get_the_ID(), '__ttfmake_layout', true ) ), true );
+			$sections = $this->get_sections( $sections_meta );
+
+			// Bail if there are no sections
+			if ( empty( $sections ) ) {
+				return;
+			}
+
+			// Parse the sections included on the page.
+			$section_types = wp_list_pluck( $sections, 'section-type' );
+
+			foreach ( $section_types as $section_id => $section_type ) {
+				switch ( $section_type ) {
+					default :
+						break;
+					case 'banner' :
+					case 'postlist' :
+					case 'productgrid' :
+						// Add Cycle2 as a dependency for the Frontend script
+						$this->scripts()->add_dependency( 'make-frontend', 'cycle2', 'script' );
+						if ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) {
+							$this->scripts()->add_dependency( 'make-frontend', 'cycle2-center', 'script' );
+							$this->scripts()->add_dependency( 'make-frontend', 'cycle2-swipe', 'script' );
+						}
+						break;
+				}
+			}
+		}
 	}
 }
