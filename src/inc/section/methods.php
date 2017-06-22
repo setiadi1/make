@@ -120,8 +120,8 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 				$section_meta = get_metadata_by_mid( 'post', $section );
 				$section_data = json_decode( wp_unslash( $section_meta->meta_value ), true );
 
-				if ( $section_data['master-id'] ) {
-					$master_option = get_option( $section_data['master-id'] );
+				if ( isset( $section_data['master_id'] ) && !empty( $section_data['master_id'] ) ) {
+					$master_option = get_option( $section_data['master_id'] );
 					$master_section_data = json_decode( wp_unslash( $master_option ), true );
 					$master_section_data['id'] = $section_data['id'];
 					$master_section_data['sid'] = $section_data['sid'];
@@ -251,6 +251,34 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 				break;
 
 			case 'gallery':
+				$gallery_columns = ( isset( $section_data['columns'] ) ) ? absint( $section_data['columns'] ) : 1;
+				$html_class  .= ' builder-gallery-columns-' . $gallery_columns;
+
+				// Captions
+				if ( isset( $section_data['captions'] ) && ! empty( $section_data['captions'] ) ) {
+					$html_class .= ' builder-gallery-captions-' . esc_attr( $section_data['captions'] );
+				}
+
+				// Caption color
+				if ( isset( $section_data['caption-color'] ) && ! empty( $section_data['caption-color'] ) ) {
+					$html_class .= ' builder-gallery-captions-' . esc_attr( $section_data['caption-color'] );
+				}
+
+				// Aspect Ratio
+				if ( isset( $section_data['aspect'] ) && ! empty( $section_data['aspect'] ) ) {
+					$html_class .= ' builder-gallery-aspect-' . esc_attr( $section_data['aspect'] );
+				}
+
+				/**
+				 * Filter the class applied to a gallery.
+				 *
+				 * @since 1.2.3.
+				 *
+				 * @param string    $gallery_class           The class applied to the gallery.
+				 * @param array     $ttfmake_section_data    The section data.
+				 * @param array     $sections                The list of sections.
+				 */
+				return apply_filters( 'make_gallery_class', $html_class, $section_data, $sections );
 				break;
 
 			case 'banner':
@@ -298,7 +326,15 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 			$style .= 'background-position: ' . implode( ' ', $rule ) . ';';
 		}
 
-		return $style;
+		/**
+		 * Filter the style added to a gallery section.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param string    $gallery_style           The style applied to the gallery.
+		 * @param array     $ttfmake_section_data    The section data.
+		 */
+		return apply_filters( 'make_builder_get_' . $section_data['section-type'] . '_style', $style, $section_data );
 	}
 
 	public function get_content( $content ) {
@@ -605,5 +641,94 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 				}
 			}
 		}
+	}
+
+	public function get_gallery_item_class( $item, $section_data, $i ) {
+		$gallery_class = '';
+
+		// Link
+		$has_link = ( isset( $item['link'] ) && ! empty( $item['link'] ) ) ? true : false;
+		if ( true === $has_link ) {
+			$gallery_class .= ' has-link';
+		}
+
+		// Columns
+		$gallery_columns = ( isset( $section_data['columns'] ) ) ? absint( $section_data['columns'] ) : 1;
+		if ( $gallery_columns > 2 && 0 === $i % $gallery_columns ) {
+			$gallery_class .= ' last-' . $gallery_columns;
+		}
+
+		if ( 0 === $i % 2 ) {
+			$gallery_class .= ' last-2';
+		}
+
+		/**
+		 * Filter the class used for a gallery item.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param string    $gallery_class           The computed gallery class.
+		 * @param array     $item                    The item's data.
+		 * @param array     $section_data    The section data.
+		 * @param int       $i                       The current gallery item number.
+		 */
+		return apply_filters( 'make_builder_get_gallery_item_class', $gallery_class, $item, $section_data, $i );
+	}
+
+	public function get_gallery_item_onclick( $link, $section_data, $i ) {
+		if ( '' === $link ) {
+			return '';
+		}
+
+		$item = $ttfmake_section_data['gallery-items'][$i - 1];
+		$external = isset( $item['open-new-tab'] ) && $item['open-new-tab'] === 1;
+		$url = esc_js( esc_url( $link ) );
+		$open_function = $external ? 'window.open(\'' . $url . '\')': 'window.location.href = \'' . $url . '\'';
+		$onclick = ' onclick="event.preventDefault(); '. $open_function . ';"';
+
+		/**
+		 * Filter the class used for a gallery item.
+		 *
+		 * @since 1.7.6.
+		 *
+		 * @param string    $onclick                 The computed gallery onclick attribute.
+		 * @param string    $link                    The item's link.
+		 * @param array     $ttfmake_section_data    The section data.
+		 * @param int       $i                       The current gallery item number.
+		 */
+		return apply_filters( 'make_builder_get_gallery_item_onclick', $onclick, $link, $section_data, $i );
+	}
+
+	public function get_gallery_item_image( $item, $aspect, $section_data ) {
+		$image = '';
+
+		if ( $this->is_section_type( 'gallery', $section_data ) && 0 !== $this->sanitize_image_id( $item[ 'background-image' ] ) ) {
+			$image_style = '';
+
+			$image_src = $this->get_image_src( $item[ 'background-image' ], 'large' );
+			if ( isset( $image_src[0] ) ) {
+				$image_style .= 'background-image: url(\'' . addcslashes( esc_url_raw( $image_src[0] ), '"' ) . '\');';
+			}
+
+			if ( 'none' === $aspect && isset( $image_src[1] ) && isset( $image_src[2] ) ) {
+				$image_ratio = ( $image_src[2] / $image_src[1] ) * 100;
+				$image_style .= 'padding-bottom: ' . $image_ratio . '%;';
+			}
+
+			if ( '' !== $image_style ) {
+				$image .= '<figure class="builder-gallery-image" style="' . esc_attr( $image_style ) . '"></figure>';
+			}
+		}
+
+		/**
+		 * Alter the generated gallery image.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param string    $image     The image HTML.
+		 * @param array     $item      The item's data.
+		 * @param string    $aspect    The aspect ratio for the section.
+		 */
+		return apply_filters( 'make_builder_get_gallery_item_image', $image, $item, $aspect );
 	}
 }
