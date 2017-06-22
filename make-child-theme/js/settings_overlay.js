@@ -6,8 +6,8 @@
 		initialize: function() {
 			sectionPrototype.initialize.apply( this, arguments );
 
-			this.model.on( 'change title', this.updateTitle, this );
-			this.model.on( 'change draft', this.updateDraftMode, this );
+			this.model.on( 'change:title', this.updateTitle, this );
+			this.model.on( 'change:draft', this.updateDraftMode, this );
 		},
 
 		updateTitle: function() {
@@ -49,16 +49,11 @@
 	var itemPrototype = oneApp.views.item.prototype;
 
 	oneApp.views.item = oneApp.views.item.extend( {
-		events: _.extend( itemPrototype.events, {
-			'view-ready.custom': 'onCustomViewReady'
-		} ),
-
 		initialize: function() {
 			this.model.on( 'change', this.onModelChange, this );
 		},
 
 		onModelChange: function() {
-			console.log('onModelChange');
 			this.$el.trigger( 'model-item-change' );
 		},
 
@@ -191,7 +186,7 @@
 		onUpdate: function( e ) {
 			e.preventDefault();
 			console.log( 'Update', this.changeset.toJSON() );
-			this.model.set( this.changeset.toJSON() );
+			this.model.set( this.model.parse( this.changeset.toJSON() ) );
 			this.remove();
 		},
 
@@ -254,6 +249,14 @@
 		},
 
 		getValue: function() {
+			// Noop
+		},
+
+		enable: function() {
+			// Noop
+		},
+
+		disable: function() {
 			// Noop
 		},
 
@@ -330,6 +333,14 @@
 		getValue: function() {
 			return $( 'input', this.$el ).val();
 		},
+
+		enable: function() {
+			$( 'input', this.$el ).prop( 'disabled', false );
+		},
+
+		disable: function() {
+			$( 'input', this.$el ).prop( 'disabled', true );
+		},
 	} );
 
 	/**
@@ -350,6 +361,14 @@
 
 		getValue: function() {
 			return $( 'select', this.$el ).val();
+		},
+
+		enable: function() {
+			$( 'select', this.$el ).prop( 'disabled', false );
+		},
+
+		disable: function() {
+			$( 'select', this.$el ).prop( 'disabled', true );
 		},
 	} );
 
@@ -374,6 +393,14 @@
 			var $input = $( 'input', this.$el );
 			return $input.is( ':checked' ) ? 1: 0;
 		},
+
+		enable: function() {
+			$( 'input', this.$el ).prop( 'disabled', false );
+		},
+
+		disable: function() {
+			$( 'input', this.$el ).prop( 'disabled', true );
+		},
 	} );
 
 	/**
@@ -394,6 +421,14 @@
 
 		getValue: function() {
 			return $( 'input', this.$el ).val();
+		},
+
+		enable: function() {
+			$( 'input', this.$el ).prop( 'disabled', false );
+		},
+
+		disable: function() {
+			$( 'input', this.$el ).prop( 'disabled', true );
 		},
 	} );
 
