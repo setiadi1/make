@@ -40,11 +40,34 @@
 				this.changeset.set( master );
 				this.applyValues( master );
 			} else {
-				var originalAttributes = this.model.omit( 'master', 'master_id' );
+				var originalAttributes = this.model.omit( 'id', 'master', 'master_id' );
 				this.changeset.set( originalAttributes );
 				this.applyValues( originalAttributes );
 			}
-		}
+		},
+
+		onUpdate: function( e ) {
+			overlayClass.prototype.onUpdate.apply( this, arguments );
+
+			var masterId = this.model.get( 'master_id' );
+
+			if ( '' !== masterId ) {
+				var attributes = this.model.omit( 'id', 'master', 'master_id' );
+				// Sync original master definition to current state
+				masterSections[ masterId ] = attributes;
+
+				// Sync all instances currently in page
+				var instances = oneApp.builder.sections.filter( function( section ) {
+					console.log( section.id );
+					return section.get( 'master_id' ) === this.model.get( 'master_id' )
+						&& section.id !== this.model.id;
+				}, this );
+
+				_( instances ).each( function( section ) {
+					section.set( section.parse( attributes ) );
+				}, this );
+			}
+		},
 	} );
 
 } ) ( jQuery, _, masterSections );
