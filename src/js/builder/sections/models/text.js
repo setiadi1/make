@@ -30,15 +30,10 @@ var oneApp = oneApp || {};
 
 		toJSON: function() {
 			var json = oneApp.models.section.prototype.toJSON.apply(this, arguments);
-			var copyColumns = _(json['columns']).clone();
 
-			_(json['columns']).each(function(column, index) {
-				if (column.hasOwnProperty('attributes')) {
-					copyColumns[index] = column.attributes;
-				} else {
-					copyColumns[index] = column;
-				}
-			});
+			json.columns = _( json.columns ).map( function( column ) {
+				return column.hasOwnProperty( 'attributes' ) ? column.toJSON() : column;
+			} );
 
 			return json;
 		}
