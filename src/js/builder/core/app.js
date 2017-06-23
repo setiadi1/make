@@ -17,6 +17,8 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 		$currentPlaceholder: false,
 		$scrollHandle: false,
 
+		sectionViews: [],
+
 		options: {
 			openSpeed : 400,
 			closeSpeed: 250
@@ -106,15 +108,17 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 				model: section
 			});
 
-			var html = view.render().el;
+			var $el = view.render().$el;
 
 			if (typeof previousSection !== 'undefined') {
-				previousSection.$el.after(html);
+				previousSection.$el.after($el);
 			} else {
-				this.$stage.append(html);
+				this.$stage.append($el);
 			}
 
 			view.$el.trigger('view-ready', view);
+
+			this.sectionViews.push( view );
 
 			return view;
 		},

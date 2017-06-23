@@ -34,7 +34,8 @@ var oneApp = oneApp || {};
 
 		render: function () {
 			var html = this.template(this.model);
-			this.setElement(html);
+			this.$el.html( html );
+			// this.setElement(html);
 			this.$headerTitle = $('.ttfmake-section-header-title', this.$el);
 
 			return this;
