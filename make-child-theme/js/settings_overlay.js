@@ -96,8 +96,11 @@
 		},
 
 		events: function() {
-			return _.extend( {}, oneApp.views.overlay.prototype.events, {
-				'setting-updated': 'onSettingUpdated'
+			return _.extend( oneApp.views.overlay.prototype.events, {
+				'click .ttfmake-overlay-close-update': 'onUpdate',
+				'click .ttfmake-overlay-close-discard': 'onDiscard',
+				'click .ttfmake-overlay-wrapper': 'onWrapperClick',
+				'setting-updated': 'onSettingUpdated',
 			} );
 		},
 
@@ -108,7 +111,7 @@
 			// Show the overlay
 			$body.append( this.$el );
 			this.$el.css( 'display', 'table' );
-			$body.one( 'keydown', { self: this }, this.onKeyDown );
+			$body.on( 'keydown', this.onKeyDown.bind( this ) );
 
 			// Scroll to the open divider
 			var $overlay = $( '.ttfmake-overlay-body', this.$el );
@@ -185,19 +188,33 @@
 
 		onUpdate: function( e ) {
 			e.preventDefault();
-			console.log( 'Update', this.changeset.toJSON() );
+			e.stopPropagation();
+
 			this.model.set( this.model.parse( this.changeset.toJSON() ) );
 			this.remove();
 		},
 
 		onDiscard: function( e ) {
 			e.preventDefault();
+			e.stopPropagation();
+
 			this.remove();
 		},
 
-		onKeyDown: function(e) {
+		onWrapperClick: function( e ) {
+			if ( $( e.target ).is( '.ttfmake-overlay-wrapper' ) ) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				this.remove();
+			}
+		},
+
+		onKeyDown: function( e ) {
 			if (27 == e.keyCode) {
-				e.data.self.remove();
+				e.preventDefault();
+				e.stopPropagation();
+				this.remove();
 			}
 		},
 
@@ -210,6 +227,7 @@
 
 			var $body = $( 'body' );
 			$body.removeClass( 'modal-open' );
+			$body.off( 'keydown', this.onKeyDown.bind( this ) );
 		}
 	} );
 
@@ -454,6 +472,8 @@
 				change: this.onColorPick.bind( this ),
 			} );
 
+			$( 'body' ).off( 'click.wpcolorpicker' );
+
 			return this;
 		},
 
@@ -470,7 +490,7 @@
 		},
 
 		remove: function() {
-			this.widget.wpColorPicker( 'close' );
+			// this.widget.wpColorPicker( 'destroy' );
 		}
 	} );
 
@@ -519,7 +539,7 @@
 
 			// Finally, open the modal
 			frame.open();
-			$( 'body' ).one( 'click', '.ttfmake-media-frame-remove-image', this.onMediaRemoved.bind( this ) );
+			$( 'body' ).on( 'click', '.ttfmake-media-frame-remove-image', this.onMediaRemoved.bind( this ) );
 		},
 
 		onFrameOpen: function() {
@@ -576,6 +596,10 @@
 
 		getValue: function() {
 			return this.currentAttachmentID;
+		},
+
+		remove: function() {
+			$( 'body' ).off( 'click', '.ttfmake-media-frame-remove-image', this.onMediaRemoved.bind( this ) );
 		},
 	} );
 

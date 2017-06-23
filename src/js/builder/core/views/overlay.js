@@ -11,9 +11,9 @@ var oneApp = oneApp || {};
 		caller: null,
 
 		events: {
-			'click .ttfmake-overlay-close-update': 'onUpdate',
-			'click .ttfmake-overlay-close-discard': 'onDiscard',
-			'click': 'onClick',
+			// 'click .ttfmake-overlay-close-update': 'onUpdate',
+			// 'click .ttfmake-overlay-close-discard': 'onDiscard',
+			// 'click': 'onClick',
 		},
 
 		initialize: function() {
