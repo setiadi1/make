@@ -190,7 +190,7 @@
 			e.preventDefault();
 			e.stopPropagation();
 
-			this.model.set( this.model.parse( this.changeset.toJSON() ) );
+			this.model.set( this.changeset.toJSON() );
 			this.remove();
 		},
 

@@ -40,7 +40,8 @@
 				this.changeset.set( master );
 				this.applyValues( master );
 			} else {
-				var originalAttributes = this.model.omit( 'id', 'master', 'master_id' );
+				var originalAttributes = this.model.toJSON();
+				originalAttributes = _( originalAttributes ).omit( 'id', 'sid', 'master', 'master_id' );
 				this.changeset.set( originalAttributes );
 				this.applyValues( originalAttributes );
 			}
@@ -52,19 +53,31 @@
 			var masterId = this.model.get( 'master_id' );
 
 			if ( '' !== masterId ) {
-				var attributes = this.model.omit( 'id', 'master', 'master_id' );
-				// Sync original master definition to current state
+				var attributes = this.model.toJSON();
+				attributes = _( attributes ).omit( 'id', 'sid', 'master', 'master_id' );
+				// Sync original master definition
+				// to current state on the client
 				masterSections[ masterId ] = attributes;
 
-				// Sync all instances currently in page
+				// Select all instances of the current master
+				// for which changes are being applied...
 				var instances = oneApp.builder.sections.filter( function( section ) {
-					console.log( section.id );
-					return section.get( 'master_id' ) === this.model.get( 'master_id' )
-						&& section.id !== this.model.id;
+					return section.get( 'master_id' ) === this.model.get( 'master_id' );
 				}, this );
 
+				// ...and sync those changes on every instance
 				_( instances ).each( function( section ) {
 					section.set( section.parse( attributes ) );
+				}, this );
+
+				// Finally re-render all views holding instances of this master
+				var instanceViews = _( oneApp.builder.sectionViews ).filter( function( sectionView ) {
+					return sectionView.model.get( 'master_id' ) === this.model.get( 'master_id' );
+				}, this );
+
+				_( instanceViews ).each( function( sectionView ) {
+					sectionView.render();
+					sectionView.$el.trigger('view-ready', sectionView);
 				}, this );
 			}
 		},
