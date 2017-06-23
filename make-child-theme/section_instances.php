@@ -34,6 +34,7 @@ class TTFMAKE_Section_Instances {
 		add_filter( 'make_prepare_data_section', array( $this, 'save_sid_field' ), 10, 2 );
 		add_action( 'make_builder_data_saved', array( $this, 'save_layout' ), 10, 2 );
 		add_filter( 'make_get_section_data', array( $this, 'read_layout' ), 10, 2 );
+		add_filter( 'make_get_section_json', array( $this, 'remove_parent_ids' ), 100, 1 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 	}
 
@@ -222,6 +223,43 @@ class TTFMAKE_Section_Instances {
 		}
 
 		return $section;
+	}
+
+	public function remove_parent_ids( $data ) {
+		/*
+		 * Remove parentIDs from section items
+		 *
+		 * @since 1.8.11.
+		 */
+
+		// Banners
+		if ( isset( $data['banner-slides'] ) && is_array( $data['banner-slides'] ) ) {
+			foreach ( $data['banner-slides'] as $s => $slide ) {
+				if ( isset( $slide['parentID'] ) ) {
+					unset( $data['banner-slides'][$s]['parentID'] );
+				}
+			}
+		}
+
+		// Columns
+		if ( isset( $data['columns'] ) && is_array( $data['columns'] ) ) {
+			foreach ( $data['columns'] as $c => $column ) {
+				if ( isset( $column['parentID'] ) ) {
+					unset( $data['columns'][$c]['parentID'] );
+				}
+			}
+		}
+
+		// Gallery
+		if ( isset( $data['gallery-items'] ) && is_array( $data['gallery-items'] ) ) {
+			foreach ( $data['gallery-items'] as $g => $item ) {
+				if ( isset( $item['parentID'] ) ) {
+					unset( $data['gallery-items'][$g]['parentID'] );
+				}
+			}
+		}
+
+		return $data;
 	}
 
 	public function generate_unique_master_name( $section_type ) {
