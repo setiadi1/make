@@ -9,7 +9,6 @@ var oneApp = oneApp || {};
 	oneApp.models['banner-slide'] = Backbone.Model.extend({
 		defaults: {
 			id: '',
-			parentID: '',
 			'section-type': 'banner-slide'
 		}
 	});

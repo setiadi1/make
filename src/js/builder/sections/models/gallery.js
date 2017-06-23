@@ -20,9 +20,9 @@ var oneApp = oneApp || {};
 			attributes['gallery-items'] = _(attributes['gallery-items'])
 				.map(function(item) {
 					var itemModel = new oneApp.models['gallery-item'](item);
-					itemModel.set('parentID', data.id);
+					itemModel.parent = this;
 					return itemModel;
-				});
+				}, this);
 
 			return attributes;
 		},

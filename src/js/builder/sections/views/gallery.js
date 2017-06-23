@@ -68,9 +68,9 @@ var oneApp = oneApp || {};
 			var itemModelDefaults = ttfMakeSectionDefaults['gallery-item'] || {};
 			var itemModelAttributes = _(itemModelDefaults).extend({
 				id: new Date().getTime().toString(),
-				parentID: this.model.id
 			});
 			var itemModel = new oneApp.models['gallery-item'](itemModelAttributes);
+			itemModel.parent = this.model;
 			var itemView = this.addItem(itemModel);
 			itemView.$el.trigger('view-ready');
 

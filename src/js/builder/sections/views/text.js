@@ -103,10 +103,9 @@ var oneApp = oneApp || {};
 				var columnModelDefaults = ttfMakeSectionDefaults['text-item'] || {};
 				var columnModelAttributes = _(columnModelDefaults).extend({
 					id: new Date().getTime().toString(),
-					parentID: this.model.id
 				});
-
 				var columnModel = new oneApp.models['text-item'](columnModelAttributes);
+				columnModel.parent = this.model;
 				var columnView = this.addColumn(columnModel);
 
 				columnView.$el.trigger('view-ready');

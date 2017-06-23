@@ -9,7 +9,6 @@ var oneApp = oneApp || {};
 	oneApp.models['gallery-item'] = Backbone.Model.extend({
 		defaults: {
 			id: '',
-			parentID: '',
 			'section-type': 'gallery-item'
 		}
 	});

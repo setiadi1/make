@@ -15,16 +15,15 @@ var oneApp = oneApp || {};
 			}
 		},
 
-		parse: function(data) {
-			var attributes = _(data).clone();
+		parse: function( data ) {
+			var attributes = _( data ).clone();
 
-			if ( attributes['columns'] ) {
-				attributes['columns'] = _(attributes['columns']).values().map(function(column) {
-					var columnModel = new oneApp.models['text-item'](column);
-					columnModel.set('parentID', data.id);
-					return columnModel;
-				});
-			}
+			attributes.columns = _( attributes.columns ).map( function( column ) {
+				column = new oneApp.models['text-item']( column );
+				console.log( column.id, column.get('id') );
+				column.parent = this;
+				return column;
+			}, this );
 
 			return attributes;
 		},

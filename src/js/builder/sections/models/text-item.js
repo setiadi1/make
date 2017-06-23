@@ -9,8 +9,8 @@ var oneApp = oneApp || {};
 	oneApp.models['text-item'] = Backbone.Model.extend({
 		defaults: {
 			id: '',
-			parentID: '',
-			'section-type': 'text-item'
+			'section-type': 'text-item',
+			content: '',
 		}
 	});
 })(window, Backbone, jQuery, _, oneApp);

@@ -18,12 +18,11 @@ var oneApp = oneApp || {};
 		parse: function(data) {
 			var attributes = _(data).clone();
 			attributes['banner-slides'] = _(attributes['banner-slides'])
-				.values()
 				.map(function(slide) {
 					var slideModel = new oneApp.models['banner-slide'](slide);
-					slideModel.set('parentID', data.id);
+					slideModel.parent = this;
 					return slideModel;
-				});
+				}, this );
 
 			return attributes;
 		},

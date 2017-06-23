@@ -89,10 +89,10 @@ var oneApp = oneApp || {};
 
 			var slideModelDefaults = ttfMakeSectionDefaults['banner-slide'] || {};
 			var slideModelAttributes = _(slideModelDefaults).extend({
-				id: new Date().getTime().toString(),
-				parentID: this.model.id
+				id: new Date().getTime().toString()
 			});
 			var slideModel = new oneApp.models['banner-slide'](slideModelAttributes);
+			slideModel.parent = this.model;
 			var slideView = this.addSlide(slideModel);
 			slideView.$el.trigger('view-ready');
 
