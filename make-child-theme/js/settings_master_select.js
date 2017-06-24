@@ -76,8 +76,9 @@
 				}, this );
 
 				_( instanceViews ).each( function( sectionView ) {
-					sectionView.render();
-					sectionView.$el.trigger('view-ready', sectionView);
+					var sectionIndex = sectionView.$el.index();
+					sectionView.remove();
+					oneApp.builder.addSectionView( sectionView.model, sectionIndex );
 				}, this );
 			}
 		},
