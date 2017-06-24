@@ -102,7 +102,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 			this.sections.reset(sortedSections);
 		},
 
-		addSectionView: function (section, previousSection) {
+		addSectionView: function (section, index) {
 			var viewClass = oneApp.views[section.get('section-type')];
 			var view = new viewClass({
 				model: section
@@ -110,15 +110,21 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 
 			var $el = view.render().$el;
 
-			if (typeof previousSection !== 'undefined') {
-				previousSection.$el.after($el);
+			if (typeof index !== 'undefined') {
+				if ( 0 === index ) {
+					this.$stage.prepend($el);
+				} else {
+					var $previousEl = this.$stage.children().eq( index - 1 );
+					$previousEl.after($el);
+				}
+
+				this.sectionViews.splice( index, 0, view );
 			} else {
 				this.$stage.append($el);
+				this.sectionViews.push( view );
 			}
 
 			view.$el.trigger('view-ready', view);
-
-			this.sectionViews.push( view );
 
 			return view;
 		},
