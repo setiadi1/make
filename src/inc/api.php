@@ -44,7 +44,7 @@ final class MAKE_API extends MAKE_Util_Modules implements MAKE_APIInterface {
 		'integration'         => 'MAKE_Integration_ManagerInterface',
 		'setup'               => 'MAKE_Setup_MiscInterface',
 		'head'                => 'MAKE_Setup_HeadInterface',
-		'section'			  => 'MAKE_Section_Methods'
+		'section'			  => 'MAKE_Section_MethodsInterface'
 	);
 
 	/**

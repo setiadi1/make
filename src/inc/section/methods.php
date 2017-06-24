@@ -215,7 +215,6 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 		 * @param string    $classes            The sting of classes.
 		 * @param array     $current_section    The array of data for the current section.
 		 */
-
 		$section_classes = apply_filters( 'make_section_classes', $prev . ' ' . $current . ' ' . $next, $section_data );
 
 		$html_class = ' ';
@@ -292,6 +291,10 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 				 */
 				$section_specific_classes = apply_filters( 'make_builder_banner_class', $html_class, $section_data );
 				break;
+		}
+
+		if ( !isset( $section_specific_classes ) ) {
+			global $section_specific_classes;
 		}
 
 		return $section_classes . $section_specific_classes;
@@ -730,5 +733,109 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 		 * @param string    $aspect    The aspect ratio for the section.
 		 */
 		return apply_filters( 'make_builder_get_gallery_item_image', $image, $item, $aspect );
+	}
+
+	/**
+	 * An array of defaults for all the Builder section settings
+	 *
+	 * @since  1.0.4.
+	 *
+	 * @return array    The section defaults.
+	 */
+	public function get_section_defaults() {
+		// Note that this function does not do anything yet. It is part of an API refresh that is happening over time.
+		$defaults = array();
+
+		/**
+		 * Filter the section defaults.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param array    $defaults    The default section data
+		 */
+		return apply_filters( 'make_sections_defaults', $defaults );
+	}
+
+	/**
+	 * Return the default value for a particular section setting.
+	 *
+	 * @since 1.0.4.
+	 *
+	 * @param  string    $key             The key for the section setting.
+	 * @param  string    $section_type    The section type.
+	 * @return mixed                      Default value if found; false if not found.
+	 */
+	public function get_section_default( $key, $section_type ) {
+		$defaults = $this->get_section_defaults();
+		$value = false;
+
+		if ( isset( $defaults[$section_type] ) && isset( $defaults[$section_type][$key] ) ) {
+			$value = $defaults[$section_type][$key];
+		}
+
+		/**
+		 * Filter the default section data that is received.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param mixed     $value           The section value.
+		 * @param string    $key             The key to get data for.
+		 * @param string    $section_type    The type of section the data is for.
+		 */
+		return apply_filters( 'make_get_section_default', $value, $key, $section_type );
+	}
+
+	/**
+	 * Sanitize a value from a list of allowed values.
+	 *
+	 * @since 1.0.4.
+	 *
+	 * @param  string|int $value The current value of the section setting.
+	 * @param  string        $key             The key for the section setting.
+	 * @param  string        $section_type    The section type.
+	 * @return mixed                          The sanitized value.
+	 */
+	public function sanitize_section_choice( $value, $key, $section_type ) {
+		$choices         = $this->get_section_choices( $key, $section_type );
+		$allowed_choices = array_keys( $choices );
+
+		if ( ! in_array( $value, $allowed_choices ) ) {
+			$value = $this->get_section_default( $key, $section_type );
+		}
+
+		/**
+		 * Allow developers to alter a section choice during the sanitization process.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param mixed     $value           The value for the section choice.
+		 * @param string    $key             The key for the section choice.
+		 * @param string    $section_type    The section type.
+		 */
+		return apply_filters( 'make_sanitize_section_choice', $value, $key, $section_type );
+	}
+
+	/**
+	 * Define the choices for section setting dropdowns.
+	 *
+	 * @since  1.0.4.
+	 *
+	 * @param  string    $key             The key for the section setting.
+	 * @param  string    $section_type    The section type.
+ 	 * @return array                      The array of choices for the section setting.
+	 */
+	public function get_section_choices( $key, $section_type ) {
+		$choices = array();
+
+		/**
+		 * Filter the section choices.
+		 *
+		 * @since 1.2.3.
+		 *
+		 * @param array    $choices         The default section choices.
+		 * @param string   $key             The key for the data.
+		 * @param string   $section_type    The type of section this relates to.
+		 */
+		return apply_filters( 'make_section_choices', $choices, $key, $section_type );
 	}
 }
