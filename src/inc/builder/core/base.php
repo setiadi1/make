@@ -522,10 +522,6 @@ class TTFMAKE_Builder_Base {
 	 * @return void
 	 */
 	public function add_frame( $id, $textarea_name, $textarea_name_path = '', $content = '', $iframe = true ) {
-		global $ttfmake_is_js_template;
-		$iframe_id   = 'ttfmake-iframe-' . $id;
-		$textarea_id = 'ttfmake-content-' . $id;
-		$textarea_attr_name = 'ttfmake-section[' .$id. '][' .$textarea_name. ']';
 	?>
 		<?php if ( true === $iframe ) : ?>
 		<span class="ttfmake-iframe-content-placeholder{{ (!get('<?php echo $textarea_name; ?>')) ? ' show' : '' }}">
@@ -533,23 +529,14 @@ class TTFMAKE_Builder_Base {
 		</span>
 		<div class="ttfmake-iframe-wrapper">
 			<div class="ttfmake-iframe-overlay">
-				<a href="#" class="edit-content-link" data-textarea="<?php echo esc_attr( $textarea_id ); ?>" data-iframe="<?php echo esc_attr( $iframe_id ); ?>">
+				<a href="#" class="edit-content-link">
 					<span class="screen-reader-text">
 						<?php esc_html_e( 'Edit content', 'make' ); ?>
 					</span>
 				</a>
 			</div>
-			<iframe width="100%" height="300" id="<?php echo esc_attr( $iframe_id ); ?>" scrolling="no"></iframe>
+			<iframe width="100%" height="300" scrolling="no"></iframe>
 		</div>
-		<?php endif; ?>
-
-		<textarea id="<?php echo esc_attr( $textarea_id ); ?>" name="<?php echo esc_attr( $textarea_attr_name ); ?>" data-model-attr="<?php echo esc_attr( $textarea_name ); ?>" style="display:none;">{{ get('<?php echo esc_attr( $textarea_name ); ?>')<?php echo $textarea_name_path; ?> }}</textarea>
-
-		<?php if ( true !== $ttfmake_is_js_template && true === $iframe ) : ?>
-		<script type="text/javascript">
-			var ttfMakeFrames = ttfMakeFrames || [];
-			ttfMakeFrames.push('<?php echo $id; ?>');
-		</script>
 		<?php endif;
 	}
 
@@ -609,9 +596,6 @@ class TTFMAKE_Builder_Base {
 		if ( ! ttfmake_post_type_supports_builder( $typenow ) || ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) )) {
 			return;
 		}
-
-		// Load the overlay for TinyMCE
-		get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
 
 		// Print the template for removing images
 		?>

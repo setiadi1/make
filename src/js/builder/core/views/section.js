@@ -15,6 +15,7 @@ var oneApp = oneApp || {};
 		$scrollHandle: $('html, body'),
 
 		events: {
+			'view-ready': 'onViewReady',
 			'click .ttfmake-section-toggle': 'toggleSection',
 			'click .ttfmake-section-remove': 'removeSection',
 			'click .ttfmake-media-uploader-add': 'onMediaAdd',
@@ -34,11 +35,14 @@ var oneApp = oneApp || {};
 
 		render: function () {
 			var html = this.template(this.model);
-			this.$el.html( html );
-			// this.setElement(html);
+			this.setElement(html);
 			this.$headerTitle = $('.ttfmake-section-header-title', this.$el);
 
 			return this;
+		},
+
+		onViewReady: function() {
+			// Noop
 		},
 
 		toggleSection: function (evt) {

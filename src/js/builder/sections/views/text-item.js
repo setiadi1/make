@@ -56,7 +56,7 @@ var oneApp = oneApp || {};
 		},
 
 		onItemDuplicated: function() {
-			this.$el.trigger('column-ready');
+			this.$el.trigger('view-ready');
 			this.$el.trigger('column-load');
 		},
 

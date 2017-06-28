@@ -29,7 +29,7 @@ class TTFMAKE_Settings_Overlay {
 
 	public function hook() {
 		add_filter( 'make_builder_js_dependencies', array( $this, 'builder_dependencies' ), 10 );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'admin_head', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 	}
 
@@ -52,12 +52,21 @@ class TTFMAKE_Settings_Overlay {
 			true
 		);
 
+		wp_register_script(
+			'make-content-overlay',
+			get_stylesheet_directory_uri() . '/js/content_overlay.js',
+			array( 'make-settings-overlay' ),
+			TTFMAKE_VERSION,
+			true
+		);
+
 		// Section settings
 		$settings = ttfmake_get_sections_settings();
 		wp_localize_script( 'make-settings-overlay', 'settings', $settings );
 
 		return array_merge( $deps, array(
-			'make-settings-overlay'
+			'make-settings-overlay',
+			'make-content-overlay'
 		) );
 	}
 
@@ -75,6 +84,9 @@ class TTFMAKE_Settings_Overlay {
 		if ( ! ttfmake_post_type_supports_builder( $typenow ) || ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ) )) {
 			return;
 		}
+
+		// Singleton element for content editors
+		get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
 		?>
 
 		<script type="text/html" id="tmpl-ttfmake-settings">
@@ -89,6 +101,35 @@ class TTFMAKE_Settings_Overlay {
 					</div>
 				</div>
 				<div class="ttfmake-overlay-body"></div>
+				<div class="ttfmake-overlay-footer">
+					<span class="ttfmake-overlay-close-update button button-primary button-large" aria-hidden="true"><?php esc_html_e( 'Update changes', 'make' ); ?></span>
+				</div>
+			</div>
+		</div>
+		</script>
+
+		<script type="text/html" id="tmpl-ttfmake-content">
+		<div class="ttfmake-overlay-wrapper">
+			<div class="ttfmake-overlay-dialog">
+				<div class="ttfmake-overlay-header">
+					<div class="ttfmake-overlay-window-head">
+						<div class="ttfmake-overlay-title">Edit content</div>
+						<button type="button" class="media-modal-close ttfmake-overlay-close-discard">
+							<span class="media-modal-icon">
+						</button>
+					</div>
+				</div>
+				<div class="ttfmake-overlay-body">
+				<?php
+				wp_editor( '', 'make', array(
+					'tinymce' => array(
+						'wp_autoresize_on' => false,
+						'resize' => false,
+					),
+					'editor_height' => 270
+				) );
+				?>
+				</div>
 				<div class="ttfmake-overlay-footer">
 					<span class="ttfmake-overlay-close-update button button-primary button-large" aria-hidden="true"><?php esc_html_e( 'Update changes', 'make' ); ?></span>
 				</div>

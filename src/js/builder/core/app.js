@@ -17,7 +17,7 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 		$currentPlaceholder: false,
 		$scrollHandle: false,
 
-		sectionViews: [],
+		sectionViews: false,
 
 		options: {
 			openSpeed : 400,
@@ -52,9 +52,10 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 				this.sections.reset(ttfMakeSectionData, {parse: true});
 			}
 
-			var sectionView;
+			this.sectionViews = new Backbone.Collection();
+
 			this.sections.forEach(function(section) {
-				sectionView = this.addSectionView(section);
+				this.addSectionView(section);
 			}, this);
 
 			this.initSortables();
@@ -99,7 +100,14 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 				});
 			}, this);
 
+			var sortedSectionViews = _( ids ).map( function( id ) {
+				return this.sectionViews.find( function( sectionView ) {
+					return sectionView.get( 'view' ).model.id.toString() == id.toString();
+				} );
+			}, this);
+
 			this.sections.reset(sortedSections);
+			this.sectionViews.reset(sortedSectionViews);
 		},
 
 		addSectionView: function (section, index) {
@@ -109,24 +117,24 @@ var oneApp = oneApp || {}, ttfMakeFrames = ttfMakeFrames || [];
 			});
 
 			var $el = view.render().$el;
+			index = typeof index !== 'undefined' ? index : this.sectionViews.size();
 
-			if (typeof index !== 'undefined') {
-				if ( 0 === index ) {
-					this.$stage.prepend($el);
-				} else {
-					var $previousEl = this.$stage.children().eq( index - 1 );
-					$previousEl.after($el);
-				}
-
-				this.sectionViews.splice( index, 0, view );
+			if ( 0 === index ) {
+				this.$stage.prepend($el);
 			} else {
-				this.$stage.append($el);
-				this.sectionViews.push( view );
+				var $previousEl = this.sectionViews.at( index - 1 ).get( 'view' ).$el;
+				$previousEl.after($el);
 			}
 
+			this.sectionViews.add( { view: view }, { at: index } );
 			view.$el.trigger('view-ready', view);
 
 			return view;
+		},
+
+		removeSectionView: function ( viewModel ) {
+			this.sectionViews.remove( viewModel );
+			viewModel.get( 'view' ).remove();
 		},
 
 		addItemView: function (item, originalItem) {

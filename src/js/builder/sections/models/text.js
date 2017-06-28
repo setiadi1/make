@@ -20,7 +20,6 @@ var oneApp = oneApp || {};
 
 			attributes.columns = _( attributes.columns ).map( function( column ) {
 				column = new oneApp.models['text-item']( column );
-				console.log( column.id, column.get('id') );
 				column.parent = this;
 				return column;
 			}, this );

@@ -166,7 +166,7 @@ class MAKE_Style_CSS implements MAKE_Style_CSSInterface {
 	 *
 	 * @return string    The CSS that is built from the data.
 	 */
-	public function build() {
+	public function build( $prefix = '' ) {
 		if ( ! $this->has_rules() ) {
 			return '';
 		}
@@ -193,6 +193,7 @@ class MAKE_Style_CSS implements MAKE_Style_CSSInterface {
 
 			// Build each rule
 			foreach ( $ruleset as $rule ) {
+				$output .= $prefix;
 				$output .= $this->parse_selectors( $rule['selectors'], $t ) . $s . '{' . $n;
 				$output .= $this->parse_declarations( $rule['declarations'], $t );
 				$output .= $t . '}' . $n;

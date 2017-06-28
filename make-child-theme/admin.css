@@ -59,3 +59,12 @@
 .iris-picker.iris-border .iris-palette-container .iris-palette:first-child {
     margin-left: 0 !important;
 }
+
+/*----------  Content overlay  ----------*/
+
+.ttfmake-content-overlay .ttfmake-overlay-dialog {
+    width: 800px !important;
+}
+.ttfmake-content-overlay .ttfmake-overlay-body {
+    /* overflow-y: hidden; */
+}

@@ -71,14 +71,14 @@
 				}, this );
 
 				// Finally re-render all views holding instances of this master
-				var instanceViews = _( oneApp.builder.sectionViews ).filter( function( sectionView ) {
-					return sectionView.model.get( 'master_id' ) === this.model.get( 'master_id' );
+				var instanceViews = oneApp.builder.sectionViews.filter( function( sectionView ) {
+					return sectionView.get( 'view' ).model.get( 'master_id' ) === this.model.get( 'master_id' );
 				}, this );
 
 				_( instanceViews ).each( function( sectionView ) {
-					var sectionIndex = sectionView.$el.index();
-					sectionView.remove();
-					oneApp.builder.addSectionView( sectionView.model, sectionIndex );
+					var sectionIndex = oneApp.builder.sectionViews.indexOf( sectionView );
+					oneApp.builder.removeSectionView( sectionView );
+					oneApp.builder.addSectionView( sectionView.get( 'view' ).model, sectionIndex );
 				}, this );
 			}
 		},

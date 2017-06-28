@@ -3,8 +3,8 @@
 	var sectionPrototype = oneApp.views.section.prototype;
 
 	oneApp.views.section = oneApp.views.section.extend( {
-		initialize: function() {
-			sectionPrototype.initialize.apply( this, arguments );
+		onViewReady: function(e) {
+			sectionPrototype.onViewReady.apply( this, arguments );
 
 			this.model.on( 'change:title', this.updateTitle, this );
 			this.model.on( 'change:draft', this.updateDraftMode, this );
@@ -42,19 +42,21 @@
 			if ( oneApp.builder.settingsOverlay ) {
 				delete oneApp.builder.settingsOverlay;
 			}
-			oneApp.builder.settingsOverlay = new oneApp.views.overlays.settings( { model: this.model }, sectionSettings ).open();
+			oneApp.builder.settingsOverlay = new oneApp.views.overlays.settings( { model: this.model }, sectionSettings );
+			oneApp.builder.settingsOverlay.open();
 		}
 	} );
 
 	var itemPrototype = oneApp.views.item.prototype;
 
 	oneApp.views.item = oneApp.views.item.extend( {
-		initialize: function() {
-			this.model.on( 'change', this.onModelChange, this );
-		},
+		onViewReady: function(e) {
+			itemPrototype.onViewReady.apply( this, arguments );
 
-		onModelChange: function() {
-			this.$el.trigger( 'model-item-change' );
+			this.updateFrame();
+
+			this.model.on( 'change', this.onModelChange, this );
+			this.model.on( 'change:content', this.onContentChange, this );
 		},
 
 		openConfigurationOverlay: function( e ) {
@@ -62,6 +64,7 @@
 			e.stopPropagation();
 
 			var $target = $( e.currentTarget );
+			// This can be refactored to be read from model itself!!!
 			var $item = $target.parents( '[data-section-type]' );
 			var itemType = $item.data( 'section-type' );
 			var itemSettings = settings[itemType];
@@ -69,8 +72,79 @@
 			if ( oneApp.builder.settingsOverlay ) {
 				delete oneApp.builder.settingsOverlay;
 			}
-			oneApp.builder.settingsOverlay = new oneApp.views.overlays.settings( { model: this.model }, itemSettings ).open();
-		}
+			oneApp.builder.settingsOverlay = new oneApp.views.overlays.settings( { model: this.model }, itemSettings );
+			oneApp.builder.settingsOverlay.open();
+		},
+
+		onContentEdit: function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+
+			var $target = $(e.currentTarget);
+			var iframeID = ($target.attr('data-iframe')) ? $target.attr('data-iframe') : '';
+			var textAreaID = $target.attr('data-textarea');
+			var $overlay = oneApp.builder.tinymceOverlay.$el;
+
+			if ( oneApp.builder.contentOverlay ) {
+				oneApp.builder.contentOverlay.remove();
+			}
+			oneApp.builder.contentOverlay = new oneApp.views.overlays.content( { model: this.model } )
+			oneApp.builder.contentOverlay.open();
+		},
+
+		onModelChange: function() {
+			this.$el.trigger( 'model-item-change' );
+		},
+
+		onContentChange: function() {
+			var content = this.model.get( 'content' );
+			this.updateFrame();
+		},
+
+		updateFrame: function() {
+			var content = switchEditors.wpautop( this.wrapShortcodes( this.model.get( 'content' ) ) );
+			var $iframe = $('iframe', this.$el);
+			var iframe = $iframe.get( 0 );
+			var iframeContent = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
+			var $iframeHead = $('head', iframeContent);
+			var $iframeBody = $('body', iframeContent);
+
+			$iframeHead.html( this.getFrameHeadLinks() );
+			$iframeBody.html( content );
+
+			// Firefox hack
+			// @link http://stackoverflow.com/a/24686535
+
+			var self = this;
+			$iframe.on( 'load', function() {
+				$( this ).contents().find( 'head' ).html( link );
+				$( this ).contents().find( 'body' ).html( content );
+			});
+		},
+
+		getFrameHeadLinks: function() {
+			var scripts = tinyMCEPreInit.mceInit.make.content_css.split(','),
+				link = '';
+
+			// Create the CSS links for the head
+			_.each(scripts, function(e) {
+				link += '<link type="text/css" rel="stylesheet" href="' + e + '" />';
+			});
+
+			return link;
+		},
+
+		wrapShortcodes: function(content) {
+			// Render captions
+			content = content.replace(
+				/\[caption.*?\](\<img.*?\/\>)[ ]*(.*?)\[\/caption\]/g,
+				'<div><dl class="wp-caption alignnone">'
+				+ '<dt class="wp-caption-dt">$1</dt>'
+				+ '<dd class="wp-caption-dd">$2</dd></dl></div>'
+			);
+
+			return content.replace( /^(<p>)?(\[.*\])(<\/p>)?$/gm, '<div class="shortcode-wrapper">$2</div>' );
+		},
 	} );
 
 	oneApp.views.overlays = {};
@@ -80,9 +154,16 @@
 	 * Settings overlay class
 	 *
 	 */
-	oneApp.views.overlays.settings = oneApp.views.overlay.extend( {
+	oneApp.views.overlays.settings = Backbone.View.extend( {
 		template: wp.template( 'ttfmake-settings' ),
 		className: 'ttfmake-overlay ttfmake-configuration-overlay',
+
+		events: {
+			'click .ttfmake-overlay-close-update': 'onUpdate',
+			'click .ttfmake-overlay-close-discard': 'onDiscard',
+			'click .ttfmake-overlay-wrapper': 'onWrapperClick',
+			'setting-updated': 'onSettingUpdated',
+		},
 
 		initialize: function( configuration, settings ) {
 			// this.model is the section origin model
@@ -95,13 +176,31 @@
 			return this.render();
 		},
 
-		events: function() {
-			return _.extend( oneApp.views.overlay.prototype.events, {
-				'click .ttfmake-overlay-close-update': 'onUpdate',
-				'click .ttfmake-overlay-close-discard': 'onDiscard',
-				'click .ttfmake-overlay-wrapper': 'onWrapperClick',
-				'setting-updated': 'onSettingUpdated',
+		render: function() {
+			this.$el.html( this.template( { body: '' } ) );
+
+			var $body = $( '.ttfmake-overlay-body', this.$el );
+
+			// Render controls
+			_( this.settings ).each( function( setting ) {
+				var view = oneApp.views.settings[setting.type];
+
+				if ( view ) {
+					var control = new view( setting );
+					this.controls[setting.name] = control;
+					$body.append( control.render().$el );
+				}
+			}, this );
+
+			// Wrap controls in divs according to dividers
+			$( '.ttfmake-configuration-divider-wrap', this.$el ).each( function() {
+				$( this ).nextUntil( '.ttfmake-configuration-divider-wrap' ).wrapAll( '<div />' );
 			} );
+
+			// Apply section data from section model
+			this.applyValues( this.model.toJSON() );
+
+			return this;
 		},
 
 		open: function() {
@@ -134,36 +233,6 @@
 			$divider.addClass( 'open-wrap' );
 			var offset = $divider.position().top + $overlay.scrollTop() - $divider.outerHeight();
 			$overlay.scrollTop( offset );
-		},
-
-		render: function() {
-			this.$el.html( this.template( { body: '' } ) );
-
-			var $body = $( '.ttfmake-overlay-body', this.$el );
-
-			// Render controls
-			_( this.settings ).each( function( setting ) {
-				var view = oneApp.views.settings[setting.type];
-
-				if ( view ) {
-					var control = new view( setting );
-					this.controls[setting.name] = control;
-					$body.append( control.render().$el );
-				}
-			}, this );
-
-			// Wrap controls in divs according to dividers
-			$( '.ttfmake-configuration-divider-wrap', this.$el ).each( function() {
-				$( this ).nextUntil( '.ttfmake-configuration-divider-wrap' ).wrapAll( '<div />' );
-			} );
-
-			// Apply section data from section model
-			this.applyValues( this.model.toJSON() );
-
-			// Bind events
-			this.delegateEvents();
-
-			return this;
 		},
 
 		applyValues: function( values ) {
