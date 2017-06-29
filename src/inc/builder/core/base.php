@@ -500,7 +500,7 @@ class TTFMAKE_Builder_Base {
 		$textarea_attr_name = 'ttfmake-section[' .$id. '][' .$textarea_name. ']';
 	?>
 		<?php if ( true === $iframe ) : ?>
-		<span class="ttfmake-iframe-content-placeholder{{ (!get('<?php echo $textarea_name; ?>')) ? ' show' : '' }}">
+		<span class="ttfmake-iframe-content-placeholder{{ (!data.get('<?php echo $textarea_name; ?>')) ? ' show' : '' }}">
 			<?php esc_html_e( 'Click to edit', 'make' ); ?>
 		</span>
 		<div class="ttfmake-iframe-wrapper">
@@ -515,7 +515,7 @@ class TTFMAKE_Builder_Base {
 		</div>
 		<?php endif; ?>
 
-		<textarea id="<?php echo esc_attr( $textarea_id ); ?>" name="<?php echo esc_attr( $textarea_attr_name ); ?>" data-model-attr="<?php echo esc_attr( $textarea_name ); ?>" style="display:none;">{{ get('<?php echo esc_attr( $textarea_name ); ?>')<?php echo $textarea_name_path; ?> }}</textarea>
+		<textarea id="<?php echo esc_attr( $textarea_id ); ?>" name="<?php echo esc_attr( $textarea_attr_name ); ?>" data-model-attr="<?php echo esc_attr( $textarea_name ); ?>" style="display:none;">{{ data.get('<?php echo esc_attr( $textarea_name ); ?>')<?php echo $textarea_name_path; ?> }}</textarea>
 
 		<?php if ( true !== $ttfmake_is_js_template && true === $iframe ) : ?>
 		<script type="text/javascript">
@@ -582,19 +582,25 @@ class TTFMAKE_Builder_Base {
 			return;
 		}
 
-		// Load the overlay for TinyMCE
+		// Content overlay templates
+		set_query_var( 'ttfmake_overlay_id', 'ttfmake-tinymce-overlay' );
+		set_query_var( 'ttfmake_overlay_class', 'ttfmake-overlay ttfmake-content-overlay' );
 		get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
 
-		// Print the template for removing images
+		// Configuration overlay templates
+		set_query_var( 'ttfmake_overlay_id', '{{ data.id }}' );
+		set_query_var( 'ttfmake_overlay_class', '{{ data.className }}' );
+		get_template_part( '/inc/builder/core/templates/overlay', 'configuration' );
+
 		?>
-			<script type="text/html" id="tmpl-ttfmake-remove-image">
-				<div class="ttfmake-remove-current-image">
-					<h3><?php esc_html_e( 'Current image', 'make' ); ?></h3>
-					<a href="#" class="ttfmake-remove-image-from-modal">
-						<?php esc_html_e( 'Remove Current Image', 'make' ); ?>
-					</a>
-				</div>
-			</script>
+		<script type="text/html" id="tmpl-ttfmake-remove-image">
+			<div class="ttfmake-remove-current-image">
+				<h3><?php esc_html_e( 'Current image', 'make' ); ?></h3>
+				<a href="#" class="ttfmake-remove-image-from-modal">
+					<?php esc_html_e( 'Remove Current Image', 'make' ); ?>
+				</a>
+			</div>
+		</script>
 		<?php
 	}
 
