@@ -305,10 +305,32 @@ class TTFMAKE_Builder_Base {
 
 		wp_enqueue_script(
 			'ttfmake-builder',
-			Make()->scripts()->get_js_directory_uri() . '/builder/core/app.js',
+			Make()->scripts()->get_js_directory_uri() . '/builder/core/builder.js',
 			$dependencies,
 			TTFMAKE_VERSION,
 			true
+		);
+
+		wp_enqueue_script(
+			'ttfmake-builder-overlay',
+			Make()->scripts()->get_js_directory_uri() . '/builder/core/views/overlay.js',
+			array( 'ttfmake-builder' ),
+			TTFMAKE_VERSION,
+			true
+		);
+
+		// Get the current sections
+		$section_data = ttfmake_get_section_data( get_the_ID() );
+
+		// Section settings, defaults and data
+		wp_localize_script(
+			'ttfmake-builder',
+			'ttfMakeSections',
+			array(
+				'settings' => ttfmake_get_sections_settings(),
+				'defaults' => ttfmake_get_section_definitions()->get_section_defaults(),
+				'data' => ttfmake_get_section_json_data( $section_data )
+			)
 		);
 
 		// Fetch color palette
@@ -319,7 +341,7 @@ class TTFMAKE_Builder_Base {
 		$color_values = array_unique( $color_values );
 		$color_values = array_filter( $color_values, 'strlen' );
 
-		// Add data needed for the JS
+		// General builder configuration
 		$data = array(
 			'pageID'        => get_the_ID(),
 			'postRefresh'   => true,
@@ -329,7 +351,7 @@ class TTFMAKE_Builder_Base {
 
 		wp_localize_script(
 			'ttfmake-builder',
-			'ttfmakeBuilderData',
+			'ttfmakeBuilderSettings',
 			$data
 		);
 
