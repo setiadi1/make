@@ -282,46 +282,6 @@ class TTFMAKE_Builder_Base {
 			'backbone',
 		);
 
-		wp_register_script(
-			'ttfmake-builder/js/models/section.js',
-			Make()->scripts()->get_js_directory_uri() . '/builder/core/models/section.js',
-			array(),
-			TTFMAKE_VERSION,
-			true
-		);
-
-		wp_register_script(
-			'ttfmake-builder/js/collections/sections.js',
-			Make()->scripts()->get_js_directory_uri() . '/builder/core/collections/sections.js',
-			array(),
-			TTFMAKE_VERSION,
-			true
-		);
-
-		wp_register_script(
-			'ttfmake-builder/js/views/menu.js',
-			Make()->scripts()->get_js_directory_uri() . '/builder/core/views/menu.js',
-			array(),
-			TTFMAKE_VERSION,
-			true
-		);
-
-		wp_register_script(
-			'ttfmake-builder/js/views/section.js',
-			Make()->scripts()->get_js_directory_uri() . '/builder/core/views/section.js',
-			array(),
-			TTFMAKE_VERSION,
-			true
-		);
-
-		wp_register_script(
-			'ttfmake-builder/js/views/overlay.js',
-			Make()->scripts()->get_js_directory_uri() . '/builder/core/views/overlay.js',
-			array(),
-			TTFMAKE_VERSION,
-			true
-		);
-
 		/**
 		 * Filter the dependencies for the Make builder JS.
 		 *
@@ -329,19 +289,19 @@ class TTFMAKE_Builder_Base {
 		 *
 		 * @param array    $dependencies    The list of dependencies.
 		 */
-		$dependencies = apply_filters(
-			'make_builder_js_dependencies',
-			array_merge(
-				$dependencies,
-				array(
-					'ttfmake-builder/js/models/section.js',
-					'ttfmake-builder/js/collections/sections.js',
-					'ttfmake-builder/js/views/menu.js',
-					'ttfmake-builder/js/views/section.js',
-					'ttfmake-builder/js/views/overlay.js'
-				)
-			)
-		);
+		// $dependencies = apply_filters(
+		// 	'make_builder_js_dependencies',
+		// 	array_merge(
+		// 		$dependencies,
+		// 		array(
+		// 			'ttfmake-builder/js/models/section.js',
+		// 			'ttfmake-builder/js/collections/sections.js',
+		// 			'ttfmake-builder/js/views/menu.js',
+		// 			'ttfmake-builder/js/views/section.js',
+		// 			'ttfmake-builder/js/views/overlay.js'
+		// 		)
+		// 	)
+		// );
 
 		wp_enqueue_script(
 			'ttfmake-builder',
