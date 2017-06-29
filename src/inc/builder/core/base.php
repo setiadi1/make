@@ -66,6 +66,7 @@ class TTFMAKE_Builder_Base {
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 		add_action( 'post_submitbox_misc_actions', array( $this, 'builder_toggle' ) );
+		add_filter( 'make_get_section_data', array( $this, 'massage_legacy_format' ), 10, 2 );
 	}
 
 	/**
@@ -146,11 +147,10 @@ class TTFMAKE_Builder_Base {
 		get_template_part( 'inc/builder/core/templates/menu' );
 		get_template_part( 'inc/builder/core/templates/stage', 'header' );
 
-		$section_data        = ttfmake_get_section_data( $post_local->ID );
+	public function massage_legacy_format( $section_data, $post_id ) {
 		$registered_sections = ttfmake_get_sections();
 
-		// Print the current sections
-		foreach ( $section_data as $section ) {
+		foreach ( $section_data as $id => $section ) {
 			/**
 			 * In Make 1.4.0, the blank section was deprecated. Any existing blank sections are converted to 1 column,
 			 * text sections.
@@ -164,7 +164,7 @@ class TTFMAKE_Builder_Base {
 				$id      = ( ! empty( $section['id'] ) ) ? $section['id'] : time();
 
 				// Set the data
-				$section = array(
+				$section_data[$id] = array(
 					'id'             => $id,
 					'state'          => $state,
 					'section-type'   => 'text',
@@ -212,11 +212,9 @@ class TTFMAKE_Builder_Base {
 		}
 
 		get_template_part( 'inc/builder/core/templates/stage', 'footer' );
-
-		// Add the sort input
-		$section_order = get_post_meta( $post_local->ID, '_ttfmake-section-ids', true );
-
 		// Handle legacy section order, if present
+		$section_order = get_post_meta( $post_id, '_ttfmake-section-ids', true );
+
 		if ( ! empty( $section_order ) ) {
 			$ordered_sections = array();
 
@@ -227,6 +225,7 @@ class TTFMAKE_Builder_Base {
 			$section_data = $ordered_sections;
 		}
 
+		return $section_data;
 		// Expose section defaults to JS
 		wp_localize_script( 'ttfmake-builder', 'ttfMakeSectionDefaults', ttfmake_get_section_definitions()->get_section_defaults() );
 		// Expose saved sections data to JS
