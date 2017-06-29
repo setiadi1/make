@@ -145,7 +145,8 @@ class TTFMAKE_Builder_Base {
 
 		// Load the boilerplate templates
 		get_template_part( 'inc/builder/core/templates/menu' );
-		get_template_part( 'inc/builder/core/templates/stage', 'header' );
+		get_template_part( 'inc/builder/core/templates/stage' );
+	}
 
 	public function massage_legacy_format( $section_data, $post_id ) {
 		$registered_sections = ttfmake_get_sections();
@@ -211,7 +212,6 @@ class TTFMAKE_Builder_Base {
 			}
 		}
 
-		get_template_part( 'inc/builder/core/templates/stage', 'footer' );
 		// Handle legacy section order, if present
 		$section_order = get_post_meta( $post_id, '_ttfmake-section-ids', true );
 
