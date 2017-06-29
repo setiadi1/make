@@ -138,11 +138,6 @@ class TTFMAKE_Builder_Base {
 	public function display_builder( $post_local ) {
 		wp_nonce_field( 'save', 'ttfmake-builder-nonce' );
 
-		// Get the current sections
-		global $ttfmake_sections;
-		$ttfmake_sections = get_post_meta( $post_local->ID, '_ttfmake-sections', true );
-		$ttfmake_sections = ( is_array( $ttfmake_sections ) ) ? $ttfmake_sections : array();
-
 		// Load the boilerplate templates
 		get_template_part( 'inc/builder/core/templates/menu' );
 		get_template_part( 'inc/builder/core/templates/stage' );
@@ -226,25 +221,6 @@ class TTFMAKE_Builder_Base {
 		}
 
 		return $section_data;
-		// Expose section defaults to JS
-		wp_localize_script( 'ttfmake-builder', 'ttfMakeSectionDefaults', ttfmake_get_section_definitions()->get_section_defaults() );
-		// Expose saved sections data to JS
-		wp_localize_script( 'ttfmake-builder', 'ttfMakeSectionData', ttfmake_get_section_json_data( $section_data ) );
-
-		// Fetch templates
-		$templates = array();
-		foreach ( ttfmake_get_sections() as $section ) {
-			$template = $this->load_section( $section, array(), true );
-
-			if ( !is_array( $template ) ) {
-				$templates[$section['id']] = $template;
-			} else {
-				$templates = array_merge( $templates, $template );
-			}
-		}
-
-		// Expose section template strings to JS
-		wp_localize_script( 'ttfmake-builder', 'ttfMakeSectionTemplates', $templates );
 	}
 
 	/**
@@ -261,7 +237,7 @@ class TTFMAKE_Builder_Base {
 			return;
 		}
 
-		// Enqueue the CSS
+		// Styles
 		wp_enqueue_style(
 			'ttfmake-builder',
 			Make()->scripts()->get_css_directory_uri() . '/builder/core/builder.css',
