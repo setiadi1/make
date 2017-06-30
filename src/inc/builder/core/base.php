@@ -561,11 +561,13 @@ class TTFMAKE_Builder_Base {
 		// Content overlay templates
 		set_query_var( 'ttfmake_overlay_id', 'ttfmake-tinymce-overlay' );
 		set_query_var( 'ttfmake_overlay_class', 'ttfmake-overlay ttfmake-content-overlay' );
+		set_query_var( 'ttfmake_overlay_title', __( 'Edit content', 'make' ) );
 		get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
 
 		// Configuration overlay templates
 		set_query_var( 'ttfmake_overlay_id', '{{ data.id }}' );
 		set_query_var( 'ttfmake_overlay_class', '{{ data.className }}' );
+		set_query_var( 'ttfmake_overlay_title', '{{ data.title }}' );
 		get_template_part( '/inc/builder/core/templates/overlay', 'configuration' );
 
 		?>
