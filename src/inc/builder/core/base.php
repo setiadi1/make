@@ -571,8 +571,8 @@ class TTFMAKE_Builder_Base {
 		get_template_part( '/inc/builder/core/templates/overlay', 'configuration' );
 
 		?>
-		<script type="text/html" id="tmpl-ttfmake-remove-image">
-			<div class="ttfmake-remove-current-image">
+		<script type="text/html" id="tmpl-ttfmake-media-overlay-remove-image">
+			<div class="ttfmake-media-overlay-remove-image">
 				<h3><?php esc_html_e( 'Current image', 'make' ); ?></h3>
 				<a href="#" class="ttfmake-remove-image-from-modal">
 					<?php esc_html_e( 'Remove Current Image', 'make' ); ?>
