@@ -54,9 +54,6 @@ class TTFMAKE_Builder_Base {
 		// Include the save routines
 		require_once get_template_directory() . '/inc/builder/core/save.php';
 
-		// Include the front-end helpers
-		require_once get_template_directory() . '/inc/builder/sections/section-front-end-helpers.php';
-
 		// Set up actions
 		add_action( 'admin_init', array( $this, 'register_post_type_support_for_builder' ) );
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 1 ); // Bias toward top of stack
