@@ -31,8 +31,8 @@ class TTFMAKE_Section_Instances {
 		add_filter( 'make_section_settings', array( $this, 'section_settings' ), 70, 2 );
 		add_filter( 'make_sections_defaults', array( $this, 'add_section_defaults' ), 999 );
 		add_filter( 'make_prepare_data_section', array( $this, 'save_section' ), 20, 2 );
-		add_filter( 'make_prepare_data_section', array( $this, 'save_sid_field' ), 10, 2 );
-		add_action( 'make_builder_data_saved', array( $this, 'save_layout' ), 10, 2 );
+		//add_filter( 'make_prepare_data_section', array( $this, 'save_sid_field' ), 10, 2 );
+		add_filter( 'make_builder_data_saved', array( $this, 'save_layout' ), 10, 2 );
 		add_filter( 'make_get_section_data', array( $this, 'read_layout' ), 10, 2 );
 		add_filter( 'make_get_section_json', array( $this, 'remove_parent_ids' ), 100, 1 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -87,23 +87,26 @@ class TTFMAKE_Section_Instances {
 	}
 
 	public function save_section( $clean_data, $raw_data ) {
+		$clean_data[ 'sid' ] = $raw_data[ 'sid' ];
+
 		if ( isset( $raw_data[ 'master' ] ) ) {
 			if ( $raw_data[ 'master' ] == 1 ) {
 				$clean_data[ 'master' ] = 1;
+
+				if ( ! $raw_data[ 'master_id' ] || empty( $raw_data['master_id'] ) ) {
+					$option_id = $this->generate_unique_master_name( $section[ 'section-type' ] );
+					// Set the master_id reference on the instance
+					$raw_data[ 'master_id' ] = $option_id;
+				} else {
+					$option_id = $section[ 'master_id' ];
+				}
+
+				$clean_data[ 'master_id' ] = $raw_data[ 'master_id' ];
 			} else {
 				$clean_data[ 'master' ] = 0;
+				$clean_data[ 'master_id' ] = 0;
 			}
 		}
-
-		$clean_data[ 'master_id' ] = $raw_data[ 'master_id' ];
-
-		return $clean_data;
-	}
-
-	public function save_sid_field( $clean_data, $raw_data ) {
-		// Make the sid field pass through
-		// during the save routine
-		$clean_data[ 'sid' ] = $raw_data[ 'sid' ];
 
 		return $clean_data;
 	}
