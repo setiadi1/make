@@ -124,12 +124,11 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 					$master_option = get_option( $section_data['master_id'] );
 					$master_section_data = json_decode( wp_unslash( $master_option ), true );
 					$master_section_data['id'] = $section_data['id'];
-					$master_section_data['sid'] = $section_data['sid'];
 
 					$section_data = $master_section_data;
 				}
 
-				$sections[$section_data['sid']] = $section_data;
+				$sections[$section_data['id']] = $section_data;
 			}
 		}
 
@@ -138,7 +137,7 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 
 	public function get_prev_section_data( $current_section, $sections ) {
 		foreach ( $sections as $sid => $data ) {
-			if ( $current_section['sid'] == $sid ) {
+			if ( $current_section['id'] == $data['id'] ) {
 				break;
 			} else {
 				$prev_key = $sid;
@@ -170,7 +169,7 @@ class MAKE_Section_Methods extends MAKE_Util_Modules implements MAKE_Section_Met
 					break;
 				}
 
-				if ( $current_section['sid'] == $sid ) {
+				if ( $current_section['id'] == $data['id'] ) {
 					$next_is_the_one = true;
 				}
 			}
