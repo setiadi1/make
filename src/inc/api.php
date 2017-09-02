@@ -34,7 +34,6 @@ final class MAKE_API extends MAKE_Util_Modules implements MAKE_APIInterface {
 		'widgets'             => 'MAKE_Setup_WidgetsInterface',
 		'scripts'             => 'MAKE_Setup_ScriptsInterface',
 		'style'               => 'MAKE_Style_ManagerInterface',
-		'builder'             => 'MAKE_Builder_SetupInterface',
 		'formatting'          => 'MAKE_Formatting_ManagerInterface',
 		'galleryslider'       => 'MAKE_GallerySlider_SetupInterface',
 		'logo'                => 'MAKE_Logo_MethodsInterface',
@@ -44,7 +43,7 @@ final class MAKE_API extends MAKE_Util_Modules implements MAKE_APIInterface {
 		'integration'         => 'MAKE_Integration_ManagerInterface',
 		'setup'               => 'MAKE_Setup_MiscInterface',
 		'head'                => 'MAKE_Setup_HeadInterface',
-		'sections'			  => 'MAKE_Sections_SetupInterface'
+		'builder'             => 'MAKE_Builder_SetupInterface',
 	);
 
 	/**
@@ -68,7 +67,6 @@ final class MAKE_API extends MAKE_Util_Modules implements MAKE_APIInterface {
 		'widgets'             => 'MAKE_Setup_Widgets',
 		'scripts'             => 'MAKE_Setup_Scripts',
 		'style'               => 'MAKE_Style_Manager',
-		'builder'             => 'MAKE_Builder_Setup',
 		'formatting'          => 'MAKE_Formatting_Manager',
 		'galleryslider'       => 'MAKE_GallerySlider_Setup',
 		'logo'                => 'MAKE_Logo_Methods',
@@ -78,7 +76,7 @@ final class MAKE_API extends MAKE_Util_Modules implements MAKE_APIInterface {
 		'integration'         => 'MAKE_Integration_Manager',
 		'setup'               => 'MAKE_Setup_Misc',
 		'head'                => 'MAKE_Setup_Head',
-		'sections'			  => 'MAKE_Sections_Setup'
+		'builder'             => 'MAKE_Builder_Setup',
 	);
 
 	/**
